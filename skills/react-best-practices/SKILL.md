@@ -1,15 +1,28 @@
 ---
-name: vercel-react-best-practices
-description: React and Next.js performance optimization guidelines from Vercel Engineering. This skill should be used when writing, reviewing, or refactoring React/Next.js code to ensure optimal performance patterns. Triggers on tasks involving React components, Next.js pages, data fetching, bundle optimization, or performance improvements.
+name: react-best-practices
+description: React 19 and Next.js 16 performance optimization guidelines from Vercel Engineering. Use when writing, reviewing, or refactoring React/Next.js code to ensure optimal performance patterns. Triggers on tasks involving React components, Next.js pages, data fetching, bundle optimization, or performance improvements.
 license: MIT
 metadata:
   author: vercel
-  version: "1.0.0"
+  version: "2.0.0"
 ---
 
 # Vercel React Best Practices
 
-Comprehensive performance optimization guide for React and Next.js applications, maintained by Vercel. Contains 45 rules across 8 categories, prioritized by impact to guide automated refactoring and code generation.
+Comprehensive performance optimization guide for React 19 and Next.js 16 applications, maintained by Vercel. Contains 53+ rules across 8 categories, prioritized by impact to guide automated refactoring and code generation.
+
+## React 19 Key Features
+
+| Feature | Description |
+|---------|-------------|
+| `use()` | Read promises and context anywhere |
+| `useActionState` | Handle form actions with pending state |
+| `useOptimistic` | Optimistic UI updates |
+| `useFormStatus` | Form pending state in children |
+| `ref` as prop | No more `forwardRef` needed |
+| Ref cleanup | Return cleanup function from ref callback |
+| React Compiler | Automatic memoization (no useMemo/useCallback) |
+| Server Components | Stable in React 19 |
 
 ## When to Apply
 
@@ -58,6 +71,8 @@ Reference these guidelines when:
 - `server-serialization` - Minimize data passed to client components
 - `server-parallel-fetching` - Restructure components to parallelize fetches
 - `server-after-nonblocking` - Use after() for non-blocking operations
+- `server-rsc-boundaries` - Optimize Server/Client Component boundaries
+- `server-edge-config` - Use Edge Config for feature flags
 
 ### 4. Client-Side Data Fetching (MEDIUM-HIGH)
 
@@ -73,6 +88,8 @@ Reference these guidelines when:
 - `rerender-functional-setstate` - Use functional setState for stable callbacks
 - `rerender-lazy-state-init` - Pass function to useState for expensive values
 - `rerender-transitions` - Use startTransition for non-urgent updates
+- `rerender-context-use` - Use React 19's use() for flexible context consumption
+- `rerender-context-split` - Split contexts by domain to isolate re-renders
 
 ### 6. Rendering Performance (MEDIUM)
 

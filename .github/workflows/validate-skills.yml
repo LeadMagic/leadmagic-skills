@@ -1,0 +1,95 @@
+name: Validate Skills
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'skills/**'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'skills/**'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate SKILL.md frontmatter
+        run: |
+          echo "Validating skill frontmatter..."
+
+          for skill_dir in skills/*/; do
+            skill_name=$(basename "$skill_dir")
+            skill_file="$skill_dir/SKILL.md"
+
+            if [ ! -f "$skill_file" ]; then
+              echo "❌ Missing SKILL.md in $skill_name"
+              exit 1
+            fi
+
+            # Check for required frontmatter fields
+            if ! head -20 "$skill_file" | grep -q "^name:"; then
+              echo "❌ Missing 'name' in $skill_name/SKILL.md"
+              exit 1
+            fi
+
+            if ! head -20 "$skill_file" | grep -q "^description:"; then
+              echo "❌ Missing 'description' in $skill_name/SKILL.md"
+              exit 1
+            fi
+
+            # Validate name matches folder
+            yaml_name=$(head -20 "$skill_file" | grep "^name:" | sed 's/name: *//')
+            if [ "$yaml_name" != "$skill_name" ]; then
+              echo "❌ Name mismatch in $skill_name: folder='$skill_name' vs name='$yaml_name'"
+              exit 1
+            fi
+
+            # Check name format (lowercase, hyphens, numbers only)
+            if echo "$yaml_name" | grep -qE '[^a-z0-9-]'; then
+              echo "❌ Invalid name format in $skill_name: must be lowercase letters, numbers, hyphens"
+              exit 1
+            fi
+
+            # Check for reserved words
+            if echo "$yaml_name" | grep -qiE 'anthropic|claude'; then
+              echo "❌ Reserved word in name: $skill_name"
+              exit 1
+            fi
+
+            echo "✓ $skill_name"
+          done
+
+          echo ""
+          echo "All skills validated successfully!"
+
+      - name: Check description length
+        run: |
+          echo "Checking description lengths (max 1024 chars)..."
+
+          for skill_dir in skills/*/; do
+            skill_name=$(basename "$skill_dir")
+            skill_file="$skill_dir/SKILL.md"
+
+            desc=$(head -20 "$skill_file" | grep "^description:" | sed 's/description: *//')
+            desc_len=${#desc}
+
+            if [ $desc_len -gt 1024 ]; then
+              echo "❌ Description too long in $skill_name: $desc_len chars (max 1024)"
+              exit 1
+            fi
+
+            echo "✓ $skill_name: $desc_len chars"
+          done
+
+      - name: List skills summary
+        run: |
+          echo ""
+          echo "=== Skills Summary ==="
+          for skill_dir in skills/*/; do
+            skill_name=$(basename "$skill_dir")
+            rule_count=$(find "$skill_dir/rules" -name "*.md" 2>/dev/null | wc -l || echo 0)
+            echo "  $skill_name: $rule_count rules"
+          done
