@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Maps LeadMagic skills to Context7 library IDs for freshness checks",
+  "mappings": {
+    "hono-v4": {
+      "context7": "hono/hono",
+      "description": "Hono v4 web framework",
+      "checkTopics": ["middleware", "routing", "context", "validators"]
+    },
+    "react-best-practices": {
+      "context7": "facebook/react",
+      "description": "React 19 patterns",
+      "checkTopics": ["hooks", "server-components", "suspense", "transitions"]
+    },
+    "nextjs-app-router": {
+      "context7": "vercel/next.js",
+      "description": "Next.js App Router",
+      "checkTopics": ["app-router", "server-actions", "caching", "middleware"]
+    },
+    "cloudflare-workers": {
+      "context7": "cloudflare/workers-sdk",
+      "description": "Cloudflare Workers runtime",
+      "checkTopics": ["workers", "bindings", "fetch", "scheduled"]
+    },
+    "cloudflare-d1": {
+      "context7": "cloudflare/workers-sdk",
+      "description": "D1 SQLite database",
+      "checkTopics": ["d1", "sql", "prepared-statements", "migrations"]
+    },
+    "cloudflare-kv": {
+      "context7": "cloudflare/workers-sdk",
+      "description": "Workers KV storage",
+      "checkTopics": ["kv", "namespaces", "caching"]
+    },
+    "cloudflare-r2": {
+      "context7": "cloudflare/workers-sdk",
+      "description": "R2 object storage",
+      "checkTopics": ["r2", "buckets", "multipart", "presigned-urls"]
+    },
+    "cloudflare-durable-objects": {
+      "context7": "cloudflare/workers-sdk",
+      "description": "Durable Objects for state",
+      "checkTopics": ["durable-objects", "websockets", "hibernation", "alarms"]
+    },
+    "cloudflare-workflows": {
+      "context7": "cloudflare/workers-sdk",
+      "description": "Cloudflare Workflows",
+      "checkTopics": ["workflows", "steps", "events", "retry"]
+    },
+    "cloudflare-ai-gateway": {
+      "context7": "cloudflare/workers-sdk",
+      "description": "AI Gateway",
+      "checkTopics": ["ai-gateway", "routing", "caching", "rate-limiting"]
+    },
+    "wrangler": {
+      "context7": "cloudflare/workers-sdk",
+      "description": "Wrangler CLI",
+      "checkTopics": ["wrangler", "configuration", "deployment", "dev"]
+    },
+    "drizzle-orm": {
+      "context7": "drizzle-team/drizzle-orm",
+      "description": "Drizzle ORM",
+      "checkTopics": ["schema", "queries", "relations", "migrations"]
+    },
+    "tanstack-query": {
+      "context7": "tanstack/query",
+      "description": "TanStack Query v5",
+      "checkTopics": ["useQuery", "useMutation", "queryClient", "hydration"]
+    },
+    "tanstack-table": {
+      "context7": "tanstack/table",
+      "description": "TanStack Table v8",
+      "checkTopics": ["columns", "sorting", "filtering", "pagination"]
+    },
+    "vercel-ai-sdk": {
+      "context7": "vercel/ai",
+      "description": "Vercel AI SDK",
+      "checkTopics": ["streamText", "generateObject", "tools", "useChat"]
+    },
+    "typescript-best-practices": {
+      "context7": "microsoft/TypeScript",
+      "description": "TypeScript",
+      "checkTopics": ["strict-mode", "generics", "utility-types", "config"]
+    },
+    "stripe-payments": {
+      "context7": "stripe/stripe-node",
+      "description": "Stripe Node.js SDK",
+      "checkTopics": ["checkout", "subscriptions", "webhooks", "customers"]
+    },
+    "inngest": {
+      "context7": "inngest/inngest-js",
+      "description": "Inngest workflows",
+      "checkTopics": ["functions", "steps", "events", "scheduling"]
+    },
+    "biome": {
+      "context7": "biomejs/biome",
+      "description": "Biome linter/formatter",
+      "checkTopics": ["rules", "configuration", "cli", "migration"]
+    },
+    "upstash": {
+      "context7": "upstash/redis",
+      "description": "Upstash Redis",
+      "checkTopics": ["redis", "ratelimit", "qstash", "vector"]
+    },
+    "opentelemetry": {
+      "context7": "open-telemetry/opentelemetry-js",
+      "description": "OpenTelemetry JS",
+      "checkTopics": ["tracing", "spans", "metrics", "context"]
+    },
+    "tinybird": {
+      "context7": "tinybirdco/tinybird-typescript-sdk",
+      "description": "Tinybird analytics",
+      "checkTopics": ["pipes", "datasources", "endpoints", "sql"]
+    },
+    "axiom": {
+      "context7": "axiomhq/axiom-js",
+      "description": "Axiom logging",
+      "checkTopics": ["ingest", "query", "apl", "datasets"]
+    }
+  }
+}

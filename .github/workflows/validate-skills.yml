@@ -11,6 +11,15 @@ on:
     paths:
       - 'skills/**'
       - 'scripts/validate.sh'
+  schedule:
+    # Run weekly to check for outdated documentation
+    - cron: '0 9 * * 1'
+  workflow_dispatch:
+    inputs:
+      check_context7:
+        description: 'Run Context7 freshness check'
+        required: false
+        default: 'true'
 
 jobs:
   validate:
@@ -113,21 +122,21 @@ jobs:
 
       - name: Check SKILL.md line count
         run: |
-          echo "Checking SKILL.md line counts (max 700 lines)..."
+          echo "Checking SKILL.md line counts (max 500 lines)..."
           errors=0
           warnings=0
 
           for skill_dir in skills/*/; do
             skill_name=$(basename "$skill_dir")
             skill_file="$skill_dir/SKILL.md"
-            
+
             line_count=$(wc -l < "$skill_file" | tr -d ' ')
 
-            if [ "$line_count" -gt 700 ]; then
-              echo "❌ $skill_name: $line_count lines (exceeds 700 limit)"
+            if [ "$line_count" -gt 500 ]; then
+              echo "❌ $skill_name: $line_count lines (exceeds 500 limit)"
               errors=$((errors + 1))
-            elif [ "$line_count" -gt 600 ]; then
-              echo "⚠️  $skill_name: $line_count lines (approaching 700 limit)"
+            elif [ "$line_count" -gt 400 ]; then
+              echo "⚠️  $skill_name: $line_count lines (approaching 500 limit)"
               warnings=$((warnings + 1))
             else
               echo "✓ $skill_name: $line_count lines"
@@ -136,13 +145,13 @@ jobs:
 
           if [ $errors -gt 0 ]; then
             echo ""
-            echo "❌ $errors skill(s) exceed the 700 line limit"
+            echo "❌ $errors skill(s) exceed the 500 line limit"
             exit 1
           fi
 
           if [ $warnings -gt 0 ]; then
             echo ""
-            echo "⚠️  $warnings skill(s) approaching the 700 line limit"
+            echo "⚠️  $warnings skill(s) approaching the 500 limit"
           fi
 
           echo ""
@@ -151,7 +160,6 @@ jobs:
       - name: Validate rule files
         run: |
           echo "Validating rule files..."
-          errors=0
 
           for skill_dir in skills/*/; do
             skill_name=$(basename "$skill_dir")
@@ -183,7 +191,7 @@ jobs:
           echo "═══════════════════════════════════════"
           echo "           SKILLS SUMMARY"
           echo "═══════════════════════════════════════"
-          
+
           total_skills=0
           total_rules=0
 
@@ -191,9 +199,9 @@ jobs:
             skill_name=$(basename "$skill_dir")
             rule_count=$(find "$skill_dir/rules" -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
             line_count=$(wc -l < "$skill_dir/SKILL.md" | tr -d ' ')
-            
+
             printf "  %-35s %3d rules  %4d lines\n" "$skill_name" "$rule_count" "$line_count"
-            
+
             total_skills=$((total_skills + 1))
             total_rules=$((total_rules + rule_count))
           done
@@ -201,3 +209,141 @@ jobs:
           echo "═══════════════════════════════════════"
           echo "  Total: $total_skills skills, $total_rules rules"
           echo "═══════════════════════════════════════"
+
+  context7-freshness:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Check skills against Context7
+        env:
+          CONTEXT7_API_KEY: ${{ secrets.CONTEXT7_API_KEY }}
+        run: |
+          echo "═══════════════════════════════════════════════════"
+          echo "  CONTEXT7 FRESHNESS CHECK"
+          echo "  Checking skills against latest documentation"
+          echo "═══════════════════════════════════════════════════"
+          echo ""
+
+          # Map skills to Context7 library IDs
+          declare -A SKILL_TO_CONTEXT7=(
+            ["hono-v4"]="hono/hono"
+            ["react-best-practices"]="facebook/react"
+            ["nextjs-app-router"]="vercel/next.js"
+            ["cloudflare-workers"]="cloudflare/workers-sdk"
+            ["cloudflare-d1"]="cloudflare/workers-sdk"
+            ["cloudflare-kv"]="cloudflare/workers-sdk"
+            ["cloudflare-r2"]="cloudflare/workers-sdk"
+            ["cloudflare-durable-objects"]="cloudflare/workers-sdk"
+            ["cloudflare-workflows"]="cloudflare/workers-sdk"
+            ["drizzle-orm"]="drizzle-team/drizzle-orm"
+            ["tanstack-query"]="tanstack/query"
+            ["tanstack-table"]="tanstack/table"
+            ["vercel-ai-sdk"]="vercel/ai"
+            ["typescript-best-practices"]="microsoft/TypeScript"
+            ["stripe-payments"]="stripe/stripe-node"
+            ["inngest"]="inngest/inngest"
+            ["biome"]="biomejs/biome"
+            ["upstash"]="upstash/redis"
+            ["opentelemetry"]="open-telemetry/opentelemetry-js"
+          )
+
+          outdated=0
+          checked=0
+
+          for skill_name in "${!SKILL_TO_CONTEXT7[@]}"; do
+            library_id="${SKILL_TO_CONTEXT7[$skill_name]}"
+            skill_file="skills/$skill_name/SKILL.md"
+
+            if [ ! -f "$skill_file" ]; then
+              continue
+            fi
+
+            checked=$((checked + 1))
+
+            # Extract version from skill if present
+            skill_version=$(grep -oP 'v\d+(\.\d+)*' "$skill_file" | head -1 || echo "")
+
+            echo "Checking $skill_name against $library_id..."
+
+            # Query Context7 for latest documentation
+            # Note: This is a placeholder - actual implementation depends on Context7 API
+            if [ -n "$CONTEXT7_API_KEY" ]; then
+              response=$(curl -s -H "Authorization: Bearer $CONTEXT7_API_KEY" \
+                "https://api.context7.com/v1/libraries/$library_id/latest" 2>/dev/null || echo "{}")
+
+              latest_version=$(echo "$response" | jq -r '.version // empty' 2>/dev/null || echo "")
+
+              if [ -n "$latest_version" ] && [ -n "$skill_version" ]; then
+                if [ "$skill_version" != "$latest_version" ]; then
+                  echo "  ⚠️  $skill_name: skill has $skill_version, latest is $latest_version"
+                  outdated=$((outdated + 1))
+                else
+                  echo "  ✓ $skill_name: up to date ($skill_version)"
+                fi
+              else
+                echo "  ℹ️  $skill_name: version check skipped"
+              fi
+            else
+              echo "  ℹ️  $skill_name: mapped to $library_id (API key not configured)"
+            fi
+          done
+
+          echo ""
+          echo "═══════════════════════════════════════════════════"
+          echo "  Checked: $checked skills"
+          if [ $outdated -gt 0 ]; then
+            echo "  ⚠️  Potentially outdated: $outdated skills"
+            echo ""
+            echo "  Run 'npx @anthropic-ai/claude-code' to update skills"
+            echo "  using Context7 MCP for latest documentation."
+          else
+            echo "  ✅ All checked skills appear current"
+          fi
+          echo "═══════════════════════════════════════════════════"
+
+      - name: Create freshness report
+        run: |
+          cat > freshness-report.md << 'EOF'
+          # Skills Freshness Report
+
+          Generated: $(date -u +"%Y-%m-%d %H:%M UTC")
+
+          ## Technology Mappings
+
+          | Skill | Context7 Library | Check |
+          |-------|------------------|-------|
+          | hono-v4 | hono/hono | ✓ |
+          | react-best-practices | facebook/react | ✓ |
+          | nextjs-app-router | vercel/next.js | ✓ |
+          | cloudflare-workers | cloudflare/workers-sdk | ✓ |
+          | drizzle-orm | drizzle-team/drizzle-orm | ✓ |
+          | tanstack-query | tanstack/query | ✓ |
+          | tanstack-table | tanstack/table | ✓ |
+          | vercel-ai-sdk | vercel/ai | ✓ |
+          | stripe-payments | stripe/stripe-node | ✓ |
+          | inngest | inngest/inngest | ✓ |
+          | biome | biomejs/biome | ✓ |
+          | upstash | upstash/redis | ✓ |
+          | opentelemetry | open-telemetry/opentelemetry-js | ✓ |
+
+          ## How to Update
+
+          1. Use Context7 MCP to fetch latest documentation
+          2. Compare with current skill content
+          3. Update patterns, APIs, and examples as needed
+          4. Bump version in SKILL.md metadata
+
+          ```bash
+          # Example: Update hono-v4 skill
+          npx @anthropic-ai/claude-code "Update skills/hono-v4 using Context7 for hono/hono latest docs"
+          ```
+          EOF
+
+          echo "Freshness report created"

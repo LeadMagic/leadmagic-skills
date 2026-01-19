@@ -99,7 +99,7 @@ git worktree prune
    git merge feature/auth
    git merge feature/api
    git merge feature/ui
-   
+
    # Run full test suite to catch integration issues
    npm test
    ```
@@ -113,7 +113,7 @@ git worktree prune
 feature/auth ──────┐
                    ├──→ feature/dashboard (depends on auth)
 feature/api ───────┘
-                   
+
 feature/ui ────────────→ Can run independently
 ```
 

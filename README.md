@@ -14,7 +14,7 @@ This repository contains **43 Claude Skills** that provide AI coding agents with
 
 Skills are structured knowledge files that teach AI agents how to write better code. Each skill contains:
 
-- **SKILL.md** — Main instruction file (under 700 lines)
+- **SKILL.md** — Main instruction file (under 500 lines)
 - **rules/** — Detailed patterns with correct/incorrect examples
 - **scripts/** — Optional automation scripts
 
@@ -326,7 +326,7 @@ Additional context.
 
 ### Best Practices
 
-- **Keep SKILL.md under 700 lines** — Put details in rules/
+- **Keep SKILL.md under 500 lines** — Put details in rules/
 - **Write specific descriptions** — Include trigger keywords
 - **Use progressive disclosure** — Link to rules for depth
 - **Prioritize by impact** — CRITICAL > HIGH > MEDIUM > LOW
@@ -345,9 +345,17 @@ Additional context.
 This checks:
 - All skills have required `SKILL.md`
 - Frontmatter is properly formatted
-- Line count is under 700
+- Line count is under 500
 - Name format is valid (lowercase, hyphens, numbers)
 - Description length under 1024 chars
+
+### Check Freshness Against Context7
+
+```bash
+./scripts/check-freshness.sh
+```
+
+Skills are mapped to Context7 library IDs in `context7-mappings.json`. The CI runs a weekly freshness check to identify skills that may need updates.
 
 ### Manual Checks
 
@@ -428,6 +436,65 @@ leadmagic-skills/
 ├── install.sh                 # Installation script
 └── LICENSE
 ```
+
+---
+
+## Keeping Skills Up to Date
+
+### Context7 Integration
+
+Skills are mapped to their upstream documentation via [Context7](https://context7.com/). This ensures skills stay current with the latest API changes.
+
+**Mapping File:** `context7-mappings.json`
+
+| Skill | Context7 Library |
+|-------|-----------------|
+| `hono-v4` | hono/hono |
+| `react-best-practices` | facebook/react |
+| `nextjs-app-router` | vercel/next.js |
+| `cloudflare-*` | cloudflare/workers-sdk |
+| `drizzle-orm` | drizzle-team/drizzle-orm |
+| `tanstack-query` | tanstack/query |
+| `tanstack-table` | tanstack/table |
+| `vercel-ai-sdk` | vercel/ai |
+| `stripe-payments` | stripe/stripe-node |
+| `inngest` | inngest/inngest-js |
+| `biome` | biomejs/biome |
+
+### Updating a Skill with Context7
+
+1. **Setup Context7 MCP** (add to `~/.claude/mcp.json`):
+
+```json
+{
+  "mcpServers": {
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp"]
+    }
+  }
+}
+```
+
+2. **Update skill using Claude Code:**
+
+```bash
+npx @anthropic-ai/claude-code "Update skills/hono-v4 using Context7 for latest Hono v4 docs"
+```
+
+3. **Or use Context7 MCP directly:**
+
+```
+use_mcp_tool context7 resolve {"libraryName": "hono/hono"}
+use_mcp_tool context7 get_library_docs {"context7CompatibleLibraryID": "/hono/hono"}
+```
+
+### Automated Freshness Checks
+
+The CI runs weekly to check skills against Context7:
+
+- **Schedule:** Every Monday at 9:00 UTC
+- **Manual trigger:** Go to Actions → "Validate Skills" → "Run workflow"
 
 ---
 
