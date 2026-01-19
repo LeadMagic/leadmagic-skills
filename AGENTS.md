@@ -288,7 +288,7 @@ bash /mnt/skills/user/{skill-name}/scripts/{script}.sh --flag value
 
 Skills are loaded on-demand — only the skill name and description are loaded at startup. The full `SKILL.md` loads into context only when the agent decides the skill is relevant.
 
-- **Keep SKILL.md under 500 lines** — put detailed reference material in rules/ files
+- **Keep SKILL.md under 700 lines** — put detailed reference material in rules/ files
 - **Write specific descriptions** — helps the agent know exactly when to activate the skill
 - **Use progressive disclosure** — reference supporting files that get read only when needed
 - **Prefer scripts over inline code** — script execution doesn't consume context (only output does)

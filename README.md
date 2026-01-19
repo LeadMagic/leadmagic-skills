@@ -14,7 +14,7 @@ This repository contains **43 Claude Skills** that provide AI coding agents with
 
 Skills are structured knowledge files that teach AI agents how to write better code. Each skill contains:
 
-- **SKILL.md** — Main instruction file (under 500 lines)
+- **SKILL.md** — Main instruction file (under 700 lines)
 - **rules/** — Detailed patterns with correct/incorrect examples
 - **scripts/** — Optional automation scripts
 
@@ -326,7 +326,7 @@ Additional context.
 
 ### Best Practices
 
-- **Keep SKILL.md under 500 lines** — Put details in rules/
+- **Keep SKILL.md under 700 lines** — Put details in rules/
 - **Write specific descriptions** — Include trigger keywords
 - **Use progressive disclosure** — Link to rules for depth
 - **Prioritize by impact** — CRITICAL > HIGH > MEDIUM > LOW
@@ -345,8 +345,9 @@ Additional context.
 This checks:
 - All skills have required `SKILL.md`
 - Frontmatter is properly formatted
-- Line count is under 500
-- No broken rule references
+- Line count is under 700
+- Name format is valid (lowercase, hyphens, numbers)
+- Description length under 1024 chars
 
 ### Manual Checks
 

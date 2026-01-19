@@ -5,10 +5,12 @@ on:
     branches: [main]
     paths:
       - 'skills/**'
+      - 'scripts/validate.sh'
   pull_request:
     branches: [main]
     paths:
       - 'skills/**'
+      - 'scripts/validate.sh'
 
 jobs:
   validate:
@@ -19,6 +21,7 @@ jobs:
       - name: Validate SKILL.md frontmatter
         run: |
           echo "Validating skill frontmatter..."
+          errors=0
 
           for skill_dir in skills/*/; do
             skill_name=$(basename "$skill_dir")
@@ -26,48 +29,68 @@ jobs:
 
             if [ ! -f "$skill_file" ]; then
               echo "❌ Missing SKILL.md in $skill_name"
-              exit 1
+              errors=$((errors + 1))
+              continue
             fi
 
             # Check for required frontmatter fields
             if ! head -20 "$skill_file" | grep -q "^name:"; then
               echo "❌ Missing 'name' in $skill_name/SKILL.md"
-              exit 1
+              errors=$((errors + 1))
+              continue
             fi
 
             if ! head -20 "$skill_file" | grep -q "^description:"; then
               echo "❌ Missing 'description' in $skill_name/SKILL.md"
-              exit 1
+              errors=$((errors + 1))
+              continue
             fi
 
             # Validate name matches folder
             yaml_name=$(head -20 "$skill_file" | grep "^name:" | sed 's/name: *//')
             if [ "$yaml_name" != "$skill_name" ]; then
               echo "❌ Name mismatch in $skill_name: folder='$skill_name' vs name='$yaml_name'"
-              exit 1
+              errors=$((errors + 1))
+              continue
             fi
 
             # Check name format (lowercase, hyphens, numbers only)
             if echo "$yaml_name" | grep -qE '[^a-z0-9-]'; then
               echo "❌ Invalid name format in $skill_name: must be lowercase letters, numbers, hyphens"
-              exit 1
+              errors=$((errors + 1))
+              continue
+            fi
+
+            # Check name length (max 64 chars)
+            if [ ${#yaml_name} -gt 64 ]; then
+              echo "❌ Name too long in $skill_name: ${#yaml_name} chars (max 64)"
+              errors=$((errors + 1))
+              continue
             fi
 
             # Check for reserved words
             if echo "$yaml_name" | grep -qiE 'anthropic|claude'; then
               echo "❌ Reserved word in name: $skill_name"
-              exit 1
+              errors=$((errors + 1))
+              continue
             fi
 
             echo "✓ $skill_name"
           done
 
+          if [ $errors -gt 0 ]; then
+            echo ""
+            echo "❌ Validation failed with $errors error(s)"
+            exit 1
+          fi
+
           echo ""
-          echo "All skills validated successfully!"
+          echo "✅ All skills validated successfully!"
 
       - name: Check description length
         run: |
           echo "Checking description lengths (max 1024 chars)..."
+          errors=0
 
           for skill_dir in skills/*/; do
             skill_name=$(basename "$skill_dir")
@@ -78,18 +101,103 @@ jobs:
 
             if [ $desc_len -gt 1024 ]; then
               echo "❌ Description too long in $skill_name: $desc_len chars (max 1024)"
-              exit 1
+              errors=$((errors + 1))
+            else
+              echo "✓ $skill_name: $desc_len chars"
             fi
-
-            echo "✓ $skill_name: $desc_len chars"
           done
 
-      - name: List skills summary
+          if [ $errors -gt 0 ]; then
+            exit 1
+          fi
+
+      - name: Check SKILL.md line count
         run: |
-          echo ""
-          echo "=== Skills Summary ==="
+          echo "Checking SKILL.md line counts (max 700 lines)..."
+          errors=0
+          warnings=0
+
           for skill_dir in skills/*/; do
             skill_name=$(basename "$skill_dir")
-            rule_count=$(find "$skill_dir/rules" -name "*.md" 2>/dev/null | wc -l || echo 0)
-            echo "  $skill_name: $rule_count rules"
+            skill_file="$skill_dir/SKILL.md"
+            
+            line_count=$(wc -l < "$skill_file" | tr -d ' ')
+
+            if [ "$line_count" -gt 700 ]; then
+              echo "❌ $skill_name: $line_count lines (exceeds 700 limit)"
+              errors=$((errors + 1))
+            elif [ "$line_count" -gt 600 ]; then
+              echo "⚠️  $skill_name: $line_count lines (approaching 700 limit)"
+              warnings=$((warnings + 1))
+            else
+              echo "✓ $skill_name: $line_count lines"
+            fi
           done
+
+          if [ $errors -gt 0 ]; then
+            echo ""
+            echo "❌ $errors skill(s) exceed the 700 line limit"
+            exit 1
+          fi
+
+          if [ $warnings -gt 0 ]; then
+            echo ""
+            echo "⚠️  $warnings skill(s) approaching the 700 line limit"
+          fi
+
+          echo ""
+          echo "✅ All skills within line limits!"
+
+      - name: Validate rule files
+        run: |
+          echo "Validating rule files..."
+          errors=0
+
+          for skill_dir in skills/*/; do
+            skill_name=$(basename "$skill_dir")
+            rules_dir="$skill_dir/rules"
+
+            if [ -d "$rules_dir" ]; then
+              for rule_file in "$rules_dir"/*.md; do
+                [ -f "$rule_file" ] || continue
+                rule_name=$(basename "$rule_file")
+
+                # Check for frontmatter
+                if ! head -1 "$rule_file" | grep -q "^---"; then
+                  echo "⚠️  $skill_name/rules/$rule_name: Missing frontmatter"
+                fi
+
+                # Check for title in frontmatter
+                if ! head -10 "$rule_file" | grep -q "^title:"; then
+                  echo "⚠️  $skill_name/rules/$rule_name: Missing 'title' in frontmatter"
+                fi
+              done
+            fi
+          done
+
+          echo "✅ Rule validation complete"
+
+      - name: Skills summary
+        run: |
+          echo ""
+          echo "═══════════════════════════════════════"
+          echo "           SKILLS SUMMARY"
+          echo "═══════════════════════════════════════"
+          
+          total_skills=0
+          total_rules=0
+
+          for skill_dir in skills/*/; do
+            skill_name=$(basename "$skill_dir")
+            rule_count=$(find "$skill_dir/rules" -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
+            line_count=$(wc -l < "$skill_dir/SKILL.md" | tr -d ' ')
+            
+            printf "  %-35s %3d rules  %4d lines\n" "$skill_name" "$rule_count" "$line_count"
+            
+            total_skills=$((total_skills + 1))
+            total_rules=$((total_rules + rule_count))
+          done
+
+          echo "═══════════════════════════════════════"
+          echo "  Total: $total_skills skills, $total_rules rules"
+          echo "═══════════════════════════════════════"

@@ -86,14 +86,17 @@ for skill_dir in "$SKILLS_DIR"/*/; do
         continue
     fi
 
-    # Check SKILL.md line count (should be under 500)
+    # Check SKILL.md line count (must be under 700)
     line_count=$(wc -l < "$skill_file" | tr -d ' ')
     
     # Count rules
     rule_count=$(find "$skill_dir/rules" -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
 
-    if [ "$line_count" -gt 500 ]; then
-        echo -e "${YELLOW}⚠${NC} $skill_name (${rule_count} rules) - ${line_count} lines ${YELLOW}(over 500)${NC}"
+    if [ "$line_count" -gt 700 ]; then
+        echo -e "${RED}✗${NC} $skill_name (${rule_count} rules) - ${line_count} lines ${RED}(exceeds 700 limit)${NC}"
+        ((errors++))
+    elif [ "$line_count" -gt 600 ]; then
+        echo -e "${YELLOW}⚠${NC} $skill_name (${rule_count} rules) - ${line_count} lines ${YELLOW}(approaching 700 limit)${NC}"
     else
         echo -e "${GREEN}✓${NC} $skill_name (${rule_count} rules) - ${line_count} lines"
     fi
