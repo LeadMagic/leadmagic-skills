@@ -56,9 +56,9 @@ printf "  %-30s %s\n" "───────────────────
 for mapping in "${MAPPINGS[@]}"; do
     skill_name="${mapping%%:*}"
     library_id="${mapping##*:}"
-    
+
     skill_file="$SKILLS_DIR/$skill_name/SKILL.md"
-    
+
     if [ -f "$skill_file" ]; then
         printf "  ${GREEN}%-30s${NC} %s\n" "$skill_name" "$library_id"
     else

@@ -38,7 +38,7 @@ app.post('/webhooks/linear', async (c) => {
 
   // 2. Parse event
   const event = JSON.parse(body)
-  
+
   // 3. Route by event type
   await routeEvent(event)
 

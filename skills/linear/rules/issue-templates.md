@@ -242,7 +242,7 @@ function createIssueFromTemplate(
   }
 
   const template = templates[type](data)
-  
+
   return {
     teamId,
     title: template.title,

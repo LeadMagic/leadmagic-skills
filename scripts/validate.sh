@@ -88,7 +88,7 @@ for skill_dir in "$SKILLS_DIR"/*/; do
 
     # Check SKILL.md line count (must be under 500)
     line_count=$(wc -l < "$skill_file" | tr -d ' ')
-    
+
     # Count rules
     rule_count=$(find "$skill_dir/rules" -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
 

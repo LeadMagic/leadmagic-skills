@@ -1,0 +1,237 @@
+name: Update Skills from Context7
+
+on:
+  schedule:
+    # Run monthly on the 1st at 9:00 UTC
+    - cron: '0 9 1 * *'
+  workflow_dispatch:
+    inputs:
+      skill:
+        description: 'Specific skill to update (leave empty for all)'
+        required: false
+        default: ''
+      dry_run:
+        description: 'Dry run (no PR created)'
+        required: false
+        default: 'false'
+
+env:
+  CONTEXT7_API_URL: https://api.context7.com/v1
+
+jobs:
+  check-updates:
+    runs-on: ubuntu-latest
+    outputs:
+      skills_to_update: ${{ steps.check.outputs.skills }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check for outdated skills
+        id: check
+        run: |
+          echo "Checking skills against Context7..."
+
+          # Read mappings
+          skills_to_update="[]"
+
+          # Skills with their npm package names for version checking
+          declare -A SKILL_PACKAGES=(
+            ["hono-v4"]="hono"
+            ["drizzle-orm"]="drizzle-orm"
+            ["tanstack-query"]="@tanstack/react-query"
+            ["tanstack-table"]="@tanstack/react-table"
+            ["vercel-ai-sdk"]="ai"
+            ["stripe-payments"]="stripe"
+            ["inngest"]="inngest"
+            ["biome"]="@biomejs/biome"
+          )
+
+          outdated=""
+
+          for skill in "${!SKILL_PACKAGES[@]}"; do
+            package="${SKILL_PACKAGES[$skill]}"
+            skill_file="skills/$skill/SKILL.md"
+
+            if [ ! -f "$skill_file" ]; then
+              continue
+            fi
+
+            # Get latest version from npm
+            latest=$(npm view "$package" version 2>/dev/null || echo "")
+
+            if [ -z "$latest" ]; then
+              echo "⚠️  Could not fetch version for $package"
+              continue
+            fi
+
+            # Check if skill mentions this version
+            if grep -q "v$latest\|version.*$latest\|@$latest" "$skill_file" 2>/dev/null; then
+              echo "✓ $skill: up to date (v$latest)"
+            else
+              echo "⚠️  $skill: may need update (latest: v$latest)"
+              outdated="$outdated $skill"
+            fi
+          done
+
+          echo "skills=$outdated" >> $GITHUB_OUTPUT
+
+  create-update-issue:
+    needs: check-updates
+    if: needs.check-updates.outputs.skills_to_update != ''
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create update tracking issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SKILLS: ${{ needs.check-updates.outputs.skills_to_update }}
+        run: |
+          # Check if issue already exists
+          existing=$(gh issue list --label "skill-updates" --state open --json number -q '.[0].number' || echo "")
+
+          if [ -n "$existing" ]; then
+            echo "Updating existing issue #$existing"
+
+            gh issue comment "$existing" --body "## Update Check - $(date -u +"%Y-%m-%d")
+
+          Skills that may need updates:
+          $SKILLS
+
+          Use Context7 MCP to fetch latest documentation and update patterns."
+          else
+            echo "Creating new issue"
+
+            gh issue create \
+              --title "🔄 Skills Update Required - $(date -u +"%Y-%m")" \
+              --label "skill-updates,documentation" \
+              --body "## Skills Requiring Updates
+
+          The following skills may have outdated documentation:
+
+          $SKILLS
+
+          ### How to Update
+
+          1. **Use Claude Code with Context7 MCP:**
+
+          \`\`\`bash
+          npx @anthropic-ai/claude-code
+          \`\`\`
+
+          2. **For each skill, run:**
+
+          \`\`\`
+          Update skills/<skill-name> using Context7 to fetch the latest documentation.
+          Check for API changes, new patterns, and deprecations.
+          \`\`\`
+
+          3. **Create a PR** with the changes.
+
+          ### Context7 Commands
+
+          \`\`\`
+          # Resolve library
+          use_mcp_tool context7 resolve {\"libraryName\": \"<library>\"}
+
+          # Get docs
+          use_mcp_tool context7 get_library_docs {\"context7CompatibleLibraryID\": \"/<org>/<repo>\"}
+          \`\`\`
+
+          ### Checklist
+
+          $(for skill in $SKILLS; do echo "- [ ] $skill"; done)
+
+          ---
+          *This issue was automatically created by the monthly skills update check.*"
+          fi
+
+  update-skill:
+    if: github.event.inputs.skill != ''
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Fetch Context7 docs for skill
+        env:
+          SKILL: ${{ github.event.inputs.skill }}
+        run: |
+          echo "Fetching Context7 docs for: $SKILL"
+
+          # Read the mapping
+          library_id=$(jq -r ".mappings[\"$SKILL\"].context7 // empty" context7-mappings.json)
+
+          if [ -z "$library_id" ]; then
+            echo "❌ No Context7 mapping found for $SKILL"
+            exit 1
+          fi
+
+          echo "Library ID: $library_id"
+          echo "Topics to check: $(jq -r ".mappings[\"$SKILL\"].checkTopics | join(\", \")" context7-mappings.json)"
+
+          # Create a summary of what needs to be updated
+          cat > update-summary.md << EOF
+          # Update Summary for $SKILL
+
+          **Context7 Library:** $library_id
+          **Date:** $(date -u +"%Y-%m-%d %H:%M UTC")
+
+          ## Instructions
+
+          Use Claude Code with Context7 MCP to update this skill:
+
+          \`\`\`
+          Update skills/$SKILL using Context7 library $library_id.
+          Focus on: $(jq -r ".mappings[\"$SKILL\"].checkTopics | join(\", \")" context7-mappings.json)
+          \`\`\`
+
+          ## Current Skill Info
+
+          \`\`\`
+          $(head -20 skills/$SKILL/SKILL.md)
+          \`\`\`
+          EOF
+
+          cat update-summary.md
+
+      - name: Create branch and PR
+        if: github.event.inputs.dry_run != 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SKILL: ${{ github.event.inputs.skill }}
+        run: |
+          branch="update/$SKILL-$(date +%Y%m%d)"
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git checkout -b "$branch"
+
+          # Add update summary as a tracking file
+          mkdir -p .updates
+          mv update-summary.md ".updates/$SKILL-update.md"
+          git add ".updates/"
+          git commit -m "chore($SKILL): prepare update from Context7"
+
+          git push -u origin "$branch"
+
+          gh pr create \
+            --title "chore($SKILL): update from Context7 docs" \
+            --body "## Skill Update: $SKILL
+
+          This PR was created to track updates for the \`$SKILL\` skill.
+
+          ### Next Steps
+
+          1. Use Claude Code with Context7 MCP to update the skill
+          2. Review changes for accuracy
+          3. Run validation: \`./scripts/validate.sh\`
+          4. Merge when ready
+
+          See \`.updates/$SKILL-update.md\` for details." \
+            --label "skill-updates"
