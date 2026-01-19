@@ -9,7 +9,7 @@ metadata:
 
 # API Development Best Practices
 
-Comprehensive guide for building production-grade APIs at the edge. Contains 30+ rules across 8 categories for designing, securing, and operating APIs.
+Comprehensive guide for building production-grade APIs at the edge.
 
 ## When to Apply
 
@@ -40,51 +40,34 @@ Reference these guidelines when:
 ### 1. API Design (CRITICAL)
 
 - `design-rest-conventions` - RESTful naming and HTTP methods
-- `design-resource-naming` - Consistent resource naming
-- `design-request-validation` - Validate all inputs against schema
-- `design-response-format` - Consistent response structure
 
 ### 2. Authentication (CRITICAL)
 
 - `auth-api-keys` - Secure API key management
-- `auth-scopes` - Implement proper authorization scopes
-- `auth-tokens` - Token lifecycle and rotation
 
 ### 3. Rate Limiting (CRITICAL)
 
 - `ratelimit-strategy` - Rate limiting strategies
-- `ratelimit-headers` - Standard rate limit headers
-- `ratelimit-tiers` - Tiered rate limits
 
 ### 4. Error Handling (HIGH)
 
-- `errors-status-codes` - Correct HTTP status codes
 - `errors-response-format` - Structured error responses
-- `errors-validation` - Validation error details
 
 ### 5. Versioning (HIGH)
 
 - `version-strategy` - API versioning approaches
-- `version-deprecation` - Deprecation policies
-- `version-migration` - Migration guides
 
 ### 6. Security (HIGH)
 
 - `security-input-validation` - Input sanitization
-- `security-headers` - Security response headers
-- `security-cors` - CORS configuration
 
 ### 7. Observability (MEDIUM)
 
 - `observability-request-id` - Request correlation IDs
-- `observability-logging` - Structured logging
-- `observability-metrics` - Key metrics to track
 
 ### 8. Performance (MEDIUM)
 
-- `perf-caching` - Edge caching strategies
-- `perf-pagination` - Efficient pagination
-- `perf-payload` - Payload optimization
+- `perf-edge-caching` - Edge caching strategies
 
 ## Essential Patterns
 

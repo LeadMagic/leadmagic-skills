@@ -9,7 +9,7 @@ metadata:
 
 # Cloudflare KV Best Practices
 
-Comprehensive guide for using Cloudflare Workers KV (Key-Value) storage. Contains 15+ rules across 4 categories.
+Comprehensive guide for using Cloudflare Workers KV (Key-Value) storage.
 
 ## When to Apply
 
@@ -24,39 +24,17 @@ Reference these guidelines when:
 | Priority | Category | Impact | Prefix |
 |----------|----------|--------|--------|
 | 1 | Read/Write Operations | CRITICAL | `ops-` |
-| 2 | Data Patterns | HIGH | `data-` |
-| 3 | Performance | HIGH | `perf-` |
-| 4 | Consistency | MEDIUM | `consistency-` |
+| 2 | Consistency | HIGH | `consistency-` |
 
 ## Quick Reference
 
 ### 1. Read/Write Operations (CRITICAL)
 
 - `ops-get-put` - Basic get/put operations with types
-- `ops-delete` - Delete and bulk delete patterns
-- `ops-list` - Efficient key listing with pagination
-- `ops-metadata` - Store metadata alongside values
-- `ops-expiration` - Set TTL for automatic expiration
 
-### 2. Data Patterns (HIGH)
-
-- `data-json` - Store and retrieve JSON objects
-- `data-binary` - Handle binary data (ArrayBuffer)
-- `data-key-design` - Design keys for efficient access
-- `data-namespacing` - Organize data with key prefixes
-
-### 3. Performance (HIGH)
-
-- `perf-caching` - Use KV as edge cache
-- `perf-read-heavy` - Optimize for read-heavy workloads
-- `perf-batch-writes` - Batch write operations
-- `perf-size-limits` - Stay within value size limits
-
-### 4. Consistency (MEDIUM)
+### 2. Consistency (HIGH)
 
 - `consistency-eventual` - Understand eventual consistency
-- `consistency-read-after-write` - Handle read-after-write
-- `consistency-cache-invalidation` - Invalidation strategies
 
 ## Essential Patterns
 
@@ -460,6 +438,3 @@ wrangler kv:key list --binding=CACHE --prefix="user:"
 wrangler kv:bulk put --binding=CACHE ./data.json
 ```
 
-## Full Compiled Document
-
-For the complete guide with all rules expanded: `AGENTS.md`

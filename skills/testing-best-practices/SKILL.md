@@ -115,9 +115,9 @@ import { render, screen, waitFor } from '@testing-library/react'
 
 it('loads data', async () => {
   render(<UserProfile userId="123" />)
-  
+
   expect(screen.getByRole('status')).toHaveTextContent(/loading/i)
-  
+
   await waitFor(() => {
     expect(screen.getByRole('heading')).toHaveTextContent('John Doe')
   })

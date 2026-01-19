@@ -12,7 +12,7 @@ Claude Skills for building production applications with **Next.js + Cloudflare +
 ./install.sh ./my-project/.claude/skills
 ```
 
-## Skills (29 Total)
+## Skills (36 Total)
 
 ### Core Stack
 

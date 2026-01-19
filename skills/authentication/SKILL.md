@@ -47,7 +47,7 @@ import { auth, currentUser } from '@clerk/nextjs/server'
 export default async function Dashboard() {
   const { userId } = await auth()
   if (!userId) redirect('/sign-in')
-  
+
   const user = await currentUser()
   return <h1>Welcome, {user?.firstName}</h1>
 }
@@ -132,16 +132,16 @@ import { getCookie, setCookie } from 'hono/cookie'
 app.post('/login', async (c) => {
   const user = await verifyCredentials(/* ... */)
   const sessionId = crypto.randomUUID()
-  
+
   await c.env.SESSIONS.put(`session:${sessionId}`, user.id, { expirationTtl: 86400 })
-  
+
   setCookie(c, 'session', sessionId, {
     httpOnly: true,
     secure: true,
     sameSite: 'Lax',
     maxAge: 86400,
   })
-  
+
   return c.json({ success: true })
 })
 ```

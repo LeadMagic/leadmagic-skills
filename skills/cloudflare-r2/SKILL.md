@@ -9,7 +9,7 @@ metadata:
 
 # Cloudflare R2 Best Practices
 
-Comprehensive guide for using Cloudflare R2 object storage in Workers. Contains 20+ rules across 4 categories.
+Comprehensive guide for using Cloudflare R2 object storage in Workers.
 
 ## When to Apply
 
@@ -24,43 +24,13 @@ Reference these guidelines when:
 
 | Priority | Category | Impact | Prefix |
 |----------|----------|--------|--------|
-| 1 | Read/Write Operations | CRITICAL | `ops-` |
-| 2 | Streaming | HIGH | `stream-` |
-| 3 | Performance | HIGH | `perf-` |
-| 4 | Security | MEDIUM-HIGH | `security-` |
+| 1 | Operations | CRITICAL | `ops-` |
 
 ## Quick Reference
 
-### 1. Read/Write Operations (CRITICAL)
+### 1. Operations (CRITICAL)
 
-- `ops-put-object` - Properly put objects with metadata
-- `ops-get-object` - Handle get with range requests
-- `ops-delete-object` - Delete single and multiple objects
-- `ops-list-objects` - Efficient object listing with pagination
-- `ops-head-object` - Use head() to check existence
-
-### 2. Streaming (HIGH)
-
-- `stream-upload` - Stream uploads for large files
-- `stream-download` - Stream downloads to response
-- `stream-multipart` - Use multipart upload for >100MB
-- `stream-range-requests` - Support range requests for video/audio
-- `stream-transform` - Transform streams on the fly
-
-### 3. Performance (HIGH)
-
-- `perf-caching` - Cache R2 responses at edge
-- `perf-conditional-requests` - Use ETags for conditional requests
-- `perf-prefix-organization` - Organize objects with prefixes
-- `perf-batch-operations` - Batch delete operations
-- `perf-presigned-urls` - Use presigned URLs for direct upload
-
-### 4. Security (MEDIUM-HIGH)
-
-- `security-cors` - Configure CORS for browser access
-- `security-content-type` - Always set correct Content-Type
-- `security-access-control` - Implement access control
-- `security-signed-urls` - Generate signed URLs for private content
+- `ops-streaming-upload` - Stream uploads for large files
 
 ## Essential Patterns
 
@@ -382,6 +352,3 @@ BUCKET_NAME = "my-bucket"
 | Max parts per multipart upload | 10,000 |
 | Free egress | Unlimited to Workers |
 
-## Full Compiled Document
-
-For the complete guide with all rules expanded: `AGENTS.md`

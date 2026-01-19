@@ -9,7 +9,7 @@ metadata:
 
 # TypeScript Best Practices
 
-Comprehensive guide for writing production-ready TypeScript code. Contains 40+ rules across 7 categories.
+Comprehensive guide for writing production-ready TypeScript code.
 
 ## When to Apply
 
@@ -25,49 +25,22 @@ Reference these guidelines when:
 | Priority | Category | Impact | Prefix |
 |----------|----------|--------|--------|
 | 1 | Configuration | CRITICAL | `config-` |
-| 2 | Type Definitions | CRITICAL | `types-` |
+| 2 | Type Definitions | HIGH | `types-` |
 | 3 | Type Safety | HIGH | `safety-` |
-| 4 | Generics | HIGH | `generics-` |
-| 5 | Utility Types | MEDIUM | `utility-` |
-| 6 | Error Handling | MEDIUM | `errors-` |
-| 7 | Performance | LOW-MEDIUM | `perf-` |
 
 ## Quick Reference
 
 ### 1. Configuration (CRITICAL)
 
 - `config-strict-mode` - Enable strict mode and all strict checks
-- `config-no-implicit-any` - Disallow implicit any
-- `config-strict-null-checks` - Enable strict null checks
-- `config-no-unchecked-indexed-access` - Check indexed access
-- `config-exact-optional-property-types` - Exact optional properties
 
-### 2. Type Definitions (CRITICAL)
+### 2. Type Definitions (HIGH)
 
-- `types-interface-vs-type` - When to use interface vs type
-- `types-explicit-return` - Explicit function return types
-- `types-const-assertions` - Use const assertions for literals
 - `types-discriminated-unions` - Use discriminated unions for variants
-- `types-branded-types` - Use branded types for type-safe IDs
 
 ### 3. Type Safety (HIGH)
 
 - `safety-no-any` - Avoid `any`, use `unknown` for unknown types
-- `safety-type-guards` - Implement proper type guards
-- `safety-exhaustive-checks` - Use exhaustive checks in switches
-- `safety-readonly` - Use readonly for immutable data
-- `safety-null-handling` - Handle null/undefined explicitly
-
-### 4. Generics (HIGH)
-
-- `generics-constraints` - Use constraints to limit generic types
-- `generics-defaults` - Provide sensible defaults
-- `generics-inference` - Let TypeScript infer when possible
-- `generics-variance` - Understand covariance and contravariance
-
-### 5. Utility Types (MEDIUM)
-
-- `utility-partial-required` - Use Partial<T> and Required<T>
 - `utility-pick-omit` - Use Pick<T, K> and Omit<T, K>
 - `utility-record` - Use Record<K, V> for dictionaries
 - `utility-extract-exclude` - Extract and Exclude for unions
@@ -404,6 +377,3 @@ import { createUser, type CreateUserInput } from './users'
 // - Better compatibility with isolatedModules
 ```
 
-## Full Compiled Document
-
-For the complete guide with all rules expanded: `AGENTS.md`

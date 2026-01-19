@@ -186,6 +186,3 @@ async function handleRequest(request: Request) {
 | Subrequests | 50 | 50 (1000 with unbound) |
 | Script size | 1MB | 10MB |
 
-## Full Compiled Document
-
-For the complete guide with all rules expanded: `AGENTS.md`

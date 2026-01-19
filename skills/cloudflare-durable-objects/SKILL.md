@@ -9,7 +9,7 @@ metadata:
 
 # Cloudflare Durable Objects Best Practices
 
-Comprehensive guide for building stateful edge applications with Durable Objects. Contains 25+ rules across 5 categories.
+Comprehensive guide for building stateful edge applications with Durable Objects.
 
 ## When to Apply
 
@@ -24,50 +24,23 @@ Reference these guidelines when:
 
 | Priority | Category | Impact | Prefix |
 |----------|----------|--------|--------|
-| 1 | Lifecycle & State | CRITICAL | `lifecycle-` |
+| 1 | Lifecycle | CRITICAL | `lifecycle-` |
 | 2 | Concurrency | CRITICAL | `concurrency-` |
-| 3 | Storage | HIGH | `storage-` |
-| 4 | WebSockets | HIGH | `websocket-` |
-| 5 | Patterns | MEDIUM | `pattern-` |
+| 3 | WebSockets | HIGH | `websocket-` |
 
 ## Quick Reference
 
-### 1. Lifecycle & State (CRITICAL)
+### 1. Lifecycle (CRITICAL)
 
-- `lifecycle-constructor` - Initialize state in constructor properly
 - `lifecycle-blockConcurrencyWhile` - Use for async initialization
-- `lifecycle-alarm` - Use alarms for scheduled tasks
-- `lifecycle-hibernation` - Implement hibernatable WebSockets
-- `lifecycle-destruction` - Handle object cleanup
 
 ### 2. Concurrency (CRITICAL)
 
-- `concurrency-single-threaded` - Understand single-threaded execution
-- `concurrency-input-gates` - Know how input gates work
-- `concurrency-atomic-operations` - Keep storage operations atomic
-- `concurrency-no-races` - Avoid race conditions in handlers
-- `concurrency-blocking` - Understand when handlers block
+- `concurrency-single-instance` - Understand single-instance execution model
 
-### 3. Storage (HIGH)
-
-- `storage-keys` - Design efficient storage keys
-- `storage-batching` - Batch storage operations
-- `storage-transactions` - Use storage transactions
-- `storage-limits` - Understand storage limits
-- `storage-delete-all` - Clean up storage properly
-
-### 4. WebSockets (HIGH)
+### 3. WebSockets (HIGH)
 
 - `websocket-hibernation` - Use Hibernatable WebSockets API
-- `websocket-tags` - Use tags for grouping connections
-- `websocket-broadcast` - Efficient broadcast patterns
-- `websocket-heartbeat` - Implement heartbeat/ping-pong
-- `websocket-cleanup` - Clean up closed connections
-
-### 5. Patterns (MEDIUM)
-
-- `pattern-counter` - Counter implementation
-- `pattern-rate-limiter` - Rate limiter implementation
 - `pattern-session` - Session management
 - `pattern-leader-election` - Leader election pattern
 - `pattern-sharding` - Sharding for scale
@@ -482,6 +455,3 @@ export class ChatRoom extends DurableObject {
 }
 ```
 
-## Full Compiled Document
-
-For the complete guide with all rules expanded: `AGENTS.md`

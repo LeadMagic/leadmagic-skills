@@ -240,6 +240,3 @@ my-worker/
 └── tsconfig.json
 ```
 
-## Full Compiled Document
-
-For the complete guide with all rules expanded: `AGENTS.md`

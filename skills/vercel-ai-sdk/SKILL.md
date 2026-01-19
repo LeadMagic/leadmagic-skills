@@ -9,7 +9,7 @@ metadata:
 
 # Vercel AI SDK Best Practices
 
-Comprehensive guide for building AI-powered applications with Vercel AI SDK 5/6. Contains 25+ rules across 7 categories.
+Comprehensive guide for building AI-powered applications with Vercel AI SDK 5/6.
 
 ## What's New in AI SDK v5
 
@@ -45,28 +45,32 @@ Reference these guidelines when:
 
 - `stream-useChat` - Use useChat hook for chat interfaces
 - `stream-server-client` - Match server/client maxSteps config
-- `stream-error-handling` - Handle streaming errors gracefully
 - `stream-abort` - Implement request cancellation with stop()
 
 ### 2. Tool Calling (CRITICAL)
 
 - `tools-schema` - Define tools with Zod schemas
 - `tools-approval` - Use needsApproval for dangerous operations
-- `tools-execution` - Handle tool execution properly
-- `tools-validation` - Validate tool inputs/outputs
 
 ### 3. Agents (HIGH)
 
 - `agent-abstraction` - Use Agent interface for reusable agents
-- `agent-tool-loop` - Implement tool loops correctly
-- `agent-instructions` - Define clear agent instructions
-- `agent-context` - Manage agent context efficiently
 
 ### 4. Structured Output (HIGH)
 
 - `output-schema` - Use schema for structured responses
-- `output-zod` - Define output types with Zod
-- `output-validation` - Validate AI outputs
+
+### 5. Provider Integration (MEDIUM)
+
+- `provider-edge` - Configure providers for edge runtime
+
+### 6. UI Patterns (MEDIUM)
+
+- `ui-messages` - Handle message state in UI components
+
+### 7. Voice & Audio (MEDIUM)
+
+- `voice-elements` - Implement voice input/output elements
 
 ### 5. Provider Integration (MEDIUM)
 
@@ -435,6 +439,3 @@ export function ChatWithTools() {
 npm install ai @ai-sdk/openai @ai-sdk/anthropic zod
 ```
 
-## Full Compiled Document
-
-For the complete guide with all rules expanded: `AGENTS.md`

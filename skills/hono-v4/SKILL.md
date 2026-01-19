@@ -4,12 +4,36 @@ description: Best practices and patterns for building high-performance APIs usin
 license: MIT
 metadata:
   author: leadmagic
-  version: "1.0.0"
+  version: "2.1.0"
 ---
 
 # Hono v4 Best Practices
 
-Comprehensive guide for building production-ready APIs with Hono v4 on Cloudflare Workers. Contains 30+ rules across 6 categories, prioritized by impact.
+Comprehensive guide for building production-ready APIs with Hono v4 on Cloudflare Workers.
+
+## SECURITY ALERT: JWT Algorithm Confusion (CVE-2026-22817)
+
+**Affected versions:** < 4.11.4
+**Severity:** HIGH (CVSS 8.2)
+**Fix:** Upgrade to 4.11.4+ and explicitly specify `alg` in JWT middleware
+
+```typescript
+// VULNERABLE - alg was optional
+app.use('/auth/*', jwt({
+  secret: 'it-is-very-secret',
+  // Missing alg allows algorithm confusion attacks
+}))
+
+// PATCHED - alg is now REQUIRED
+app.use('/auth/*', jwt({
+  secret: 'it-is-very-secret',
+  alg: 'HS256', // REQUIRED - prevents algorithm confusion
+}))
+```
+
+**Action Required:** Audit all JWT middleware usage and ensure `alg` is explicitly set.
+
+---
 
 ## When to Apply
 
@@ -24,75 +48,40 @@ Reference these guidelines when:
 
 | Priority | Category | Impact | Prefix |
 |----------|----------|--------|--------|
-| 1 | Type Safety & Bindings | CRITICAL | `types-` |
-| 2 | Routing & Handlers | HIGH | `routing-` |
-| 3 | Middleware Patterns | HIGH | `middleware-` |
-| 4 | Error Handling | MEDIUM-HIGH | `errors-` |
-| 5 | Performance | MEDIUM | `perf-` |
-| 6 | Testing | MEDIUM | `testing-` |
+| 1 | Type Safety | CRITICAL | `types-` |
+| 2 | Middleware | HIGH | `middleware-` |
+| 3 | Error Handling | HIGH | `errors-` |
 
 ## Quick Reference
 
-### 1. Type Safety & Bindings (CRITICAL)
+### 1. Type Safety (CRITICAL)
 
-- `types-env-bindings` - Define typed environment bindings
-- `types-context-generics` - Use Hono generics for type-safe context
+- `types-env-bindings` - Define typed environment bindings for D1, KV, R2
 - `types-request-validation` - Validate requests with Zod schemas
-- `types-response-types` - Type API responses explicitly
 
-### 2. Routing & Handlers (HIGH)
-
-- `routing-explicit-methods` - Use explicit HTTP method handlers
-- `routing-path-params` - Extract typed path parameters
-- `routing-query-params` - Parse and validate query strings
-- `routing-route-groups` - Organize routes with basePath
-- `routing-chained-handlers` - Chain multiple handlers properly
-
-### 3. Middleware Patterns (HIGH)
+### 2. Middleware Patterns (HIGH)
 
 - `middleware-order` - Order middleware correctly (logging → auth → validation)
-- `middleware-async` - Handle async middleware properly
-- `middleware-context-passing` - Pass data through context variables
-- `middleware-early-return` - Return early to skip downstream handlers
-- `middleware-factory` - Create reusable middleware factories
 
-### 4. Error Handling (MEDIUM-HIGH)
+### 3. Error Handling (HIGH)
 
 - `errors-global-handler` - Implement global error handler with onError
-- `errors-http-exceptions` - Use HTTPException for HTTP errors
-- `errors-validation` - Handle validation errors consistently
-- `errors-not-found` - Custom 404 handler with notFound
-- `errors-structured-responses` - Return structured error responses
-
-### 5. Performance (MEDIUM)
-
-- `perf-streaming-responses` - Stream large responses
-- `perf-json-shortcuts` - Use c.json() instead of new Response()
-- `perf-header-helpers` - Use built-in header helpers
-- `perf-body-parsing` - Parse body once, reuse result
-- `perf-parallel-operations` - Parallelize independent operations
-
-### 6. Testing (MEDIUM)
-
-- `testing-app-request` - Use app.request() for testing
-- `testing-mock-bindings` - Mock environment bindings properly
-- `testing-middleware-isolation` - Test middleware in isolation
 
 ## How to Use
 
-Read individual rule files for detailed explanations and code examples:
+Read individual rule files for detailed explanations:
 
 ```
 rules/types-env-bindings.md
-rules/routing-explicit-methods.md
+rules/types-request-validation.md
 rules/middleware-order.md
+rules/errors-global-handler.md
 ```
 
 Each rule file contains:
 - Brief explanation of why it matters
-- Incorrect code example with explanation
-- Correct code example with explanation
-- Additional context and references
+- Incorrect code example
+- Correct code example
 
 ## Project Structure
 
@@ -325,6 +314,3 @@ app.post('/users', async (c) => {
 })
 ```
 
-## Full Compiled Document
-
-For the complete guide with all rules expanded: `AGENTS.md`

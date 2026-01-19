@@ -9,7 +9,7 @@ metadata:
 
 # Cloudflare Workflows Best Practices
 
-Comprehensive guide for building durable, reliable workflows on Cloudflare Workers. Contains 20+ rules across 5 categories.
+Comprehensive guide for building durable, reliable workflows on Cloudflare Workers.
 
 ## When to Apply
 
@@ -24,48 +24,20 @@ Reference these guidelines when:
 
 | Priority | Category | Impact | Prefix |
 |----------|----------|--------|--------|
-| 1 | Workflow Definition | CRITICAL | `define-` |
-| 2 | Steps & Durability | CRITICAL | `step-` |
-| 3 | Error Handling | HIGH | `errors-` |
-| 4 | Events & Scheduling | HIGH | `events-` |
-| 5 | State Management | MEDIUM | `state-` |
+| 1 | Steps & Durability | CRITICAL | `step-` |
+| 2 | Events & Scheduling | HIGH | `events-` |
 
 ## Quick Reference
 
-### 1. Workflow Definition (CRITICAL)
+### 1. Steps & Durability (CRITICAL)
 
-- `define-entrypoint` - Extend WorkflowEntrypoint properly
-- `define-bindings` - Configure workflow bindings in wrangler.toml
-- `define-parameters` - Type workflow parameters and return values
-- `define-instance-id` - Use meaningful instance IDs for idempotency
-
-### 2. Steps & Durability (CRITICAL)
-
-- `step-do` - Use step.do() for durable operations
+- `step-do-durable` - Use step.do() for durable operations
 - `step-idempotency` - Make steps idempotent
-- `step-retries` - Configure retry policies
-- `step-payload-size` - Keep step payloads small (<1MB)
-- `step-side-effects` - Isolate side effects in steps
+- `step-payload-limits` - Keep step payloads small (<1MB)
 
-### 3. Error Handling (HIGH)
-
-- `errors-step-failures` - Handle step failures gracefully
-- `errors-retry-config` - Configure appropriate retry strategies
-- `errors-circuit-breaker` - Implement circuit breaker pattern
-- `errors-compensation` - Plan compensation/rollback logic
-
-### 4. Events & Scheduling (HIGH)
+### 2. Events & Scheduling (HIGH)
 
 - `events-wait-for-event` - Wait for external events properly
-- `events-sleep` - Use step.sleep() for delays
-- `events-sleep-until` - Schedule for specific times
-- `events-webhooks` - Handle incoming webhooks
-
-### 5. State Management (MEDIUM)
-
-- `state-serialization` - Ensure state is serializable
-- `state-minimize` - Keep state small
-- `state-versioning` - Plan for workflow versioning
 
 ## Essential Patterns
 
@@ -346,6 +318,3 @@ database_id = "xxx"
 | Max concurrent instances | 100 per account |
 | Event wait timeout | 30 days |
 
-## Full Compiled Document
-
-For the complete guide with all rules expanded: `AGENTS.md`

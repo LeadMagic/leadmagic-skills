@@ -9,7 +9,7 @@ metadata:
 
 # Cloudflare AI Gateway Best Practices
 
-Comprehensive guide for managing AI API requests through Cloudflare AI Gateway. Contains 20+ rules across 5 categories.
+Comprehensive guide for managing AI API requests through Cloudflare AI Gateway.
 
 ## When to Apply
 
@@ -24,40 +24,23 @@ Reference these guidelines when:
 
 | Priority | Category | Impact | Prefix |
 |----------|----------|--------|--------|
-| 1 | Routing & Providers | CRITICAL | `routing-` |
+| 1 | Routing | CRITICAL | `routing-` |
 | 2 | Caching | HIGH | `cache-` |
-| 3 | Security & Keys | HIGH | `security-` |
-| 4 | Rate Limiting | MEDIUM-HIGH | `ratelimit-` |
-| 5 | Observability | MEDIUM | `observe-` |
+| 3 | Security | HIGH | `security-` |
 
 ## Quick Reference
 
-### 1. Routing & Providers (CRITICAL)
+### 1. Routing (CRITICAL)
 
-- `routing-unified-endpoint` - Use unified /compat endpoint for provider switching
 - `routing-fallbacks` - Configure fallback providers for reliability
-- `routing-model-selection` - Dynamic model selection strategies
-- `routing-streaming` - Handle streaming responses properly
 
 ### 2. Caching (HIGH)
 
 - `cache-semantic` - Enable semantic caching for similar prompts
-- `cache-ttl` - Set appropriate cache TTLs
-- `cache-skip` - Know when to skip cache
-- `cache-keys` - Customize cache keys
 
-### 3. Security & Keys (HIGH)
+### 3. Security (HIGH)
 
-- `security-byok` - Bring Your Own Keys securely
-- `security-secrets-store` - Use Cloudflare Secrets Store
 - `security-guardrails` - Enable content guardrails
-- `security-dlp` - Configure Data Loss Prevention
-
-### 4. Rate Limiting (MEDIUM-HIGH)
-
-- `ratelimit-per-user` - Rate limit by user/API key
-- `ratelimit-cost-controls` - Set spending limits
-- `ratelimit-burst` - Configure burst allowances
 - `ratelimit-quotas` - Implement usage quotas
 
 ### 5. Observability (MEDIUM)
@@ -467,6 +450,3 @@ Custom blocklist: [list of blocked terms]
 - Amazon Bedrock
 - Workers AI (Cloudflare)
 
-## Full Compiled Document
-
-For the complete guide with all rules expanded: `AGENTS.md`

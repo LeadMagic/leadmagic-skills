@@ -9,7 +9,7 @@ metadata:
 
 # Cloudflare D1 Best Practices
 
-Comprehensive guide for using Cloudflare D1 (SQLite at the edge) in Workers. Contains 25+ rules across 5 categories.
+Comprehensive guide for using Cloudflare D1 (SQLite at the edge) in Workers.
 
 ## When to Apply
 
@@ -24,50 +24,14 @@ Reference these guidelines when:
 
 | Priority | Category | Impact | Prefix |
 |----------|----------|--------|--------|
-| 1 | Schema Design | CRITICAL | `schema-` |
-| 2 | Query Patterns | CRITICAL | `query-` |
-| 3 | Migrations | HIGH | `migrate-` |
-| 4 | Performance | HIGH | `perf-` |
-| 5 | Integration | MEDIUM | `integrate-` |
+| 1 | Query Patterns | CRITICAL | `query-` |
 
 ## Quick Reference
 
-### 1. Schema Design (CRITICAL)
-
-- `schema-primary-keys` - Always define explicit primary keys
-- `schema-indexes` - Create indexes for frequently queried columns
-- `schema-types` - Use appropriate SQLite types
-- `schema-constraints` - Add NOT NULL and CHECK constraints
-- `schema-foreign-keys` - Enable and use foreign keys
-
-### 2. Query Patterns (CRITICAL)
+### 1. Query Patterns (CRITICAL)
 
 - `query-prepared-statements` - Always use prepared statements (prevent SQL injection)
 - `query-batch-operations` - Use batch() for multiple operations
-- `query-select-columns` - Select only needed columns, avoid SELECT *
-- `query-pagination` - Implement proper pagination with LIMIT/OFFSET
-- `query-transactions` - Use batch() for transaction-like behavior
-
-### 3. Migrations (HIGH)
-
-- `migrate-version-control` - Version control all migrations
-- `migrate-idempotent` - Make migrations idempotent
-- `migrate-backwards-compatible` - Plan backwards-compatible changes
-- `migrate-test-locally` - Test migrations locally first
-- `migrate-backup` - Backup before destructive migrations
-
-### 4. Performance (HIGH)
-
-- `perf-index-usage` - Ensure queries use indexes (EXPLAIN)
-- `perf-batch-inserts` - Batch insert operations
-- `perf-avoid-full-scans` - Avoid full table scans
-- `perf-connection-reuse` - Reuse database binding
-- `perf-read-replicas` - Use read replicas for read-heavy workloads
-
-### 5. Integration (MEDIUM)
-
-- `integrate-hono` - Proper D1 integration with Hono
-- `integrate-drizzle` - Use Drizzle ORM for type safety
 - `integrate-error-handling` - Handle D1 errors properly
 - `integrate-typing` - Type D1 results properly
 
@@ -266,6 +230,3 @@ wrangler d1 execute DB --local --command="SELECT * FROM users"
 wrangler d1 export DB --output=backup.sql
 ```
 
-## Full Compiled Document
-
-For the complete guide with all rules expanded: `AGENTS.md`

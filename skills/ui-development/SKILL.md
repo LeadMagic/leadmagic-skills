@@ -166,7 +166,7 @@ import { useReducedMotion } from "framer-motion"
 
 function Component() {
   const shouldReduceMotion = useReducedMotion()
-  
+
   return (
     <motion.div
       animate={{ x: shouldReduceMotion ? 0 : 100 }}
