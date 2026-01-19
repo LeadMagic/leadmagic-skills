@@ -1,7 +1,7 @@
 ---
 name: ui-development
 description: Best practices for shadcn/ui, Tailwind CSS v4, Framer Motion, and Recharts. Use when creating React components, styling, animations, or data visualization. Triggers on "shadcn", "Tailwind", "Framer Motion", "charts", "UI components".
-license: MIT
+license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "2.0.0"

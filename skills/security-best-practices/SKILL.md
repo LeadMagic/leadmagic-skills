@@ -1,7 +1,7 @@
 ---
 name: security-best-practices
 description: Security patterns for web applications. Use when implementing input validation, CSRF protection, rate limiting, content security policies, or securing APIs. Triggers on "security", "XSS", "CSRF", "validation", "sanitize", "rate limit", "CSP".
-license: MIT
+license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "1.0.0"

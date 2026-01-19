@@ -1,7 +1,7 @@
 ---
 name: cloudflare-d1
 description: Best practices for using Cloudflare D1 SQLite database in Workers. Use when designing schemas, writing queries, performing migrations, or optimizing database performance. Triggers on "D1 database", "SQL query", "database schema", "migrations".
-license: MIT
+license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "1.0.0"

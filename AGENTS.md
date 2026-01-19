@@ -129,7 +129,7 @@ Use this format for coding guidelines, patterns, and best practices.
 ---
 name: {skill-name}
 description: {One sentence. Include trigger phrases like "Use when X", "Triggers on Y".}
-license: MIT
+license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "1.0.0"

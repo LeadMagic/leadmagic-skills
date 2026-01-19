@@ -1,7 +1,7 @@
 ---
 name: typescript-best-practices
 description: TypeScript best practices for building type-safe applications. Use when writing TypeScript code, configuring tsconfig, defining types/interfaces, or reviewing code for type safety. Triggers on "TypeScript", "type safety", "tsconfig", "interfaces", "generics".
-license: MIT
+license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "1.0.0"

@@ -1,7 +1,7 @@
 ---
 name: cloudflare-durable-objects
 description: Best practices for building stateful applications with Cloudflare Durable Objects. Use when implementing real-time features, coordination, sessions, rate limiting, or any stateful edge logic. Triggers on "Durable Objects", "stateful worker", "real-time", "coordination", "WebSocket".
-license: MIT
+license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "1.0.0"

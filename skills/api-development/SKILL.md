@@ -1,7 +1,7 @@
 ---
 name: api-development
 description: Best practices for building production APIs at the edge. Use when designing API endpoints, implementing authentication, rate limiting, error handling, versioning, or building developer-facing APIs. Triggers on "API design", "REST API", "rate limiting", "API authentication", "error handling", "API versioning", "developer portal".
-license: MIT
+license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "1.0.0"

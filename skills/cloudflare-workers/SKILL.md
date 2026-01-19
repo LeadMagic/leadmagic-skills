@@ -1,7 +1,7 @@
 ---
 name: cloudflare-workers
 description: Best practices for building and deploying Cloudflare Workers. Use when creating Workers, configuring bindings, handling requests at the edge, or optimizing Worker performance. Triggers on "create worker", "edge function", "serverless", "Cloudflare deployment".
-license: MIT
+license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "2.0.0"

@@ -1,7 +1,7 @@
 ---
 name: inngest
 description: Durable workflow orchestration for Next.js and serverless. Use when building background jobs, event-driven workflows, scheduled tasks, or multi-step processes. Triggers on "background job", "workflow", "queue", "scheduled task", "event-driven", "retry logic", "inngest".
-license: MIT
+license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "2.0.0"

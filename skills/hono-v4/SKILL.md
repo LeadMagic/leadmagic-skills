@@ -1,7 +1,7 @@
 ---
 name: hono-v4
 description: Best practices and patterns for building high-performance APIs using Hono v4 on Cloudflare Workers. Use when creating new Workers, adding routes, writing middleware, handling requests, or optimizing edge performance. Triggers on "build API", "create endpoint", "Hono middleware", "route handler".
-license: MIT
+license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "2.1.0"

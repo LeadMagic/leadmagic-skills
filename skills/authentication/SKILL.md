@@ -1,7 +1,7 @@
 ---
 name: authentication
 description: Authentication patterns for Next.js 16 and Cloudflare Workers. Use when implementing sign-in, sessions, JWT, OAuth, or auth providers. Triggers on "authentication", "login", "sessions", "JWT", "Clerk", "Auth.js".
-license: MIT
+license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "2.0.0"

@@ -1,7 +1,7 @@
 ---
 name: doppler
 description: Doppler secrets management for environment variables across all environments. Use when managing secrets, syncing to Vercel/Cloudflare/AWS, or injecting env vars. Triggers on "Doppler", "secrets management", "environment variables", "secret sync".
-license: MIT
+license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "1.0.0"

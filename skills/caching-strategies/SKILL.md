@@ -1,7 +1,7 @@
 ---
 name: caching-strategies
 description: Caching patterns for Next.js 16 and Cloudflare. Use when implementing data caching, ISR, SWR, cache headers, or optimizing performance. Triggers on "caching", "cache", "ISR", "revalidate", "stale-while-revalidate", "CDN", "cache headers".
-license: MIT
+license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "2.0.0"

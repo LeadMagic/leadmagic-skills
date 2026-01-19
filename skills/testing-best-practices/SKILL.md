@@ -1,7 +1,7 @@
 ---
 name: testing-best-practices
 description: Testing patterns for React 19, Next.js 16, and Cloudflare Workers. Use when writing tests, setting up test infrastructure, or implementing testing strategies. Covers Vitest, Testing Library, Playwright, and MSW.
-license: MIT
+license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "2.0.0"

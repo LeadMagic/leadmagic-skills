@@ -1,7 +1,7 @@
 ---
 name: vercel-ai-sdk
 description: Best practices for building AI applications with Vercel AI SDK 5/6. Use when implementing chat interfaces, streaming responses, tool calling, agents, structured outputs, or AI-powered features. Triggers on "AI SDK", "useChat", "streamText", "generateText", "generateObject", "AI chat", "LLM integration", "tool calling".
-license: MIT
+license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "2.0.0"

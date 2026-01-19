@@ -1,7 +1,7 @@
 ---
 name: opentelemetry
 description: OpenTelemetry instrumentation for traces, metrics, and logs. Use when adding observability, distributed tracing, or exporting telemetry to backends. Triggers on "OpenTelemetry", "OTel", "tracing", "spans", "OTLP", "distributed tracing".
-license: MIT
+license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "1.0.0"

@@ -1,7 +1,7 @@
 ---
 name: cloudflare-ai-gateway
 description: Best practices for using Cloudflare AI Gateway for unified AI API management. Use when routing requests to AI providers, implementing caching, rate limiting, observability, or managing API keys securely. Triggers on "AI Gateway", "LLM routing", "AI caching", "model fallback", "AI observability".
-license: MIT
+license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "1.0.0"

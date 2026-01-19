@@ -1,7 +1,7 @@
 ---
 name: error-handling
 description: Error handling patterns for React 19, Next.js 16, and APIs. Use when implementing error boundaries, API error responses, logging, or user-friendly error messages. Triggers on "error handling", "error boundary", "try catch", "error message", "exception".
-license: MIT
+license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "2.0.0"

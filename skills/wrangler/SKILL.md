@@ -1,7 +1,7 @@
 ---
 name: wrangler
 description: Best practices for using Wrangler CLI to develop, test, and deploy Cloudflare Workers. Use when configuring wrangler.toml/wrangler.jsonc, running local development, deploying Workers, or managing environments. Triggers on "wrangler config", "deploy worker", "local development", "wrangler.toml", "wrangler.jsonc".
-license: MIT
+license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "2.0.0"

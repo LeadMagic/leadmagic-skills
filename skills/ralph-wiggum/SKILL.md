@@ -1,7 +1,7 @@
 ---
 name: ralph-wiggum
 description: Iterative AI development loops for persistent code generation. Use when running autonomous coding sessions, overnight development, TDD loops, or any task requiring iteration until completion. Triggers on "run until done", "iterate until passing", "autonomous coding", "overnight development", "TDD loop", "keep trying until it works".
-license: MIT
+license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "1.0.0"

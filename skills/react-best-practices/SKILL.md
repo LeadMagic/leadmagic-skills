@@ -1,7 +1,7 @@
 ---
 name: react-best-practices
 description: React 19 and Next.js 16 performance optimization guidelines from Vercel Engineering. Use when writing, reviewing, or refactoring React/Next.js code to ensure optimal performance patterns. Triggers on tasks involving React components, Next.js pages, data fetching, bundle optimization, or performance improvements.
-license: MIT
+license: LeadMagic Proprietary
 metadata:
   author: vercel
   version: "2.0.0"

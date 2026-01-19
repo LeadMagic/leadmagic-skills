@@ -1,7 +1,7 @@
 ---
 name: cloudflare-r2
 description: Best practices for using Cloudflare R2 object storage in Workers. Use when storing files, serving assets, handling uploads/downloads, or implementing storage patterns. Triggers on "R2 storage", "file upload", "object storage", "serve files", "bucket".
-license: MIT
+license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "1.0.0"

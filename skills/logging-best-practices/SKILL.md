@@ -1,7 +1,7 @@
 ---
 name: logging-best-practices
 description: Production logging patterns with wide events, structured logging, and observability. Use when implementing logging, debugging production issues, or building observability. Triggers on "logging", "logs", "observability", "debugging", "tracing", "wide events".
-license: MIT
+license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "1.0.0"

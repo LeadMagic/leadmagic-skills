@@ -77,7 +77,7 @@ If blocked: <promise>BLOCKED: [reason]</promise>
 ## Verification Steps (run in order)
 
 1. [ ] `npm run lint` - No errors
-2. [ ] `npm run typecheck` - No errors  
+2. [ ] `npm run typecheck` - No errors
 3. [ ] `npm test` - All tests pass
 4. [ ] `npm run build` - Build succeeds
 5. [ ] Manual smoke test of main feature

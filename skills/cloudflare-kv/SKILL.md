@@ -1,7 +1,7 @@
 ---
 name: cloudflare-kv
 description: Best practices for using Cloudflare Workers KV key-value storage. Use when caching data, storing configuration, session management, or any key-value patterns. Triggers on "KV", "key-value", "cache", "Workers KV", "namespace".
-license: MIT
+license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "1.0.0"

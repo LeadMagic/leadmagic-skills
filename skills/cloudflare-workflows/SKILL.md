@@ -1,7 +1,7 @@
 ---
 name: cloudflare-workflows
 description: Best practices for building durable, multi-step workflows with Cloudflare Workflows. Use when orchestrating long-running tasks, handling retries, waiting for external events, or building reliable background jobs. Triggers on "Workflow", "durable execution", "orchestration", "multi-step", "background job".
-license: MIT
+license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "1.0.0"

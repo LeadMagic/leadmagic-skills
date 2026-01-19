@@ -1,7 +1,7 @@
 ---
 name: design-review
 description: Review UI code for accessibility (WCAG 2.1) and apply opinionated design constraints. Use when asked to "review my UI", "check accessibility", "audit design", "review for WCAG", or when building UI components. Combines accessibility auditing with design best practices.
-license: MIT
+license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "1.0.0"

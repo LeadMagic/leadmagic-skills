@@ -1,7 +1,7 @@
 ---
 name: monorepo
 description: Monorepo patterns with Turborepo and pnpm workspaces. Use when setting up monorepos, configuring task pipelines, caching, or managing internal packages. Triggers on "monorepo", "Turborepo", "turbo", "workspaces", "pnpm workspace".
-license: MIT
+license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "1.0.0"

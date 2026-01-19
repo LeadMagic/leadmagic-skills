@@ -1,7 +1,7 @@
 ---
 name: design-lab
 description: Conduct design interviews, generate five distinct UI variations in a temporary design lab, collect feedback, and produce implementation plans. Use when the user wants to explore UI design options, redesign existing components, or create new UI with multiple approaches to compare.
-license: MIT
+license: LeadMagic Proprietary
 metadata:
   author: 0xdesign
   version: "1.0.0"

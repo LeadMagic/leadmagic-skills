@@ -1,7 +1,7 @@
 ---
 name: tanstack-query
 description: TanStack Query (React Query) for server state management and data fetching. Use when fetching data, caching API responses, managing server state, implementing optimistic updates, or handling mutations. Triggers on "React Query", "TanStack Query", "useQuery", "useMutation", "data fetching", "cache", "server state".
-license: MIT
+license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "1.1.0"

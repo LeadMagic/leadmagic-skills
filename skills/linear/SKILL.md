@@ -1,7 +1,7 @@
 ---
 name: linear
 description: Linear project management for AI agents and teams. Use when creating issues, managing projects, planning sprints/cycles, reviewing backlogs, or building project plans. Triggers on "create Linear issue", "plan sprint", "manage backlog", "project planning", "track work", "Linear API".
-license: MIT
+license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "1.1.0"

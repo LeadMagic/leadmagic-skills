@@ -1,7 +1,7 @@
 ---
 name: tanstack-table
 description: TanStack Table for building powerful data tables and datagrids. Use when implementing sortable tables, filterable data grids, paginated lists, or column management. Triggers on "data table", "TanStack Table", "useReactTable", "sorting", "filtering", "pagination", "datagrid".
-license: MIT
+license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "1.1.0"

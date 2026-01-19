@@ -1,7 +1,7 @@
 ---
 name: stripe-payments
 description: Stripe payment integration patterns for Next.js and serverless. Use when implementing checkout, subscriptions, webhooks, or payment processing. Triggers on "payment", "stripe", "checkout", "subscription", "billing", "invoice", "webhook".
-license: MIT
+license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "1.1.0"

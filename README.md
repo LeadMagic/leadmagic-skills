@@ -4,7 +4,7 @@ Claude Skills for building production applications with the **LeadMagic Stack** 
 
 [![Skills](https://img.shields.io/badge/skills-43-blue)]()
 [![Internal](https://img.shields.io/badge/visibility-internal-orange)]()
-[![License](https://img.shields.io/badge/license-MIT-green)]()
+[![License](https://img.shields.io/badge/license-proprietary-red)]()
 
 ## Overview
 
@@ -255,7 +255,7 @@ skills/
 ---
 name: my-skill
 description: What it does. Use when X. Triggers on "keyword", "another keyword".
-license: MIT
+license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "1.0.0"
@@ -488,7 +488,7 @@ All LeadMagic organization members have access to this internal repository.
 
 ## License
 
-MIT — See [LICENSE](LICENSE) for details.
+**LeadMagic Proprietary** — Internal use only. No sharing, distribution, or reproduction permitted. See [LICENSE](LICENSE) for details.
 
 ---
 

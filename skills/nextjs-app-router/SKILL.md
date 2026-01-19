@@ -1,7 +1,7 @@
 ---
 name: nextjs-app-router
 description: Next.js 16 App Router patterns with React 19. Use when building pages, layouts, Server Components, Server Actions, or data fetching. Triggers on "App Router", "Server Components", "Server Actions", "Next.js", "RSC", "page.tsx".
-license: MIT
+license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "2.0.0"

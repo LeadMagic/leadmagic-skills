@@ -1,7 +1,7 @@
 ---
 name: drizzle-orm
 description: Drizzle ORM patterns for Cloudflare D1 and PostgreSQL. Use when defining schemas, writing queries, managing migrations. Triggers on "Drizzle", "ORM", "database schema", "migrations", "type-safe queries".
-license: MIT
+license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "2.0.0"

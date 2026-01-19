@@ -1,7 +1,7 @@
 ---
 name: axiom
 description: Axiom observability platform for logs, traces, and metrics. Use when sending logs to Axiom, querying with APL, or integrating with Next.js/Cloudflare Workers. Triggers on "Axiom", "APL", "observability platform", "log analytics".
-license: MIT
+license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "1.0.0"

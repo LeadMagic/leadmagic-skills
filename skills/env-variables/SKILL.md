@@ -1,7 +1,7 @@
 ---
 name: env-variables
 description: Environment variable patterns for Next.js and Cloudflare Workers. Use when configuring environment variables, validating env at runtime, or managing secrets across environments. Triggers on "env", "environment variables", ".env", "secrets", "configuration".
-license: MIT
+license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "1.0.0"

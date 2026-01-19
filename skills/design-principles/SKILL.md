@@ -1,7 +1,7 @@
 ---
 name: design-principles
 description: Foundational design principles and visual design systems reference. Use when creating UI designs, choosing typography/spacing/color values, designing components, or needing UX heuristics. Triggers on "design system", "spacing scale", "typography scale", "color palette", "UX principles".
-license: MIT
+license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "1.0.0"

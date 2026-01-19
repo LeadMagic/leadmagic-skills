@@ -1,7 +1,7 @@
 ---
 name: cloudflare-observability
 description: Cloudflare Workers observability with logs, traces, Logpush, and OTel export. Use when setting up logging, tracing, or exporting telemetry from Workers. Triggers on "Workers logs", "Logpush", "wrangler tail", "Workers tracing", "OTel export".
-license: MIT
+license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "1.0.0"

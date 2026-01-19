@@ -1,7 +1,7 @@
 ---
 name: upstash
 description: Upstash serverless services - QStash (message queue), Redis (caching), Workflows (durable execution), Ratelimit. Use when building background jobs, scheduling, caching, rate limiting. Triggers on "QStash", "Upstash", "message queue", "rate limit", "background job".
-license: MIT
+license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "1.0.0"

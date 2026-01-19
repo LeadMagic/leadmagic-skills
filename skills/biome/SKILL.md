@@ -1,7 +1,7 @@
 ---
 name: biome
 description: Biome formatter and linter configuration for TypeScript and JavaScript. Use when setting up code formatting, linting rules, or migrating from ESLint/Prettier. Triggers on "biome", "linting", "formatting", "code style", "eslint migration".
-license: MIT
+license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "1.1.0"

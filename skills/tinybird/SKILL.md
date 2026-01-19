@@ -1,7 +1,7 @@
 ---
 name: tinybird
 description: Tinybird real-time analytics platform. Use when building analytics APIs, event ingestion, real-time dashboards, or ClickHouse-powered data pipelines. Triggers on "Tinybird", "analytics", "real-time data", "ClickHouse", "data API", "event ingestion".
-license: MIT
+license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "1.0.0"
