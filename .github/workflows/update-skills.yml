@@ -18,6 +18,11 @@ on:
 env:
   CONTEXT7_API_URL: https://api.context7.com/v1
 
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
 jobs:
   check-updates:
     runs-on: ubuntu-latest
