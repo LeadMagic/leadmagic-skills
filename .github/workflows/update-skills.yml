@@ -87,8 +87,8 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SKILLS: ${{ needs.check-updates.outputs.skills_to_update }}
         run: |
-          # Check if issue already exists
-          existing=$(gh issue list --label "skill-updates" --state open --json number -q '.[0].number' || echo "")
+          # Check if issue already exists (search by title prefix)
+          existing=$(gh issue list --state open --json number,title -q '.[] | select(.title | startswith("🔄 Skills Update")) | .number' | head -1 || echo "")
 
           if [ -n "$existing" ]; then
             echo "Updating existing issue #$existing"
@@ -104,7 +104,6 @@ jobs:
 
             gh issue create \
               --title "🔄 Skills Update Required - $(date -u +"%Y-%m")" \
-              --label "skill-updates,documentation" \
               --body "## Skills Requiring Updates
 
           The following skills may have outdated documentation:
@@ -233,5 +232,4 @@ jobs:
           3. Run validation: \`./scripts/validate.sh\`
           4. Merge when ready
 
-          See \`.updates/$SKILL-update.md\` for details." \
-            --label "skill-updates"
+          See \`.updates/$SKILL-update.md\` for details."
