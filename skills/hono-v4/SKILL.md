@@ -5,6 +5,7 @@ license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "2.2.0"
+  context7: honojs/hono
 ---
 
 # Hono v4 Best Practices

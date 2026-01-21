@@ -5,6 +5,7 @@ license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "1.2.0"
+  context7: stripe/stripe-node
 ---
 
 # Stripe Payments Integration

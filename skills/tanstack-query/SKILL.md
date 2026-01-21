@@ -5,6 +5,7 @@ license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "1.2.0"
+  context7: tanstack/query
 ---
 
 # TanStack Query (React Query)

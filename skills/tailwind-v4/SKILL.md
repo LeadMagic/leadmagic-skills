@@ -5,6 +5,7 @@ license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "1.0.0"
+  context7: tailwindlabs/tailwindcss
 ---
 
 # Tailwind CSS v4

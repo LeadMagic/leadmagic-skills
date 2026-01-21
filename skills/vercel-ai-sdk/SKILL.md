@@ -5,6 +5,7 @@ license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "3.0.1"
+  context7: vercel/ai
 ---
 
 # Vercel AI SDK Best Practices

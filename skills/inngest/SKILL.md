@@ -5,6 +5,7 @@ license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "2.1.0"
+  context7: inngest/inngest-js
 ---
 
 # Inngest - Durable Workflows

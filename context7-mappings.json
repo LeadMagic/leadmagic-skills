@@ -3,7 +3,7 @@
   "description": "Maps LeadMagic skills to Context7 library IDs for freshness checks",
   "mappings": {
     "hono-v4": {
-      "context7": "hono/hono",
+      "context7": "honojs/hono",
       "description": "Hono v4 web framework",
       "checkTopics": ["middleware", "routing", "context", "validators"]
     },
@@ -52,6 +52,11 @@
       "description": "AI Gateway",
       "checkTopics": ["ai-gateway", "routing", "caching", "rate-limiting"]
     },
+    "cloudflare-observability": {
+      "context7": "cloudflare/workers-sdk",
+      "description": "Workers observability",
+      "checkTopics": ["logs", "logpush", "tracing", "otel"]
+    },
     "wrangler": {
       "context7": "cloudflare/workers-sdk",
       "description": "Wrangler CLI",
@@ -71,6 +76,16 @@
       "context7": "tanstack/table",
       "description": "TanStack Table v8",
       "checkTopics": ["columns", "sorting", "filtering", "pagination"]
+    },
+    "zustand": {
+      "context7": "pmndrs/zustand",
+      "description": "Zustand state management",
+      "checkTopics": ["create", "selectors", "persist", "devtools"]
+    },
+    "upstash": {
+      "context7": "upstash/redis",
+      "description": "Upstash Redis",
+      "checkTopics": ["redis", "ratelimit", "qstash", "vector"]
     },
     "vercel-ai-sdk": {
       "context7": "vercel/ai",
@@ -96,11 +111,6 @@
       "context7": "biomejs/biome",
       "description": "Biome linter/formatter",
       "checkTopics": ["rules", "configuration", "cli", "migration"]
-    },
-    "upstash": {
-      "context7": "upstash/redis",
-      "description": "Upstash Redis",
-      "checkTopics": ["redis", "ratelimit", "qstash", "vector"]
     },
     "opentelemetry": {
       "context7": "open-telemetry/opentelemetry-js",
@@ -133,12 +143,12 @@
       "checkTopics": ["theme", "config", "utilities", "dark-mode"]
     },
     "clerk": {
-      "context7": "clerkinc/javascript",
+      "context7": "clerk/javascript",
       "description": "Clerk authentication",
       "checkTopics": ["middleware", "organizations", "webhooks", "session"]
     },
     "resend": {
-      "context7": "resendlabs/resend-node",
+      "context7": "resend/resend-node",
       "description": "Resend email API",
       "checkTopics": ["send", "templates", "attachments", "webhooks"]
     },
@@ -146,11 +156,6 @@
       "context7": "react-hook-form/react-hook-form",
       "description": "React Hook Form",
       "checkTopics": ["useForm", "validation", "field-array", "controller"]
-    },
-    "zustand": {
-      "context7": "pmndrs/zustand",
-      "description": "Zustand state management",
-      "checkTopics": ["create", "selectors", "persist", "devtools"]
     },
     "better-auth": {
       "context7": "better-auth/better-auth",
@@ -161,6 +166,36 @@
       "context7": "getsentry/sentry-javascript",
       "description": "Sentry error tracking",
       "checkTopics": ["init", "capture", "performance", "replay"]
+    },
+    "monorepo": {
+      "context7": "vercel/turborepo",
+      "description": "Turborepo monorepo",
+      "checkTopics": ["turbo.json", "pipelines", "caching", "workspaces"]
+    },
+    "testing-best-practices": {
+      "context7": "vitest-dev/vitest",
+      "description": "Vitest testing",
+      "checkTopics": ["describe", "expect", "mocking", "coverage"]
+    },
+    "ui-development": {
+      "context7": "framer/motion",
+      "description": "Framer Motion animations",
+      "checkTopics": ["animate", "variants", "gestures", "layout"]
+    },
+    "caching-strategies": {
+      "context7": "vercel/next.js",
+      "description": "Next.js caching",
+      "checkTopics": ["revalidate", "cache", "isr", "streaming"]
+    },
+    "doppler": {
+      "context7": "dopplerhq/cli",
+      "description": "Doppler secrets CLI",
+      "checkTopics": ["setup", "sync", "environments", "run"]
+    },
+    "linear": {
+      "context7": "linear/sdk",
+      "description": "Linear SDK",
+      "checkTopics": ["issues", "projects", "cycles", "webhooks"]
     }
   }
 }

@@ -5,6 +5,7 @@ license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "2.0.0"
+  context7: vercel/next.js
 ---
 
 # Caching Strategies

@@ -5,6 +5,7 @@ license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "2.0.0"
+  context7: biomejs/biome
 ---
 
 # Biome - Fast Formatter & Linter

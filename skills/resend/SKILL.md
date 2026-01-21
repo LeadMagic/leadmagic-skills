@@ -5,6 +5,7 @@ license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "1.0.0"
+  context7: resend/resend-node
 ---
 
 # Resend - Email API

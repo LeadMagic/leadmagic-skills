@@ -5,6 +5,7 @@ license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "1.0.0"
+  context7: better-auth/better-auth
 ---
 
 # Better Auth

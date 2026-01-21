@@ -5,6 +5,7 @@ license: LeadMagic Proprietary
 metadata:
   author: vercel
   version: "2.1.0"
+  context7: facebook/react
 ---
 
 # Vercel React Best Practices

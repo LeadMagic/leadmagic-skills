@@ -5,6 +5,7 @@ license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "1.1.0"
+  context7: upstash/redis
 ---
 
 # Upstash Best Practices

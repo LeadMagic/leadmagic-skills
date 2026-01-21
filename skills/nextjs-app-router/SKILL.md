@@ -5,6 +5,7 @@ license: LeadMagic Proprietary
 metadata:
   author: leadmagic
   version: "2.1.1"
+  context7: vercel/next.js
 ---
 
 # Next.js App Router
