@@ -1,23 +1,25 @@
 ---
 name: nextjs-app-router
-description: Next.js 16 App Router patterns with React 19. Use when building pages, layouts, Server Components, Server Actions, or data fetching. Triggers on "App Router", "Server Components", "Server Actions", "Next.js", "RSC", "page.tsx".
+description: Next.js 16 App Router patterns with React 19.2. Use when building pages, layouts, Server Components, Server Actions, or data fetching. Triggers on "App Router", "Server Components", "Server Actions", "Next.js", "RSC", "page.tsx".
 license: LeadMagic Proprietary
 metadata:
   author: leadmagic
-  version: "2.0.0"
+  version: "2.1.1"
 ---
 
 # Next.js App Router
 
-Patterns for Next.js 16 App Router with React 19.
+Patterns for Next.js 16 App Router with React 19.2.
 
 ## What's New in Next.js 16
 
+- **Cache Components** - New `cacheComponents: true` replaces `experimental.ppr`
 - **Turbopack default** - No `--turbopack` flag needed
-- **Proxy replaces Middleware** - `middleware.ts` → `proxy.ts`
+- **Proxy replaces Middleware** - `middleware.ts` → `proxy.ts` (Node.js runtime)
 - **React Compiler** - Automatic memoization via `reactCompiler: true`
-- **updateTag()** - Read-your-writes cache semantics
-- **Async params** - `params` in page components are Promises
+- **React 19.2** - View Transitions, `useEffectEvent()`, `<Activity/>`
+- **revalidateTag()** - Now requires `cacheLife` profile as 2nd argument
+- **refresh()** - New Server Actions API for uncached data
 
 ## File Conventions
 
@@ -222,17 +224,27 @@ export const revalidate = 60
 export const runtime = 'edge'
 ```
 
-### updateTag() (Next.js 16)
-
-Read-your-writes: expire AND refresh in same request.
+### Cache APIs (Next.js 16)
 
 ```typescript
 'use server'
-import { updateTag } from 'next/cache'
+import { revalidateTag, updateTag, refresh } from 'next/cache'
 
+// revalidateTag - SWR behavior, requires cacheLife profile
+export async function refreshPosts() {
+  revalidateTag('posts', 'max') // Use 'max' for long-lived content
+}
+
+// updateTag - Read-your-writes (Server Actions only)
 export async function updateProfile(userId: string, data: Profile) {
   await db.users.update(userId, data)
   updateTag(`user-${userId}`) // User sees changes immediately
+}
+
+// refresh - Refresh uncached data only (Server Actions only)
+export async function markNotificationRead(id: string) {
+  await db.notifications.markAsRead(id)
+  refresh() // Refreshes uncached data elsewhere on page
 }
 ```
 
@@ -289,6 +301,45 @@ export const config = {
 
 ---
 
+## Cache Components (PPR)
+
+Enable Partial Prerendering with the new Cache Components model:
+
+```typescript
+// next.config.ts
+import type { NextConfig } from 'next'
+
+const nextConfig: NextConfig = {
+  cacheComponents: true, // Replaces experimental.ppr
+  reactCompiler: true,
+}
+
+export default nextConfig
+```
+
+```typescript
+// app/product/[id]/page.tsx
+import { Suspense } from 'react'
+
+export default async function ProductPage({ params }: Props) {
+  const { id } = await params
+  const product = await getProduct(id) // Static shell
+
+  return (
+    <main>
+      <h1>{product.name}</h1> {/* Prerendered */}
+      <Suspense fallback={<CartSkeleton />}>
+        <DynamicCart /> {/* Streams in - uses cookies() */}
+      </Suspense>
+    </main>
+  )
+}
+```
+
+> Static shell renders immediately, dynamic content streams in parallel.
+
+---
+
 ## Configuration
 
 ```typescript
@@ -296,19 +347,11 @@ export const config = {
 import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
-  reactCompiler: true, // Enable React Compiler
+  cacheComponents: true,
+  reactCompiler: true,
 }
 
 export default nextConfig
-```
-
-```json
-{
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build"
-  }
-}
 ```
 
 > Turbopack is default in Next.js 16 - remove `--turbopack` flag.

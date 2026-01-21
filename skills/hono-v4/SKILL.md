@@ -1,37 +1,38 @@
 ---
 name: hono-v4
-description: Best practices and patterns for building high-performance APIs using Hono v4 on Cloudflare Workers. Use when creating new Workers, adding routes, writing middleware, handling requests, or optimizing edge performance. Triggers on "build API", "create endpoint", "Hono middleware", "route handler".
+description: Best practices and patterns for building high-performance APIs using Hono v4.11+ on Cloudflare Workers. Use when creating new Workers, adding routes, writing middleware, handling requests, or optimizing edge performance. Triggers on "build API", "create endpoint", "Hono middleware", "route handler".
 license: LeadMagic Proprietary
 metadata:
   author: leadmagic
-  version: "2.1.0"
+  version: "2.2.0"
 ---
 
 # Hono v4 Best Practices
 
-Comprehensive guide for building production-ready APIs with Hono v4 on Cloudflare Workers.
+Comprehensive guide for building production-ready APIs with Hono v4.11+ on Cloudflare Workers.
 
-## SECURITY ALERT: JWT Algorithm Confusion (CVE-2026-22817)
+## What's New in Hono v4.11
 
-**Affected versions:** < 4.11.4
-**Severity:** HIGH (CVSS 8.2)
-**Fix:** Upgrade to 4.11.4+ and explicitly specify `alg` in JWT middleware
+| Feature | Description |
+|---------|-------------|
+| `tryGetContext()` | Returns `undefined` instead of throwing when context unavailable |
+| Typed URL for `hc` | Pass base URL as type parameter for precise URL types |
+| Custom `NotFoundResponse` | Module augmentation for typed `c.notFound()` |
+| Async CSRF handlers | `IsAllowedOriginHandler` can be async |
+| CSP report-to/report-uri | Secure headers directive support |
+
+## SECURITY ALERT: JWT Algorithm Confusion (v4.11.4)
+
+**Affected versions:** < 4.11.4 | **Severity:** HIGH
+**Fix:** Upgrade and explicitly specify `alg` in JWT middleware
 
 ```typescript
-// VULNERABLE - alg was optional
-app.use('/auth/*', jwt({
-  secret: 'it-is-very-secret',
-  // Missing alg allows algorithm confusion attacks
-}))
-
 // PATCHED - alg is now REQUIRED
 app.use('/auth/*', jwt({
   secret: 'it-is-very-secret',
   alg: 'HS256', // REQUIRED - prevents algorithm confusion
 }))
 ```
-
-**Action Required:** Audit all JWT middleware usage and ensure `alg` is explicitly set.
 
 ---
 

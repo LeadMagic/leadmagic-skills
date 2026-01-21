@@ -4,12 +4,22 @@ description: Best practices for building stateful applications with Cloudflare D
 license: LeadMagic Proprietary
 metadata:
   author: leadmagic
-  version: "1.0.0"
+  version: "1.1.0"
 ---
 
 # Cloudflare Durable Objects Best Practices
 
 Comprehensive guide for building stateful edge applications with Durable Objects.
+
+## What's New (2025)
+
+| Feature | Description |
+|---------|-------------|
+| Alarm handlers | 15-minute max wall time |
+| JSRPC 32 MiB | Increased message limit |
+| WebSocket 32 MiB | Message size limit increased |
+| `.retryable` | Exception property for transient failures |
+| `.overloaded` | Exception property for overload detection |
 
 ## When to Apply
 

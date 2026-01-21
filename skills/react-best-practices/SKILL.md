@@ -1,17 +1,17 @@
 ---
 name: react-best-practices
-description: React 19 and Next.js 16 performance optimization guidelines from Vercel Engineering. Use when writing, reviewing, or refactoring React/Next.js code to ensure optimal performance patterns. Triggers on tasks involving React components, Next.js pages, data fetching, bundle optimization, or performance improvements.
+description: React 19.2 and Next.js 16 performance optimization guidelines from Vercel Engineering. Use when writing, reviewing, or refactoring React/Next.js code to ensure optimal performance patterns. Triggers on tasks involving React components, Next.js pages, data fetching, bundle optimization, or performance improvements.
 license: LeadMagic Proprietary
 metadata:
   author: vercel
-  version: "2.0.0"
+  version: "2.1.0"
 ---
 
 # Vercel React Best Practices
 
-Comprehensive performance optimization guide for React 19 and Next.js 16 applications, maintained by Vercel. Contains 53+ rules across 8 categories, prioritized by impact to guide automated refactoring and code generation.
+Comprehensive performance optimization guide for React 19.2 and Next.js 16 applications. Contains 53+ rules across 8 categories, prioritized by impact.
 
-## React 19 Key Features
+## React 19.2 Key Features
 
 | Feature | Description |
 |---------|-------------|
@@ -19,9 +19,12 @@ Comprehensive performance optimization guide for React 19 and Next.js 16 applica
 | `useActionState` | Handle form actions with pending state |
 | `useOptimistic` | Optimistic UI updates |
 | `useFormStatus` | Form pending state in children |
+| `useEffectEvent` | Extract non-reactive logic from Effects |
 | `ref` as prop | No more `forwardRef` needed |
 | Ref cleanup | Return cleanup function from ref callback |
 | React Compiler | Automatic memoization (no useMemo/useCallback) |
+| View Transitions | Animate elements during transitions |
+| `<Activity>` | Hide UI with `display: none` while maintaining state |
 | Server Components | Stable in React 19 |
 
 ## When to Apply

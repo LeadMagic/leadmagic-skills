@@ -4,12 +4,20 @@ description: Best practices for using Cloudflare R2 object storage in Workers. U
 license: LeadMagic Proprietary
 metadata:
   author: leadmagic
-  version: "1.0.0"
+  version: "1.1.0"
 ---
 
 # Cloudflare R2 Best Practices
 
 Comprehensive guide for using Cloudflare R2 object storage in Workers.
+
+## What's New (2024-2025)
+
+- **Event notifications** - Send messages to Queues on object changes (GA)
+- **Lifecycle rules** - Auto-delete or transition objects via Wrangler
+- **Infrequent Access** - Storage class for less-accessed data
+- **Smart Tiered Cache** - Improved caching for public buckets
+- **SSE-C** - Server-side encryption with customer-provided keys
 
 ## When to Apply
 
@@ -18,7 +26,7 @@ Reference these guidelines when:
 - Implementing file upload endpoints
 - Serving static assets from R2
 - Handling large file transfers
-- Managing bucket permissions and lifecycle
+- Reacting to object changes with event notifications
 
 ## Rule Categories by Priority
 
@@ -341,6 +349,41 @@ R2_ACCOUNT_ID = "your-account-id"
 BUCKET_NAME = "my-bucket"
 ```
 
+## Event Notifications (GA)
+
+```typescript
+// Receive R2 events via Queue consumer
+export default {
+  async queue(batch: MessageBatch<R2EventMessage>, env: Env) {
+    for (const message of batch.messages) {
+      const event = message.body
+      console.log(`${event.action} on ${event.object.key}`)
+      
+      if (event.action === 'PutObject') {
+        await processNewObject(env, event.object.key)
+      }
+      message.ack()
+    }
+  },
+}
+
+interface R2EventMessage {
+  account: string
+  bucket: string
+  action: 'PutObject' | 'CopyObject' | 'DeleteObject' | 'LifecycleDeletion'
+  object: { key: string; size?: number; eTag?: string }
+  eventTime: string
+}
+```
+
+```bash
+# Enable via Wrangler
+wrangler r2 bucket notification create my-bucket \
+  --event-type object-create \
+  --queue MY_QUEUE \
+  --prefix "uploads/"
+```
+
 ## R2 Limits
 
 | Resource | Limit |
@@ -351,4 +394,5 @@ BUCKET_NAME = "my-bucket"
 | Min multipart part size | 5MB |
 | Max parts per multipart upload | 10,000 |
 | Free egress | Unlimited to Workers |
+| Event notification rules | 100 per bucket |
 

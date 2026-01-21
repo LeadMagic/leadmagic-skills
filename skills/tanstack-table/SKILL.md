@@ -4,7 +4,7 @@ description: TanStack Table for building powerful data tables and datagrids. Use
 license: LeadMagic Proprietary
 metadata:
   author: leadmagic
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # TanStack Table

@@ -4,19 +4,37 @@ description: Best practices for building and deploying Cloudflare Workers. Use w
 license: LeadMagic Proprietary
 metadata:
   author: leadmagic
-  version: "2.0.0"
+  version: "2.1.0"
 ---
 
 # Cloudflare Workers Best Practices
 
 Comprehensive guide for building production-ready Cloudflare Workers.
 
-## What's New
+## What's New (2025-2026)
 
-- **`nodejs_compat`** - Full Node.js API compatibility flag
-- **Compatibility date 2025-01-01** - Use latest features
-- **wrangler.jsonc** - JSON with comments configuration
-- **Observability** - Built-in logging with `observability.enabled`
+| Feature | Date | Description |
+|---------|------|-------------|
+| V8 v14.4 | Jan 2026 | Latest JS engine |
+| WebSocket 32 MiB | Oct 2025 | Increased from 1 MiB |
+| node:fs & Web File System | Sep 2025 | File APIs available |
+| MessageChannel/MessagePort | Aug 2025 | Web APIs |
+| Float16Array | May 2025 | New typed array |
+| Smart Placement improvements | Mar 2025 | Better heuristics |
+| `nodejs_compat_v2` | 2025 | Includes `process.env` from text bindings |
+
+## Configuration
+
+```jsonc
+// wrangler.jsonc
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "compatibility_date": "2026-01-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": { "enabled": true },
+  "placement": { "mode": "smart" }
+}
+```
 
 ## When to Apply
 

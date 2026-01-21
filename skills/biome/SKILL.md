@@ -4,21 +4,23 @@ description: Biome formatter and linter configuration for TypeScript and JavaScr
 license: LeadMagic Proprietary
 metadata:
   author: leadmagic
-  version: "1.1.0"
+  version: "2.0.0"
 ---
 
 # Biome - Fast Formatter & Linter
 
-Biome is a fast, all-in-one toolchain for JavaScript and TypeScript. It combines formatting (like Prettier) and linting (like ESLint) into a single, performant tool.
+Biome is a fast, all-in-one toolchain for JavaScript and TypeScript. Combines formatting and linting into a single, performant tool (10-20x faster than ESLint).
 
-## When to Apply
+## Biome 2.0 (Coming Soon)
 
-Reference these guidelines when:
-- Setting up new projects with Biome
-- Migrating from ESLint + Prettier
-- Configuring linting rules
-- Setting up CI/CD formatting checks
-- Customizing code style rules
+| Feature | Description |
+|---------|-------------|
+| **Plugins (GritQL)** | Create custom lint rules with GritQL |
+| **Domains** | Auto-enable rules by package.json deps (React, Next.js, etc.) |
+| **Suppressions** | `biome-ignore-all`, `biome-ignore-start/end` comments |
+| **Multi-file analysis** | Cross-file lint rules |
+| **HTML support** | Format and lint HTML files |
+| **Type inference** | `noFloatingPromises` rule with type checking |
 
 ## Rule Categories by Priority
 

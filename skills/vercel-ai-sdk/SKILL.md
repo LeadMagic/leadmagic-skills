@@ -1,22 +1,26 @@
 ---
 name: vercel-ai-sdk
-description: Best practices for building AI applications with Vercel AI SDK 5/6. Use when implementing chat interfaces, streaming responses, tool calling, agents, structured outputs, or AI-powered features. Triggers on "AI SDK", "useChat", "streamText", "generateText", "generateObject", "AI chat", "LLM integration", "tool calling".
+description: Best practices for building AI applications with Vercel AI SDK 5. Use when implementing chat interfaces, streaming responses, tool calling, agents, structured outputs, or AI-powered features. Triggers on "AI SDK", "useChat", "streamText", "generateText", "generateObject", "AI chat", "LLM integration", "tool calling".
 license: LeadMagic Proprietary
 metadata:
   author: leadmagic
-  version: "2.0.0"
+  version: "3.0.1"
 ---
 
 # Vercel AI SDK Best Practices
 
-Comprehensive guide for building AI-powered applications with Vercel AI SDK 5/6.
+Comprehensive guide for building AI-powered applications with Vercel AI SDK 5.
 
-## What's New in AI SDK v5
+## What's New in AI SDK 5 (Jul 2025)
 
-- **`toolCallStreaming` enabled by default** - Partial tool calls stream in real-time
-- **`toUIMessageStreamResponse()`** - New response helper for UI message streams
-- **Multi-step agent patterns** - Chain multiple `streamText` calls with `writer.merge`
-- **`@ai-sdk/react`** - New package structure for React hooks
+- **Type-safe UIMessage** - Customizable typed messages with `UIMessage<Metadata, DataParts, Tools>`
+- **Data Parts** - Stream arbitrary typed data from server to client
+- **Agentic Loop Control** - `stopWhen` and `prepareStep` for agent control
+- **Agent Abstraction** - New `Agent` class for encapsulating agent config
+- **Speech & Transcription** - `generateSpeech()` and `transcribe()` APIs
+- **Dynamic Tools** - Runtime tools with `dynamicTool()`
+- **Tool Lifecycle Hooks** - `onInputStart`, `onInputDelta`, `onInputAvailable`
+- **Zod 4 Support** - Use Zod 4 mini schemas
 
 ## When to Apply
 
@@ -59,18 +63,6 @@ Reference these guidelines when:
 ### 4. Structured Output (HIGH)
 
 - `output-schema` - Use schema for structured responses
-
-### 5. Provider Integration (MEDIUM)
-
-- `provider-edge` - Configure providers for edge runtime
-
-### 6. UI Patterns (MEDIUM)
-
-- `ui-messages` - Handle message state in UI components
-
-### 7. Voice & Audio (MEDIUM)
-
-- `voice-elements` - Implement voice input/output elements
 
 ### 5. Provider Integration (MEDIUM)
 
@@ -235,55 +227,60 @@ export async function generateRecipe(dish: string): Promise<Recipe> {
 }
 ```
 
-### Agent with Tool Loop
+### Agent with Tool Loop (AI SDK 5)
 
 ```typescript
 import { openai } from '@ai-sdk/openai'
-import { generateText, tool } from 'ai'
+import { Experimental_Agent as Agent, stepCountIs, hasToolCall, tool } from 'ai'
 import { z } from 'zod'
 
-// Define reusable agent
-const researchAgent = {
-  model: openai('gpt-4-turbo'),
-  system: `You are a research assistant. Use the available tools to find
-    information and provide comprehensive answers. Always cite your sources.`,
+// Agent class encapsulates configuration
+const researchAgent = new Agent({
+  model: openai('gpt-4o'),
+  system: `You are a research assistant. Use tools to find information.`,
+  stopWhen: [stepCountIs(10), hasToolCall('finalAnswer')],
   tools: {
     webSearch: tool({
-      description: 'Search the web for information',
-      parameters: z.object({
-        query: z.string(),
-      }),
-      execute: async ({ query }) => {
-        // Implement web search
-        return { results: [] }
-      },
+      description: 'Search the web',
+      inputSchema: z.object({ query: z.string() }), // Note: inputSchema not parameters
+      execute: async ({ query }) => ({ results: [] }),
     }),
-    readUrl: tool({
-      description: 'Read content from a URL',
-      parameters: z.object({
-        url: z.string().url(),
-      }),
-      execute: async ({ url }) => {
-        // Fetch and parse URL content
-        return { content: '', url }
-      },
+    finalAnswer: tool({
+      description: 'Provide final answer',
+      inputSchema: z.object({ answer: z.string() }),
+      execute: async ({ answer }) => answer,
     }),
   },
-  maxSteps: 10,
-}
+})
 
-export async function research(question: string) {
-  const result = await generateText({
-    ...researchAgent,
-    prompt: question,
-  })
+// Use generate() for non-streaming, stream() for streaming
+const result = await researchAgent.generate({ prompt: 'Research topic' })
+```
 
-  return {
-    answer: result.text,
-    toolCalls: result.toolCalls,
-    usage: result.usage,
-  }
-}
+### Agentic Loop Control (AI SDK 5)
+
+```typescript
+import { streamText, stepCountIs, hasToolCall } from 'ai'
+
+const result = await streamText({
+  model: openai('gpt-4o'),
+  tools: { /* ... */ },
+  // Stop conditions
+  stopWhen: [stepCountIs(5), hasToolCall('complete')],
+  // Modify each step
+  prepareStep: async ({ stepNumber, messages }) => {
+    if (stepNumber === 0) {
+      return {
+        model: openai('gpt-4o-mini'), // Use cheaper model first
+        toolChoice: { type: 'tool', toolName: 'analyzeIntent' },
+      }
+    }
+    // Compress context for long conversations
+    if (messages.length > 10) {
+      return { messages: messages.slice(-10) }
+    }
+  },
+})
 ```
 
 ### Multi-Provider Setup
@@ -438,4 +435,16 @@ export function ChatWithTools() {
 ```bash
 npm install ai @ai-sdk/openai @ai-sdk/anthropic zod
 ```
+
+## Migration from v4 to v5
+
+```bash
+npx @ai-sdk/codemod upgrade
+```
+
+Key changes:
+- `parameters` → `inputSchema` in tools
+- `result` → `output` in tool returns
+- New `UIMessage` type with `parts` (not just `content`)
+- `useChat` returns typed messages with data parts
 

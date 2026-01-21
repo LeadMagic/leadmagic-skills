@@ -2,13 +2,13 @@
 
 Claude Skills for building production applications with the **LeadMagic Stack** — Hono v4, Cloudflare Workers, Next.js 16, React 19, and TypeScript.
 
-[![Skills](https://img.shields.io/badge/skills-43-blue)]()
+[![Skills](https://img.shields.io/badge/skills-52-blue)]()
 [![Internal](https://img.shields.io/badge/visibility-internal-orange)]()
 [![License](https://img.shields.io/badge/license-proprietary-red)]()
 
 ## Overview
 
-This repository contains **43 Claude Skills** that provide AI coding agents with best practices, patterns, and guidelines for building production applications. Skills are automatically loaded by Claude Code, Cursor, and other AI assistants when installed.
+This repository contains **52 Claude Skills** that provide AI coding agents with best practices, patterns, and guidelines for building production applications. Skills are automatically loaded by Claude Code, Cursor, and other AI assistants when installed.
 
 ### What Are Skills?
 

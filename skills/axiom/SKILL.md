@@ -4,12 +4,22 @@ description: Axiom observability platform for logs, traces, and metrics. Use whe
 license: LeadMagic Proprietary
 metadata:
   author: leadmagic
-  version: "1.0.0"
+  version: "1.1.0"
 ---
 
 # Axiom
 
 Cloud-native observability platform for logs, traces, and metrics.
+
+## What's New (2025)
+
+| Feature | Description |
+|---------|-------------|
+| **OpenTelemetry native** | First-class OTel support |
+| **Vercel integration** | One-click Next.js log streaming |
+| **AI assistant** | Natural language APL queries |
+| **Annotations** | Mark deploys and incidents |
+| **Dashboards** | Custom visualization dashboards |
 
 ## Installation
 

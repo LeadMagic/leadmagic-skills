@@ -4,12 +4,18 @@ description: Upstash serverless services - QStash (message queue), Redis (cachin
 license: LeadMagic Proprietary
 metadata:
   author: leadmagic
-  version: "1.0.0"
+  version: "1.1.0"
 ---
 
 # Upstash Best Practices
 
 Serverless services for Next.js and Cloudflare Workers.
+
+## What's New (2025)
+
+- **Workflow v2** - Improved durable execution with better error handling
+- **QStash callbacks** - Execute callbacks after message delivery
+- **Redis pipeline improvements** - Better auto-pipelining performance
 
 ## Services
 

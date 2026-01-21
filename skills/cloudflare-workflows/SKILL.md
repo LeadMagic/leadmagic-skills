@@ -4,12 +4,21 @@ description: Best practices for building durable, multi-step workflows with Clou
 license: LeadMagic Proprietary
 metadata:
   author: leadmagic
-  version: "1.0.0"
+  version: "1.2.0"
 ---
 
 # Cloudflare Workflows Best Practices
 
-Comprehensive guide for building durable, reliable workflows on Cloudflare Workers.
+Comprehensive guide for building durable, reliable workflows on Cloudflare Workers. **Workflows is now GA.**
+
+## What's New (2025 GA)
+
+- **Production Ready** - Workflows is now Generally Available
+- **Instance Lifecycle** - `pause()`, `resume()`, `terminate()`, `restart()` methods
+- **waitForEvent** - Wait for external events with `type` matching and timeout
+- **sendEvent** - Send events to waiting workflow instances
+- **Child Workflows** - Trigger workflows from within other workflows
+- **Python Support** - Python workflows now in beta
 
 ## When to Apply
 
@@ -18,7 +27,7 @@ Reference these guidelines when:
 - Orchestrating tasks that may take hours or days
 - Implementing retry logic for unreliable operations
 - Waiting for external events (webhooks, user actions)
-- Scheduling delayed or recurring tasks
+- Building human-in-the-loop approval systems
 
 ## Rule Categories by Priority
 
@@ -170,13 +179,14 @@ export class ApprovalWorkflow extends WorkflowEntrypoint<Env, ApprovalParams> {
       await notifyApprovers(requestId)
     })
 
-    // Step 3: Wait for approval (up to 7 days)
-    const approval = await step.waitForEvent<ApprovalEvent>('approval-received', {
+    // Step 3: Wait for approval event (up to 7 days)
+    // NOTE: Use 'type' to match events sent via instance.sendEvent()
+    const approval = await step.waitForEvent<ApprovalEvent>('wait-for-approval', {
+      type: 'approval-decision',  // Matches sendEvent type
       timeout: '7 days',
     })
 
     if (!approval || approval.payload.decision === 'rejected') {
-      // Handle rejection
       await step.do('handle-rejection', async () => {
         await updateStatus(requestId, 'rejected')
         await notifyRequester(requesterId, 'rejected')
@@ -193,22 +203,49 @@ export class ApprovalWorkflow extends WorkflowEntrypoint<Env, ApprovalParams> {
     return { status: 'approved', approvedBy: approval.payload.approverId }
   }
 }
+```
 
-// Send event to waiting workflow
-app.post('/approvals/:requestId/approve', async (c) => {
+### Sending Events to Workflows
+
+```typescript
+// Send event to a waiting workflow instance
+app.post('/approvals/:requestId/decide', async (c) => {
   const requestId = c.req.param('requestId')
-  const { approverId, decision } = await c.req.json()
+  const { decision, comment } = await c.req.json()
+  const approverId = c.get('userId')
 
   const instance = await c.env.APPROVAL_WORKFLOW.get(`approval-${requestId}`)
 
-  // Send event to waiting workflow
+  // type must match the waitForEvent type
   await instance.sendEvent({
-    type: 'approval-received',
-    payload: { approverId, decision },
+    type: 'approval-decision',
+    payload: { approverId, decision, comment },
   })
 
   return c.json({ sent: true })
 })
+```
+
+### Instance Lifecycle Management
+
+```typescript
+// Get instance and check status
+const instance = await env.MY_WORKFLOW.get('instance-id')
+const status = await instance.status()
+// status.status: 'queued' | 'running' | 'paused' | 'errored' | 
+//                'terminated' | 'complete' | 'waiting' | 'waitingForPause' | 'unknown'
+
+// Pause a running instance
+await instance.pause()
+
+// Resume a paused instance
+await instance.resume()
+
+// Terminate (stop) an instance permanently
+await instance.terminate()
+
+// Restart from beginning (erases state)
+await instance.restart()
 ```
 
 ### Scheduled Delays

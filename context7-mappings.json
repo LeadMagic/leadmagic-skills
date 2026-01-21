@@ -116,6 +116,51 @@
       "context7": "axiomhq/axiom-js",
       "description": "Axiom logging",
       "checkTopics": ["ingest", "query", "apl", "datasets"]
+    },
+    "zod": {
+      "context7": "colinhacks/zod",
+      "description": "Zod schema validation",
+      "checkTopics": ["schemas", "parsing", "transforms", "refinements"]
+    },
+    "shadcn-ui": {
+      "context7": "shadcn-ui/ui",
+      "description": "shadcn/ui components",
+      "checkTopics": ["components", "theming", "forms", "data-table"]
+    },
+    "tailwind-v4": {
+      "context7": "tailwindlabs/tailwindcss",
+      "description": "Tailwind CSS v4",
+      "checkTopics": ["theme", "config", "utilities", "dark-mode"]
+    },
+    "clerk": {
+      "context7": "clerkinc/javascript",
+      "description": "Clerk authentication",
+      "checkTopics": ["middleware", "organizations", "webhooks", "session"]
+    },
+    "resend": {
+      "context7": "resendlabs/resend-node",
+      "description": "Resend email API",
+      "checkTopics": ["send", "templates", "attachments", "webhooks"]
+    },
+    "react-hook-form": {
+      "context7": "react-hook-form/react-hook-form",
+      "description": "React Hook Form",
+      "checkTopics": ["useForm", "validation", "field-array", "controller"]
+    },
+    "zustand": {
+      "context7": "pmndrs/zustand",
+      "description": "Zustand state management",
+      "checkTopics": ["create", "selectors", "persist", "devtools"]
+    },
+    "better-auth": {
+      "context7": "better-auth/better-auth",
+      "description": "Better Auth library",
+      "checkTopics": ["setup", "providers", "plugins", "session"]
+    },
+    "sentry": {
+      "context7": "getsentry/sentry-javascript",
+      "description": "Sentry error tracking",
+      "checkTopics": ["init", "capture", "performance", "replay"]
     }
   }
 }

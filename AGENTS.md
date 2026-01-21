@@ -15,7 +15,7 @@ This repository contains Claude Skills for building production applications with
 - **AI Gateway** - AI API management
 - **TypeScript** - Type-safe development
 
-## Using Skills (43 Total)
+## Using Skills (52 Total)
 
 Skills are automatically loaded when installed to `~/.claude/skills/`. Reference them when:
 
@@ -47,6 +47,8 @@ Skills are automatically loaded when installed to `~/.claude/skills/`. Reference
 |-------|----------|
 | `api-development` | REST design, versioning, rate limiting |
 | `authentication` | Clerk, Auth.js, JWT, sessions |
+| `clerk` | Clerk-specific auth patterns, organizations, webhooks |
+| `better-auth` | Self-hosted auth, framework-agnostic |
 | `caching-strategies` | Next.js caching, SWR, Cache API |
 | `error-handling` | Error boundaries, API errors, logging |
 | `env-variables` | Environment configuration, secrets |
@@ -54,6 +56,7 @@ Skills are automatically loaded when installed to `~/.claude/skills/`. Reference
 | `doppler` | Secrets management across environments |
 | `inngest` | Durable workflows, background jobs, event-driven |
 | `stripe-payments` | Payment processing, subscriptions, webhooks |
+| `resend` | Email sending, React Email templates |
 
 ### Frontend
 | Skill | Use When |
@@ -61,7 +64,12 @@ Skills are automatically loaded when installed to `~/.claude/skills/`. Reference
 | `react-best-practices` | React 19 patterns, performance |
 | `nextjs-app-router` | App Router, Server Components, Actions |
 | `typescript-best-practices` | Type safety, configuration |
+| `zod` | Schema validation, type inference, form validation |
+| `react-hook-form` | Form handling, validation with Zod |
+| `zustand` | Global state management, stores |
 | `ui-development` | shadcn/ui, Tailwind v4, Framer Motion |
+| `shadcn-ui` | Component patterns, theming, customization |
+| `tailwind-v4` | CSS-first config, theme tokens |
 | `vercel-ai-sdk` | AI streaming, tools, chat interfaces |
 
 ### Quality
@@ -71,6 +79,7 @@ Skills are automatically loaded when installed to `~/.claude/skills/`. Reference
 | `logging-best-practices` | Wide events, structured logging |
 | `opentelemetry` | Distributed tracing, spans, metrics |
 | `axiom` | Log analytics, APL queries |
+| `sentry` | Error tracking, performance monitoring |
 | `monorepo` | Turborepo, pnpm workspaces |
 | `biome` | Fast linting and formatting, ESLint/Prettier replacement |
 

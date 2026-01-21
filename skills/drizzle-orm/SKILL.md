@@ -4,30 +4,29 @@ description: Drizzle ORM patterns for Cloudflare D1 and PostgreSQL. Use when def
 license: LeadMagic Proprietary
 metadata:
   author: leadmagic
-  version: "2.0.0"
+  version: "2.1.0"
 ---
 
 # Drizzle ORM
 
 Type-safe ORM patterns for Cloudflare D1 and PostgreSQL.
 
+## What's New
+
+- **Relations v2** - New `defineRelations` API with alias support
+- **Simplified client init** - `drizzle({ client })` shorthand
+- **Relational queries v2** - Improved nested query performance
+
 ## Installation
 
 ```bash
-# D1/SQLite
 npm install drizzle-orm
-npm install -D drizzle-kit
-
-# PostgreSQL
-npm install drizzle-orm postgres
 npm install -D drizzle-kit
 ```
 
 ---
 
 ## Schema
-
-See `rules/schema-patterns.md` for detailed patterns.
 
 ```typescript
 // src/db/schema.ts
@@ -44,6 +43,7 @@ export const posts = sqliteTable('posts', {
   id: text('id').primaryKey().$defaultFn(() => crypto.randomUUID()),
   title: text('title').notNull(),
   authorId: text('author_id').notNull().references(() => users.id),
+  reviewerId: text('reviewer_id').references(() => users.id),
 })
 
 // Types
@@ -51,7 +51,25 @@ export type User = typeof users.$inferSelect
 export type NewUser = typeof users.$inferInsert
 ```
 
-### Relations
+### Relations v2 (New)
+
+```typescript
+import { defineRelations } from 'drizzle-orm'
+
+// New v2 API with alias support
+export const relations = defineRelations({ users, posts }, (r) => ({
+  users: {
+    posts: r.many.posts({ alias: 'author' }),
+    reviewedPosts: r.many.posts({ alias: 'reviewer' }),
+  },
+  posts: {
+    author: r.one.users({ from: r.posts.authorId, to: r.users.id, alias: 'author' }),
+    reviewer: r.one.users({ from: r.posts.reviewerId, to: r.users.id, alias: 'reviewer' }),
+  },
+}))
+```
+
+### Relations v1 (Still Supported)
 
 ```typescript
 import { relations } from 'drizzle-orm'

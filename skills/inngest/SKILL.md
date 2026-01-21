@@ -4,7 +4,7 @@ description: Durable workflow orchestration for Next.js and serverless. Use when
 license: LeadMagic Proprietary
 metadata:
   author: leadmagic
-  version: "2.0.0"
+  version: "2.1.0"
 ---
 
 # Inngest - Durable Workflows
@@ -13,6 +13,15 @@ Inngest provides durable workflow orchestration for serverless environments. Bui
 
 **SDK Version:** v3.0+ (TypeScript)
 
+## What's New (2025)
+
+- **Checkpointing** - Near-zero latency between steps (developer preview)
+- **Connect** - WebSocket gateway for container runtimes (K8s, ECS)
+- **Realtime** - Stream updates from workflows to browsers with `useAgent`/`useChat`
+- **step.fetch()** - Durable HTTP requests with automatic retries
+- **Singleton Functions** - Exclusive execution with `cancel` or `skip` modes
+- **Standard Schema** - Support for Zod 4, Valibot, ArkType
+
 ## When to Apply
 
 Reference these guidelines when:
@@ -20,9 +29,8 @@ Reference these guidelines when:
 - Creating multi-step workflows with durability
 - Implementing event-driven architectures
 - Scheduling recurring tasks (cron jobs)
-- Adding retry logic to critical operations
-- Orchestrating long-running processes
 - Streaming real-time updates from workflows
+- Building AI agents with durable execution
 
 ## Rule Categories by Priority
 
@@ -48,12 +56,13 @@ Reference these guidelines when:
 - `step-wait-for-event` - Wait for external events
 - `step-invoke` - Call other functions
 
-### 3. New in SDK v3.0
+### 3. New in SDK v3.0+
 
-- `step.fetch()` - Durable HTTP requests
-- **Connect** - WebSocket gateway for non-HTTP environments
-- **Realtime** - Stream updates from functions to clients
-- **Checkpointing** - Save state for long-running functions
+- `step.fetch()` - Durable HTTP requests with automatic retries
+- **Connect** - WebSocket gateway for container runtimes
+- **Realtime** - Stream updates with `useAgent`/`useChat` hooks
+- **Checkpointing** - Near-zero inter-step latency
+- **Singleton** - Exclusive execution with `cancel`/`skip` modes
 
 ---
 

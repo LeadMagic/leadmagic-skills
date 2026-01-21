@@ -4,12 +4,19 @@ description: Stripe payment integration patterns for Next.js and serverless. Use
 license: LeadMagic Proprietary
 metadata:
   author: leadmagic
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # Stripe Payments Integration
 
 Comprehensive guide for integrating Stripe payments in Next.js applications with serverless backends.
+
+## What's New (Clover API 2025)
+
+- **Accounts v2** - New account management for Connect platforms
+- **Payment Records** - Track non-Stripe payments alongside Stripe payments
+- **Custom payment methods** - Add your own payment method types
+- **MB WAY, TWINT, PayTo** - New payment methods supported
 
 ## When to Apply
 
@@ -74,7 +81,7 @@ NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_xxx
 import Stripe from 'stripe'
 
 export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2024-12-18.acacia',
+  apiVersion: '2025-12-15.clover',  // Latest API version
   typescript: true,
 })
 ```

@@ -4,12 +4,18 @@ description: TanStack Query (React Query) for server state management and data f
 license: LeadMagic Proprietary
 metadata:
   author: leadmagic
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # TanStack Query (React Query)
 
 Comprehensive guide for server state management with TanStack Query v5. Covers queries, mutations, caching, optimistic updates, and integration with Next.js App Router.
+
+## What's New in v5
+
+- **queryOptions()** - Type-safe query configuration factory
+- **Streaming SSR** - Better hydration with `dehydrate`/`hydrate` options
+- **Standard Schema** - Support for Zod, Valibot, ArkType validation
 
 ## When to Apply
 
@@ -109,28 +115,35 @@ export function Providers({ children }: { children: React.ReactNode }) {
 
 ---
 
-## Query Key Factory Pattern
+## Query Options Pattern (v5 Recommended)
 
 ```typescript
-// lib/queries/keys.ts
-export const queryKeys = {
-  users: {
-    all: ['users'] as const,
-    lists: () => [...queryKeys.users.all, 'list'] as const,
-    list: (filters: UserFilters) => [...queryKeys.users.lists(), filters] as const,
-    details: () => [...queryKeys.users.all, 'detail'] as const,
-    detail: (id: string) => [...queryKeys.users.details(), id] as const,
-  },
+// lib/queries/users.ts
+import { queryOptions } from '@tanstack/react-query'
 
-  posts: {
-    all: ['posts'] as const,
-    lists: () => [...queryKeys.posts.all, 'list'] as const,
-    list: (filters: PostFilters) => [...queryKeys.posts.lists(), filters] as const,
-    details: () => [...queryKeys.posts.all, 'detail'] as const,
-    detail: (id: string) => [...queryKeys.posts.details(), id] as const,
-    comments: (postId: string) => [...queryKeys.posts.detail(postId), 'comments'] as const,
-  },
-} as const
+export const userQueries = {
+  all: () => queryOptions({
+    queryKey: ['users'],
+  }),
+  
+  list: (filters: UserFilters) => queryOptions({
+    queryKey: ['users', 'list', filters],
+    queryFn: () => fetchUsers(filters),
+    staleTime: 5 * 60 * 1000,
+  }),
+  
+  detail: (id: string) => queryOptions({
+    queryKey: ['users', 'detail', id],
+    queryFn: () => fetchUser(id),
+    staleTime: 5 * 60 * 1000,
+  }),
+}
+
+// Usage - type-safe everywhere
+useQuery(userQueries.detail(userId))
+useSuspenseQuery(userQueries.list({ role: 'admin' }))
+queryClient.prefetchQuery(userQueries.detail(userId))
+queryClient.setQueryData(userQueries.detail(userId).queryKey, newUser)
 ```
 
 ---
@@ -208,19 +221,18 @@ function UserProfile({ userId }: { userId: string }) {
 Read individual rule files for detailed patterns:
 
 ```
-rules/query-options.md      - Query options pattern
+rules/query-options.md      - Query options factory pattern (v5)
 rules/mutations.md          - Mutation patterns
 rules/optimistic-updates.md - Optimistic update patterns
 rules/infinite-queries.md   - Infinite scroll/pagination
 rules/prefetching.md        - Prefetch strategies
-rules/cache-config.md       - Cache configuration
+rules/ssr-streaming.md      - SSR with streaming hydration
 rules/error-handling.md     - Error handling patterns
 ```
 
 ## Resources
 
 - [TanStack Query Documentation](https://tanstack.com/query/latest)
-- [Query Keys](https://tanstack.com/query/latest/docs/react/guides/query-keys)
+- [Query Options](https://tanstack.com/query/latest/docs/react/guides/query-options)
 - [Mutations](https://tanstack.com/query/latest/docs/react/guides/mutations)
-- [Optimistic Updates](https://tanstack.com/query/latest/docs/react/guides/optimistic-updates)
-- [SSR Guide](https://tanstack.com/query/latest/docs/react/guides/ssr)
+- [SSR & Hydration](https://tanstack.com/query/latest/docs/react/guides/ssr)

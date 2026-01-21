@@ -74,9 +74,11 @@ export class ApprovalWorkflow extends WorkflowEntrypoint<Env, Params> {
     })
 
     // ✅ Step 3: Wait for approval event (up to 7 days)
+    // 'type' must match the type sent via instance.sendEvent()
     const approvalEvent = await step.waitForEvent<ApprovalEvent>(
-      'approval-decision',
+      'wait-for-approval',
       {
+        type: 'approval-decision',  // Matches sendEvent type
         timeout: '7 days',
       }
     )
@@ -135,12 +137,12 @@ app.post('/approvals/:requestId/decide', async (c) => {
   const { decision, comment } = await c.req.json()
   const approverId = c.get('userId') // From auth middleware
 
-  // Get the workflow instance
+  // Get the workflow instance by its ID
   const instance = await c.env.APPROVAL_WORKFLOW.get(`approval-${requestId}`)
 
-  // Send the event to the waiting workflow
+  // Send the event - 'type' must match waitForEvent's type option
   await instance.sendEvent({
-    type: 'approval-decision',
+    type: 'approval-decision',  // This matches waitForEvent({ type: 'approval-decision' })
     payload: {
       decision,
       approverId,
@@ -172,29 +174,29 @@ app.post('/webhooks/payment', async (c) => {
 })
 ```
 
-**Multiple event types:**
+**Racing multiple event types:**
 
 ```typescript
-// Wait for either approval OR cancellation
-const event = await step.waitForEvent<ApprovalEvent | CancellationEvent>(
-  'request-action',
-  { timeout: '7 days' }
-)
+// Use Promise.race to wait for first of multiple event types
+const event = await Promise.race([
+  step.waitForEvent<ApprovalEvent>('wait-approval', {
+    type: 'approved',
+    timeout: '7 days',
+  }),
+  step.waitForEvent<RejectionEvent>('wait-rejection', {
+    type: 'rejected',
+    timeout: '7 days',
+  }),
+  step.waitForEvent<CancellationEvent>('wait-cancel', {
+    type: 'cancelled',
+    timeout: '7 days',
+  }),
+])
 
 if (!event) {
   return { status: 'expired' }
 }
 
-// Discriminate by event type
-switch (event.type) {
-  case 'approved':
-    // Handle approval
-    break
-  case 'rejected':
-    // Handle rejection
-    break
-  case 'cancelled':
-    // Handle cancellation by requester
-    break
-}
+// Handle based on which event was received
+// The event.type will indicate which one resolved first
 ```

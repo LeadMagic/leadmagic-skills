@@ -4,12 +4,20 @@ description: Best practices for using Cloudflare D1 SQLite database in Workers. 
 license: LeadMagic Proprietary
 metadata:
   author: leadmagic
-  version: "1.0.0"
+  version: "1.1.0"
 ---
 
 # Cloudflare D1 Best Practices
 
 Comprehensive guide for using Cloudflare D1 (SQLite at the edge) in Workers.
+
+## What's New (2025)
+
+| Feature | Description |
+|---------|-------------|
+| SQLite 3.47 | Nov 2024 update |
+| Smart Placement | Feb 2025 - Improved location heuristics |
+| Larger limits | 10GB storage, 20MB result size |
 
 ## When to Apply
 
@@ -18,7 +26,6 @@ Reference these guidelines when:
 - Writing SQL queries in Workers
 - Performing database migrations
 - Optimizing query performance
-- Integrating with Hono or other frameworks
 
 ## Rule Categories by Priority
 

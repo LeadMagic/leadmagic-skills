@@ -4,18 +4,19 @@ description: Best practices for using Wrangler CLI to develop, test, and deploy 
 license: LeadMagic Proprietary
 metadata:
   author: leadmagic
-  version: "2.0.0"
+  version: "2.1.0"
 ---
 
 # Wrangler Best Practices
 
 Comprehensive guide for using Wrangler to manage Cloudflare Workers development and deployment.
 
-## What's New
+## What's New (2025)
 
-- **wrangler.jsonc** - JSON with comments now supported alongside wrangler.toml
-- **Compatibility date 2024-09-23+** - Required for latest Node.js APIs
-- **Observability** - Built-in logging with `observability.enabled: true`
+- **wrangler.jsonc** - JSON with comments is now **recommended** over wrangler.toml
+- **Automatic provisioning** - KV, R2, D1 created automatically on deploy (no IDs needed)
+- **JSON Schema** - Add `"$schema": "./node_modules/wrangler/config-schema.json"` for IDE support
+- **Compatibility date 2025-01-01+** - Required for latest Node.js APIs
 
 ## When to Apply
 
@@ -211,13 +212,16 @@ wrangler d1 create my-database           # Create database
 wrangler d1 execute DB --local --file=schema.sql  # Run SQL locally
 wrangler d1 execute DB --file=schema.sql # Run SQL remotely
 
-# Storage (R2)
+# Storage (R2) - New bucket commands in 2024-2025
 wrangler r2 bucket create my-bucket      # Create bucket
-wrangler r2 object put my-bucket/key --file=./file.txt
+wrangler r2 bucket info my-bucket        # View bucket info (NEW)
+wrangler r2 bucket dev-url enable my-bucket  # Enable r2.dev URL (NEW)
+wrangler r2 bucket domain add my-bucket  # Add custom domain (NEW)
+wrangler r2 bucket lifecycle list my-bucket  # List lifecycle rules (NEW)
 
 # KV
-wrangler kv:namespace create CACHE       # Create namespace
-wrangler kv:key put --binding=CACHE key "value"
+wrangler kv namespace create CACHE       # Create namespace
+wrangler kv key put --binding=CACHE key "value"
 
 # Debugging
 wrangler tail                  # Stream live logs

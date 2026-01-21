@@ -4,18 +4,25 @@ description: Best practices for shadcn/ui, Tailwind CSS v4, Framer Motion, and R
 license: LeadMagic Proprietary
 metadata:
   author: leadmagic
-  version: "2.0.0"
+  version: "2.1.0"
 ---
 
 # UI Development Best Practices
 
 Modern UI patterns with shadcn/ui, Tailwind CSS v4, Framer Motion, and Recharts.
 
-## What's New
+## Tailwind CSS v4 (Major Rewrite)
 
-- **Tailwind CSS v4** - `@import "tailwindcss"` replaces `@tailwind`
-- **shadcn/ui** - Supports Base UI as alternative to Radix
-- **CLI** - `npx shadcn@latest` with improved prompts
+| Feature | Description |
+|---------|-------------|
+| **CSS-first config** | Configure via CSS, no `tailwind.config.js` needed |
+| **`@theme` directive** | Define design tokens in CSS |
+| **OKLCH colors** | Wider gamut, more vivid palette |
+| **Container queries** | Built-in `@container`, no plugin |
+| **3D transforms** | `rotate-x-*`, `translate-z-*`, `perspective-*` |
+| **`@starting-style`** | CSS entry animations without JS |
+| **`not-*` variant** | `:not()` pseudo-class support |
+| **Dynamic values** | `grid-cols-15`, `mt-17` work without config |
 
 ## Rule Categories
 
@@ -94,41 +101,48 @@ See `rules/shadcn-*.md` for detailed component patterns.
 
 ## Tailwind CSS v4
 
-### CSS Configuration
+### CSS Configuration (No JS Config!)
 
 ```css
 /* globals.css - Tailwind v4 */
 @import "tailwindcss";
 
 @theme {
-  --color-primary: 222.2 47.4% 11.2%;
-  --color-background: 0 0% 100%;
+  --color-primary: oklch(0.45 0.18 265);
+  --color-background: oklch(1 0 0);
   --font-sans: "Inter", sans-serif;
+  --breakpoint-3xl: 1920px;
 }
 
 .dark {
-  --color-background: 222.2 84% 4.9%;
+  --color-background: oklch(0.15 0.02 265);
 }
 ```
 
-### Responsive (Mobile-first)
+### New v4 Features
 
 ```tsx
-<div className="p-4 md:p-6 lg:p-8">
-  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-    {/* Content */}
-  </div>
+{/* Container queries - built-in */}
+<div className="@container">
+  <div className="grid grid-cols-1 @sm:grid-cols-3 @lg:grid-cols-4" />
 </div>
-```
 
-### Dark Mode
+{/* Dynamic values - no config needed */}
+<div className="grid-cols-15 mt-17 w-29" />
 
-```tsx
-<div className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">
-  <button className="bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700">
-    Click me
-  </button>
-</div>
+{/* 3D transforms */}
+<div className="perspective-distant rotate-x-12 rotate-z-6 transform-3d" />
+
+{/* not-* variant */}
+<div className="not-hover:opacity-75" />
+
+{/* @starting-style for entry animations */}
+<div className="transition-discrete starting:open:opacity-0" />
+
+{/* Gradient improvements */}
+<div className="bg-linear-45 from-indigo-500 to-pink-500" />
+<div className="bg-conic from-red-500 to-red-500" />
+<div className="bg-radial-[at_25%_25%] from-white to-zinc-900" />
 ```
 
 See `rules/tw-*.md` for detailed patterns.
