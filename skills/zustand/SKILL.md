@@ -58,7 +58,7 @@ import { useCounterStore } from '@/stores/counter'
 
 export function Counter() {
   const { count, increment, decrement } = useCounterStore()
-  
+
   return (
     <div>
       <span>{count}</span>
@@ -108,7 +108,7 @@ export const useUserStore = create<UserStore>((set, get) => ({
   user: null,
   isLoading: false,
   error: null,
-  
+
   fetchUser: async (id) => {
     set({ isLoading: true, error: null })
     try {
@@ -119,11 +119,11 @@ export const useUserStore = create<UserStore>((set, get) => ({
       set({ error: 'Failed to fetch user', isLoading: false })
     }
   },
-  
+
   updateUser: async (data) => {
     const { user } = get()
     if (!user) return
-    
+
     set({ isLoading: true })
     try {
       const response = await fetch(`/api/users/${user.id}`, {
@@ -189,16 +189,16 @@ interface TodoStore {
 export const useTodoStore = create<TodoStore>()(
   immer((set) => ({
     todos: [],
-    
+
     addTodo: (text) => set((state) => {
       state.todos.push({ id: crypto.randomUUID(), text, done: false })
     }),
-    
+
     toggleTodo: (id) => set((state) => {
       const todo = state.todos.find((t) => t.id === id)
       if (todo) todo.done = !todo.done
     }),
-    
+
     removeTodo: (id) => set((state) => {
       state.todos = state.todos.filter((t) => t.id !== id)
     }),
@@ -334,12 +334,12 @@ interface Props {
 
 export function CounterProvider({ initialCount, children }: Props) {
   const initialized = useRef(false)
-  
+
   if (!initialized.current) {
     useCounterStore.setState({ count: initialCount })
     initialized.current = true
   }
-  
+
   return <>{children}</>
 }
 ```
@@ -360,18 +360,18 @@ interface CartStore {
 
 export const useCartStore = create<CartStore>()((set, get) => ({
   items: [],
-  
+
   get totalItems() {
     return get().items.reduce((sum, item) => sum + item.quantity, 0)
   },
-  
+
   get totalPrice() {
     return get().items.reduce((sum, item) => sum + item.price * item.quantity, 0)
   },
 }))
 
 // Or use selectors
-const totalItems = useCartStore((state) => 
+const totalItems = useCartStore((state) =>
   state.items.reduce((sum, item) => sum + item.quantity, 0)
 )
 ```

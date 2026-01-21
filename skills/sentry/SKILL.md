@@ -57,16 +57,16 @@ import * as Sentry from '@sentry/nextjs'
 
 Sentry.init({
   dsn: process.env.SENTRY_DSN,
-  
+
   // Performance monitoring
   tracesSampleRate: 1.0, // 100% in dev, lower in prod
-  
+
   // Profiling
   profilesSampleRate: 1.0,
-  
+
   // Environment
   environment: process.env.NODE_ENV,
-  
+
   // Release tracking
   release: process.env.VERCEL_GIT_COMMIT_SHA,
 })
@@ -80,13 +80,13 @@ import * as Sentry from '@sentry/nextjs'
 
 Sentry.init({
   dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
-  
+
   tracesSampleRate: 1.0,
-  
+
   // Replay for session recording
   replaysSessionSampleRate: 0.1,
   replaysOnErrorSampleRate: 1.0,
-  
+
   integrations: [
     Sentry.replayIntegration({
       maskAllText: true,
@@ -111,13 +111,13 @@ export default withSentryConfig(nextConfig, {
   silent: true,
   org: process.env.SENTRY_ORG,
   project: process.env.SENTRY_PROJECT,
-  
+
   // Upload source maps
   widenClientFileUpload: true,
-  
+
   // Hide source maps from client
   hideSourceMaps: true,
-  
+
   // Automatically tree-shake unused code
   disableLogger: true,
 })
@@ -324,7 +324,7 @@ export async function GET() {
 export async function POST(request: Request) {
   return Sentry.withScope(async (scope) => {
     const body = await request.json()
-    
+
     scope.setContext('request', {
       url: request.url,
       method: 'POST',
@@ -357,7 +357,7 @@ export async function createPost(formData: FormData) {
     { recordResponse: true },
     async () => {
       const title = formData.get('title') as string
-      
+
       try {
         const post = await db.post.create({ data: { title } })
         return { success: true, post }
@@ -401,22 +401,22 @@ Sentry.addBreadcrumb({
 ```typescript
 Sentry.init({
   dsn: process.env.SENTRY_DSN,
-  
+
   beforeSend(event, hint) {
     // Filter out specific errors
     if (event.exception?.values?.[0]?.type === 'ChunkLoadError') {
       return null
     }
-    
+
     // Remove sensitive data
     if (event.request?.data) {
       delete event.request.data.password
       delete event.request.data.creditCard
     }
-    
+
     return event
   },
-  
+
   ignoreErrors: [
     'ResizeObserver loop limit exceeded',
     'Non-Error promise rejection',
@@ -432,22 +432,22 @@ Sentry.init({
 ```typescript
 Sentry.init({
   dsn: process.env.SENTRY_DSN,
-  
+
   // Sample 10% of transactions in production
   tracesSampleRate: process.env.NODE_ENV === 'production' ? 0.1 : 1.0,
-  
+
   // Dynamic sampling
   tracesSampler: ({ name, parentSampled }) => {
     // Always sample checkout flow
     if (name.includes('checkout')) {
       return 1.0
     }
-    
+
     // Lower rate for health checks
     if (name.includes('health')) {
       return 0.01
     }
-    
+
     return 0.1
   },
 })

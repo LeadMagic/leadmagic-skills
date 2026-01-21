@@ -75,22 +75,22 @@ export default {
   --color-primary: oklch(0.6 0.2 250);
   --color-secondary: oklch(0.8 0.1 250);
   --color-accent: oklch(0.7 0.25 150);
-  
+
   /* Fonts */
   --font-sans: "Inter", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", monospace;
-  
+
   /* Spacing */
   --spacing-18: 4.5rem;
   --spacing-128: 32rem;
-  
+
   /* Border radius */
   --radius-xl: 1rem;
   --radius-2xl: 1.5rem;
-  
+
   /* Shadows */
   --shadow-soft: 0 2px 8px oklch(0 0 0 / 0.08);
-  
+
   /* Animations */
   --animate-fade-in: fade-in 0.3s ease-out;
 }
@@ -115,12 +115,12 @@ export default {
   --color-brand-100: oklch(0.93 0.03 250);
   --color-brand-500: oklch(0.6 0.2 250);
   --color-brand-900: oklch(0.3 0.1 250);
-  
+
   /* Semantic colors */
   --color-success: oklch(0.7 0.2 145);
   --color-warning: oklch(0.8 0.15 85);
   --color-error: oklch(0.6 0.25 25);
-  
+
   /* Surfaces */
   --color-surface: oklch(0.99 0 0);
   --color-surface-secondary: oklch(0.97 0 0);
@@ -134,7 +134,7 @@ export default {
   /* Font families */
   --font-display: "Cal Sans", system-ui;
   --font-body: "Inter", sans-serif;
-  
+
   /* Font sizes */
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
@@ -143,12 +143,12 @@ export default {
   --text-xl: 1.25rem;
   --text-2xl: 1.5rem;
   --text-3xl: 1.875rem;
-  
+
   /* Line heights */
   --leading-tight: 1.25;
   --leading-normal: 1.5;
   --leading-relaxed: 1.75;
-  
+
   /* Letter spacing */
   --tracking-tight: -0.02em;
   --tracking-wide: 0.02em;
@@ -257,22 +257,22 @@ export default {
 
 ```tsx
 {/* Primary */}
-<button className="rounded-lg bg-brand-500 px-4 py-2 text-white 
-  hover:bg-brand-600 active:bg-brand-700 
+<button className="rounded-lg bg-brand-500 px-4 py-2 text-white
+  hover:bg-brand-600 active:bg-brand-700
   transition-colors duration-150">
   Primary
 </button>
 
 {/* Secondary */}
-<button className="rounded-lg border border-border bg-surface px-4 py-2 
-  text-text hover:bg-surface-secondary 
+<button className="rounded-lg border border-border bg-surface px-4 py-2
+  text-text hover:bg-surface-secondary
   transition-colors duration-150">
   Secondary
 </button>
 
 {/* Ghost */}
-<button className="rounded-lg px-4 py-2 text-text 
-  hover:bg-surface-secondary 
+<button className="rounded-lg px-4 py-2 text-text
+  hover:bg-surface-secondary
   transition-colors duration-150">
   Ghost
 </button>
@@ -283,7 +283,7 @@ export default {
 ```tsx
 <input
   type="text"
-  className="w-full rounded-lg border border-border bg-surface px-4 py-2 
+  className="w-full rounded-lg border border-border bg-surface px-4 py-2
     text-text placeholder:text-text/50
     focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/20
     transition-all duration-150"
@@ -362,7 +362,7 @@ npx @tailwindcss/upgrade
 {/* Group hover/focus states */}
 <button className="
   bg-brand-500 text-white
-  hover:bg-brand-600 
+  hover:bg-brand-600
   focus:ring-2 focus:ring-brand-500/50 focus:outline-none
   active:bg-brand-700
   disabled:opacity-50 disabled:cursor-not-allowed

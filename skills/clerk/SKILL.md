@@ -65,7 +65,7 @@ export default clerkMiddleware(async (auth, req) => {
   if (isProtectedRoute(req)) {
     await auth.protect()
   }
-  
+
   // Or protect all non-public routes
   // if (!isPublicRoute(req)) {
   //   await auth.protect()
@@ -109,14 +109,14 @@ import { auth, currentUser } from '@clerk/nextjs/server'
 
 export default async function Dashboard() {
   const { userId, orgId, sessionClaims } = await auth()
-  
+
   if (!userId) {
     redirect('/sign-in')
   }
-  
+
   // Get full user object
   const user = await currentUser()
-  
+
   return (
     <div>
       <h1>Welcome, {user?.firstName}</h1>
@@ -136,11 +136,11 @@ import { auth } from '@clerk/nextjs/server'
 
 export async function createPost(data: FormData) {
   const { userId } = await auth()
-  
+
   if (!userId) {
     throw new Error('Unauthorized')
   }
-  
+
   // Create post with userId
   await db.post.create({
     data: {
@@ -158,11 +158,11 @@ export async function createPost(data: FormData) {
 ```tsx
 'use client'
 
-import { 
-  useUser, 
-  useAuth, 
+import {
+  useUser,
+  useAuth,
   useClerk,
-  SignedIn, 
+  SignedIn,
   SignedOut,
   UserButton,
   SignInButton,
@@ -187,10 +187,10 @@ export function Header() {
 export function UserProfile() {
   const { user, isLoaded, isSignedIn } = useUser()
   const { signOut, getToken } = useAuth()
-  
+
   if (!isLoaded) return <Skeleton />
   if (!isSignedIn) return null
-  
+
   return (
     <div>
       <img src={user.imageUrl} alt={user.fullName || ''} />
@@ -213,7 +213,7 @@ import { SignIn } from '@clerk/nextjs'
 export default function SignInPage() {
   return (
     <div className="flex min-h-screen items-center justify-center">
-      <SignIn 
+      <SignIn
         appearance={{
           elements: {
             rootBox: 'mx-auto',
@@ -236,13 +236,13 @@ import { auth } from '@clerk/nextjs/server'
 
 export default async function OrgDashboard() {
   const { userId, orgId, orgRole } = await auth()
-  
+
   if (!orgId) {
     return <div>Please select an organization</div>
   }
-  
+
   const isAdmin = orgRole === 'org:admin'
-  
+
   return (
     <div>
       <h1>Organization Dashboard</h1>
@@ -257,7 +257,7 @@ import { OrganizationSwitcher, OrganizationList } from '@clerk/nextjs'
 
 export function OrgSelector() {
   return (
-    <OrganizationSwitcher 
+    <OrganizationSwitcher
       hidePersonal
       afterSelectOrganizationUrl="/dashboard"
       afterCreateOrganizationUrl="/dashboard"
@@ -351,7 +351,7 @@ import { useAuth } from '@clerk/nextjs'
 
 export function ApiClient() {
   const { getToken } = useAuth()
-  
+
   async function fetchData() {
     const token = await getToken()
     const res = await fetch('/api/data', {
@@ -366,14 +366,14 @@ import { auth } from '@clerk/nextjs/server'
 
 export async function GET() {
   const { userId, getToken } = await auth()
-  
+
   if (!userId) {
     return Response.json({ error: 'Unauthorized' }, { status: 401 })
   }
-  
+
   // Get token for external API
   const token = await getToken({ template: 'supabase' })
-  
+
   return Response.json({ data: '...' })
 }
 ```
@@ -389,16 +389,16 @@ import { auth } from '@clerk/nextjs/server'
 
 export async function deleteAccount() {
   const { userId, has } = await auth()
-  
+
   // Require recent authentication
   const isRecentlyAuthed = has({
     reverification: { level: 'strict', afterMinutes: 10 }
   })
-  
+
   if (!isRecentlyAuthed) {
     throw new Error('Please re-authenticate')
   }
-  
+
   await db.user.delete({ where: { clerkId: userId } })
 }
 ```

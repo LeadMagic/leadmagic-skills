@@ -262,7 +262,7 @@ export function ReceiptEmail({ customerName, items, total }: ReceiptProps) {
         <Container style={container}>
           <Text style={h1}>Receipt</Text>
           <Text>Thank you for your purchase, {customerName}!</Text>
-          
+
           <Section style={table}>
             {items.map((item, i) => (
               <Row key={i} style={row}>
@@ -389,10 +389,10 @@ export async function POST(request: Request) {
   const headers = Object.fromEntries(request.headers)
 
   const wh = new Webhook(process.env.RESEND_WEBHOOK_SECRET!)
-  
+
   try {
     const event = wh.verify(payload, headers)
-    
+
     switch (event.type) {
       case 'email.sent':
         console.log('Email sent:', event.data.email_id)
@@ -407,7 +407,7 @@ export async function POST(request: Request) {
         await handleComplaint(event.data.to)
         break
     }
-    
+
     return Response.json({ received: true })
   } catch (err) {
     return Response.json({ error: 'Invalid signature' }, { status: 400 })

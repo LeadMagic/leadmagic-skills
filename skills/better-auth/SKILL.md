@@ -111,13 +111,13 @@ export function SignUpForm() {
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     const formData = new FormData(e.currentTarget)
-    
+
     const { error } = await signUp.email({
       email: formData.get('email') as string,
       password: formData.get('password') as string,
       name: formData.get('name') as string,
     })
-    
+
     if (error) {
       setError(error.message)
     }
@@ -146,12 +146,12 @@ export function SignInForm() {
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     const formData = new FormData(e.currentTarget)
-    
+
     const { error } = await signIn.email({
       email: formData.get('email') as string,
       password: formData.get('password') as string,
     })
-    
+
     if (error) {
       console.error(error)
     }
@@ -203,7 +203,7 @@ export function UserNav() {
   const { data: session, isPending } = useSession()
 
   if (isPending) return <Skeleton />
-  
+
   if (!session) {
     return <a href="/sign-in">Sign In</a>
   }
@@ -253,7 +253,7 @@ export async function middleware(request: NextRequest) {
   })
 
   const isProtectedRoute = request.nextUrl.pathname.startsWith('/dashboard')
-  
+
   if (isProtectedRoute && !session) {
     return NextResponse.redirect(new URL('/sign-in', request.url))
   }

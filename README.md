@@ -40,94 +40,118 @@ cd leadmagic-skills
 ls ~/.claude/skills/
 ```
 
-You should see all 43 skill directories.
+You should see all 52 skill directories.
 
 ---
 
-## Skills Catalog (43 Total)
+## Skills Catalog (52 Total)
 
-### Core Stack (10 skills)
+### Cloudflare Platform (10)
 
-| Skill | Description | Rules |
-|-------|-------------|-------|
-| `hono-v4` | Hono v4 APIs — routes, middleware, validation, type-safe bindings | 4 |
-| `cloudflare-workers` | Workers fundamentals — requests, bindings, caching | 2 |
-| `cloudflare-d1` | D1 SQLite — prepared statements, batch operations | 2 |
-| `cloudflare-kv` | KV storage — caching, sessions, eventual consistency | 2 |
-| `cloudflare-r2` | R2 storage — uploads, streaming | 1 |
-| `cloudflare-durable-objects` | Durable Objects — state, WebSockets, hibernation | 3 |
-| `cloudflare-workflows` | Workflows — durable execution, steps, events | 4 |
-| `cloudflare-ai-gateway` | AI Gateway — routing, caching, guardrails | 3 |
-| `cloudflare-observability` | Observability — Logpush, OTel export | 2 |
-| `wrangler` | Wrangler CLI — configuration, deployment | - |
+| Skill | Description |
+|-------|-------------|
+| `cloudflare-workers` | Workers runtime, bindings, fetch handlers |
+| `cloudflare-d1` | SQLite database, prepared statements, migrations |
+| `cloudflare-kv` | Key-value storage, caching, sessions |
+| `cloudflare-r2` | Object storage, uploads, streaming |
+| `cloudflare-durable-objects` | Stateful coordination, WebSockets, alarms |
+| `cloudflare-workflows` | Durable execution, steps, events |
+| `cloudflare-ai-gateway` | LLM routing, caching, rate limiting |
+| `cloudflare-observability` | Logs, Logpush, OpenTelemetry export |
+| `hono-v4` | API framework, routes, middleware |
+| `wrangler` | CLI, configuration, local dev, deployment |
 
-### Data & Storage (5 skills)
+### Data & State (5)
 
-| Skill | Description | Rules |
-|-------|-------------|-------|
-| `drizzle-orm` | Drizzle ORM — type-safe queries, schemas | 2 |
-| `tinybird` | Real-time analytics — ClickHouse APIs, pipes | 3 |
-| `upstash` | QStash, Redis, Workflows, Ratelimit | 3 |
-| `tanstack-query` | TanStack Query v5 — server state, caching, mutations | 7 |
-| `tanstack-table` | TanStack Table v8 — sorting, filtering, pagination | 8 |
+| Skill | Description |
+|-------|-------------|
+| `drizzle-orm` | Type-safe ORM, schemas, migrations |
+| `tanstack-query` | Server state, data fetching, caching |
+| `tanstack-table` | Data tables, sorting, filtering, pagination |
+| `zustand` | Global state management, stores |
+| `upstash` | Redis, QStash, rate limiting |
 
-### Backend (9 skills)
+### Authentication (4)
 
-| Skill | Description | Rules |
-|-------|-------------|-------|
-| `api-development` | REST design, versioning, rate limiting, errors | 8 |
-| `authentication` | Clerk, Auth.js, JWT, sessions, Workers auth | 2 |
-| `caching-strategies` | Next.js caching, SWR, Cache API | - |
-| `error-handling` | Error boundaries, API errors, Server Actions | 3 |
-| `env-variables` | Environment variable patterns | - |
-| `security-best-practices` | Input validation, CSRF, XSS, CSP | - |
-| `doppler` | Secrets management across environments | 2 |
-| `inngest` | Durable workflows, background jobs, event-driven | 6 |
-| `stripe-payments` | Checkout, subscriptions, webhooks, billing | 4 |
+| Skill | Description |
+|-------|-------------|
+| `authentication` | Auth patterns overview, JWT, sessions |
+| `clerk` | Clerk auth, organizations, webhooks |
+| `better-auth` | Self-hosted, framework-agnostic auth |
+| `security-best-practices` | Input validation, CSRF, XSS |
 
-### Frontend (5 skills)
+### Frontend & UI (7)
 
-| Skill | Description | Rules |
-|-------|-------------|-------|
-| `react-best-practices` | React 19 optimization patterns | 53 |
-| `nextjs-app-router` | Next.js 16 App Router — RSC, Server Actions | 2 |
-| `typescript-best-practices` | TypeScript — strict mode, types, patterns | 3 |
-| `ui-development` | shadcn/ui, Tailwind v4, Framer Motion | 18 |
-| `vercel-ai-sdk` | AI SDK — chat, streaming, tools, agents | 10 |
+| Skill | Description |
+|-------|-------------|
+| `react-best-practices` | React 19 patterns, performance |
+| `nextjs-app-router` | App Router, Server Components, Actions |
+| `typescript-best-practices` | Type safety, strict mode, patterns |
+| `ui-development` | Component patterns, Framer Motion |
+| `shadcn-ui` | shadcn/ui components, theming |
+| `tailwind-v4` | CSS-first config, OKLCH, theme tokens |
+| `caching-strategies` | Next.js caching, SWR, Cache API |
 
-### Quality (6 skills)
+### Forms & Validation (2)
 
-| Skill | Description | Rules |
-|-------|-------------|-------|
-| `testing-best-practices` | Vitest, Testing Library, Playwright, MSW | 3 |
-| `logging-best-practices` | Wide events, structured logging | 4 |
-| `opentelemetry` | Distributed tracing, spans, metrics | 2 |
-| `axiom` | Log analytics, APL queries | 1 |
-| `monorepo` | Turborepo, pnpm workspaces | 2 |
-| `biome` | Fast linting/formatting, ESLint/Prettier replacement | 4 |
+| Skill | Description |
+|-------|-------------|
+| `zod` | Schema validation, type inference |
+| `react-hook-form` | Form handling, Zod integration |
 
-### Automation & Planning (2 skills)
+### Backend Services (7)
 
-| Skill | Description | Rules |
-|-------|-------------|-------|
-| `ralph-wiggum` | Iterative AI loops, autonomous coding, TDD cycles | 5 |
-| `linear` | Project management, sprints, agent task assignment | 5 |
+| Skill | Description |
+|-------|-------------|
+| `api-development` | REST design, versioning, rate limiting |
+| `stripe-payments` | Payments, subscriptions, webhooks |
+| `resend` | Email sending, React Email templates |
+| `inngest` | Durable workflows, background jobs |
+| `tinybird` | Real-time analytics, ClickHouse APIs |
+| `env-variables` | Environment configuration |
+| `doppler` | Secrets management |
 
-### Design (5 skills)
+### Observability (5)
 
-| Skill | Description | Rules |
-|-------|-------------|-------|
-| `design-principles` | UX heuristics, visual design systems | 4 |
-| `design-review` | WCAG 2.1 accessibility + design constraints | - |
-| `design-antipatterns` | Avoiding "AI slop" patterns | - |
-| `design-lab` | Interactive design exploration workflow | - |
-| `web-design-guidelines` | Vercel Web Interface Guidelines | - |
+| Skill | Description |
+|-------|-------------|
+| `logging-best-practices` | Wide events, structured logging |
+| `error-handling` | Error boundaries, API errors |
+| `sentry` | Error tracking, performance monitoring |
+| `axiom` | Log analytics, APL queries |
+| `opentelemetry` | Distributed tracing, spans, metrics |
 
-### Deployment (1 skill)
+### Quality & Tooling (3)
 
-| Skill | Description | Rules |
-|-------|-------------|-------|
-| `vercel-deploy-claimable` | Deploy to Vercel with claimable link | - |
+| Skill | Description |
+|-------|-------------|
+| `testing-best-practices` | Vitest, Testing Library, Playwright |
+| `biome` | Fast linting/formatting |
+| `monorepo` | Turborepo, pnpm workspaces |
+
+### AI & Automation (3)
+
+| Skill | Description |
+|-------|-------------|
+| `vercel-ai-sdk` | AI streaming, tools, chat interfaces |
+| `ralph-wiggum` | Iterative AI loops, autonomous coding |
+| `linear` | Project management, agent tasks |
+
+### Design System (5)
+
+| Skill | Description |
+|-------|-------------|
+| `design-principles` | UX heuristics, visual design |
+| `design-review` | UI code review checklist |
+| `design-antipatterns` | Common UI/UX mistakes |
+| `design-lab` | Structured design workflow |
+| `web-design-guidelines` | Vercel design guidelines |
+
+### Deployment (1)
+
+| Skill | Description |
+|-------|-------------|
+| `vercel-deploy-claimable` | Deploy to Vercel with claimable link |
 
 ---
 
