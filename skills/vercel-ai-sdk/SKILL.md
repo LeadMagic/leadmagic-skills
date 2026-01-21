@@ -448,4 +448,3 @@ Key changes:
 - `result` → `output` in tool returns
 - New `UIMessage` type with `parts` (not just `content`)
 - `useChat` returns typed messages with data parts
-

@@ -315,4 +315,3 @@ app.post('/users', async (c) => {
   return c.json(user, 201)
 })
 ```
-

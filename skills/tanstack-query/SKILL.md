@@ -126,13 +126,13 @@ export const userQueries = {
   all: () => queryOptions({
     queryKey: ['users'],
   }),
-  
+
   list: (filters: UserFilters) => queryOptions({
     queryKey: ['users', 'list', filters],
     queryFn: () => fetchUsers(filters),
     staleTime: 5 * 60 * 1000,
   }),
-  
+
   detail: (id: string) => queryOptions({
     queryKey: ['users', 'detail', id],
     queryFn: () => fetchUser(id),
