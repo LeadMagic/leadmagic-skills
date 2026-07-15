@@ -47,24 +47,20 @@ Exact field names and enums: see the docs page above (source of truth).
 
 ## Job function (`contact_job_function`)
 
-- Accepts **short chips** (`Sales`, `Marketing`, `Product`) **or** full warehouse labels (`Sales & Business Development`).
-- Matching is **exact after chip expansion** (not substring). `"Product"` does **not** match `"Manufacturing & Production"`.
-- Response rows always return the **warehouse label** (e.g. request `Sales` → response `Sales & Business Development`). That is expected, not a bug.
+- Accepts **short names** (`Sales`, `Marketing`, `Product`) **or** full canonical labels (`Sales & Business Development`).
+- Matching is **exact after short-name expansion** (not substring). `"Product"` does **not** match `"Manufacturing & Production"`.
+- Response rows always return the **canonical label** (e.g. request `Sales` → response `Sales & Business Development`). That is expected.
 
-| Chip | Warehouse label returned |
-|------|--------------------------|
+| Request | Label returned |
+|---------|----------------|
 | Sales | Sales & Business Development |
 | Marketing | Advertising & Marketing |
 | Product | Product Management |
 | Engineering | Engineering |
-| … | See docs Job function section |
+| … | See [Job function](https://leadmagic.io/docs/api-reference/people-search#job-function) |
 
 ## When not to use this skill
 
 - Single-person email / mobile / profile lookup → `email-enrichment` or `people-enrichment`
 - Company firmographics only → `company-enrichment`
 - CSV enrichment of known rows → `bulk-jobs`
-
-## Learnings
-
-Append durable gotchas to `skills/leadmagic/references/learnings.md` (no secrets / PII).

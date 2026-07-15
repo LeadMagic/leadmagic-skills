@@ -1,35 +1,23 @@
 ## Description
-<!-- Describe your changes -->
+<!-- What changed and why -->
 
 
-## Type of Change
-<!-- Check all that apply -->
+## Type of change
 - [ ] New skill
-- [ ] New rule(s)
+- [ ] Skill update
 - [ ] Bug fix
-- [ ] Documentation update
-- [ ] Other (describe):
+- [ ] Docs / meta
+- [ ] Other:
 
-## Skills Affected
-<!-- List skills modified or added -->
+## Skills affected
 -
 
 ## Checklist
-<!-- Verify before submitting -->
-- [ ] SKILL.md has valid frontmatter (`name`, `description`)
-- [ ] Skill `name` matches folder name
-- [ ] Skill `name` is lowercase with hyphens only
-- [ ] Description explains WHAT and WHEN to use
-- [ ] Description is under 1024 characters
-- [ ] Rules have proper frontmatter (`title`, `impact`, `tags`)
-- [ ] Rules include code examples (Incorrect/Correct)
-- [ ] No reserved words used (`anthropic`, `claude`)
-- [ ] Tested skill triggers correctly
+- [ ] `SKILL.md` has `name` + `description` frontmatter
+- [ ] `name` matches folder (lowercase, hyphens)
+- [ ] Description says what + when (under 1024 chars)
+- [ ] No secrets, API keys, or customer data
+- [ ] Examples use `$LEADMAGIC_API_KEY` / `YOUR_API_KEY`
 
-## Testing
-<!-- How did you test this? -->
-
-
-## Related Issues
-<!-- Link any related issues -->
+## Related
 Closes #

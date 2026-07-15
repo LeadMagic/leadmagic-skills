@@ -1,8 +1,10 @@
 # AGENTS.md — LeadMagic Skills
 
-## What this repo is
+Guidance for AI agents editing or using this repository.
 
-Official **product** skills for AI agents that call LeadMagic:
+## Purpose
+
+Official **product** skills so agents can call LeadMagic correctly:
 
 - REST API (`https://api.leadmagic.io`, `X-API-Key`)
 - Enrichments (email, people, company, mobile, …)
@@ -10,13 +12,13 @@ Official **product** skills for AI agents that call LeadMagic:
 - Hosted MCP (`https://mcp.leadmagic.io/mcp`)
 - Credits, auth, and safe integration patterns
 
-**Not in scope:** building LeadMagic's internal apps (Workers, Next.js, Hono, etc.).
+This repo does **not** document how LeadMagic’s own apps are built.
 
-## Skills to prefer
+## Skill map
 
 | Skill | Purpose |
 |-------|---------|
-| `leadmagic` | Entry router |
+| `leadmagic` | Entry router — load this first when the goal is unclear |
 | `api-auth-credits` | Keys & credits |
 | `email-enrichment` | Email find/validate |
 | `people-search` | V3 people search |
@@ -25,24 +27,15 @@ Official **product** skills for AI agents that call LeadMagic:
 | `bulk-jobs` | Async bulk + uploaders |
 | `mcp-integration` | MCP setup |
 
-## Hard rules for agents editing this repo
+## Editing rules
 
-1. **No secrets** in commits, skills, or learnings — use `YOUR_API_KEY` / `$LEADMAGIC_API_KEY` in examples.
+1. **No secrets** — examples use `$LEADMAGIC_API_KEY` or `YOUR_API_KEY` only.
 2. **No customer PII** or raw enrichment payloads in references.
-3. **Docs are source of truth** — [leadmagic.io/docs](https://leadmagic.io/docs); keep skill credit tables marked as typical.
-4. **Frontmatter:** `name` must match folder; `description` required; keep `SKILL.md` ≤ 500 lines.
-5. **Install path:** only `skills/*`.
+3. **Docs are source of truth** — [leadmagic.io/docs](https://leadmagic.io/docs). Credit tables here are typical; confirm on the docs site.
+4. **Frontmatter:** `name` matches folder; `description` required; `SKILL.md` ≤ 500 lines.
+5. Install path is `skills/*` only.
 
-## Validation
+## Related public repos
 
-```bash
-# CI runs .github/workflows/validate-skills.yml on skills/**
-for d in skills/*/; do test -f "$d/SKILL.md" || exit 1; done
-./scripts/build.sh
-```
-
-## Related repos
-
-- [LeadMagic/leadmagic-openapi](https://github.com/LeadMagic/leadmagic-openapi) — OpenAPI snapshot
-- [LeadMagic/leadmagic-cursor-plugin](https://github.com/LeadMagic/leadmagic-cursor-plugin) — Cursor / local MCP
-- Product apps live in the all-repos workspace under `repos/leadmagic`, `lm-workers`, etc. — do not confuse those with this skills repo.
+- [LeadMagic/leadmagic-openapi](https://github.com/LeadMagic/leadmagic-openapi)
+- [LeadMagic/leadmagic-cursor-plugin](https://github.com/LeadMagic/leadmagic-cursor-plugin)

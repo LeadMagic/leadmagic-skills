@@ -1,10 +1,2 @@
-# Default owners for everything
+# Default owners
 * @jesseouellette
-
-# Skills ownership
-/skills/cloudflare-* @jesseouellette
-/skills/hono-* @jesseouellette
-/skills/typescript-* @jesseouellette
-/skills/vercel-* @jesseouellette
-/skills/ui-* @jesseouellette
-/skills/react-* @jesseouellette

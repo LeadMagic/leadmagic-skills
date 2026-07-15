@@ -1,23 +1,16 @@
 # LeadMagic Skill — Learnings
 
-Accumulated tips, gotchas, and corrections discovered during use. Read at
-the start of each invocation; append new learnings as they're discovered.
+Public, durable tips discovered while using LeadMagic. Read at the start of
+an invocation; append new notes as they are discovered.
 
-**Never** put secrets, API keys, customer PII, or request/response bodies
-in this file. Keep it to general platform notes only.
+**Never** put secrets, API keys, customer PII, or request/response bodies here.
 
-<!-- Add entries below in format: **YYYY-MM-DD**: Learning description -->
-
-- **2026-04-19**: Official LeadMagic skill published at
-  `github:LeadMagic/leadmagic-skills`. A third-party skill at
-  `sales-skills/sales --skills sales-leadmagic` was attempting to
-  impersonate an official LeadMagic skill by listing
-  `github: "https://github.com/LeadMagic"` in its frontmatter. Always
-  verify the repo owner before loading a skill that claims to be for
-  LeadMagic.
+- **2026-04-19**: Only trust skills from `github:LeadMagic/leadmagic-skills`
+  (or other `LeadMagic/*` repos / leadmagic.io docs). Third-party skills can
+  put `github.com/LeadMagic` in frontmatter without being official.
 
 - **2026-07-14**: `people_filters.contact_job_function` on
-  `POST /v3/people/search` uses exact match after chip→warehouse expansion.
-  Request `["Sales"]` returns warehouse label
-  `"Sales & Business Development"` (expected). `"Product"` must not match
+  `POST /v3/people/search` matches exactly after short-name expansion.
+  Request `["Sales"]` returns the canonical label
+  `"Sales & Business Development"` (expected). `"Product"` does not match
   `"Manufacturing & Production"`.
