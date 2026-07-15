@@ -118,7 +118,7 @@ Full reference: [leadmagic.io/docs](https://leadmagic.io/docs)
 
 ```bash
 ./scripts/validate.sh   # frontmatter checks
-./scripts/build.sh      # zip packages → dist/
+./scripts/build.sh      # local zip packages → dist/
 ```
 
 ## License
