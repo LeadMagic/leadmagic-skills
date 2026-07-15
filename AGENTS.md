@@ -34,7 +34,7 @@ This repo does **not** document how LeadMagic’s own apps are built.
 3. **Docs are source of truth** — [leadmagic.io/docs](https://leadmagic.io/docs). Credit tables here are typical; confirm on the docs site.
 4. **Frontmatter:** `name` matches folder; `description` required (what + when); `SKILL.md` ≤ 500 lines; put tags under `metadata.tags`.
 5. Install path is `skills/*` only.
-6. Say **B2B Profile**, not LinkedIn (except the hosted MCP tool id `linkedin_profile_to_work_email`).
+6. Prefer **B2B Profile** wording over third-party brand names in skill copy.
 7. Follow [Claude skill authoring best practices](https://docs.claude.com/en/docs/agents-and-tools/agent-skills/best-practices).
 
 ## Related public repos
