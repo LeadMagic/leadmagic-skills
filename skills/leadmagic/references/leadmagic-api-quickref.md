@@ -15,9 +15,9 @@ OpenAPI snapshot: [LeadMagic/leadmagic-openapi](https://github.com/LeadMagic/lea
 | Skill | Use for |
 |-------|---------|
 | `api-auth-credits` | Keys, credits, rate limits |
-| `email-enrichment` | Email find/validate / B2B email |
+| `email-enrichment` | Email find/validate / B2B Profile ↔ email |
 | `people-search` | `POST /v3/people/search` |
-| `people-enrichment` | Mobile, profile, role, employees |
+| `people-enrichment` | Mobile, B2B Profile, role, employees |
 | `company-enrichment` | Company + funding |
 | `bulk-jobs` | CSV / async bulk |
 | `mcp-integration` | Hosted MCP setup |
@@ -58,7 +58,7 @@ curl -sS -X POST "https://api.leadmagic.io/bulk/submit" \
 | `POST /v1/people/employee-finder` | ~0.05/employee | |
 | `POST /v1/people/mobile-finder` | 5 | Free if not found |
 | `POST /v1/people/b2b-profile-email` | 5 | Free if not found |
-| `POST /v1/people/b2b-profile` | 10 | Prefer profile-search if you have URL |
+| `POST /v1/people/b2b-profile` | 10 | Prefer profile-search if you have a B2B Profile URL |
 | `POST /v1/companies/company-search` | 1 | Free if not found |
 | `POST /v1/companies/company-funding` | 4 | Free if not found |
 | `POST /v3/people/search` | see docs | Audience discovery |

@@ -3,148 +3,51 @@ name: Validate Skills
 on:
   push:
     branches: [main]
-    paths:
-      - 'skills/**'
-      - 'scripts/validate.sh'
   pull_request:
     branches: [main]
-    paths:
-      - 'skills/**'
-      - 'scripts/validate.sh'
   workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   validate:
+    name: Claude Agent Skills checks
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Validate SKILL.md frontmatter
+      - name: Install ripgrep
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ripgrep
+
+      - name: Run scripts/validate.sh
         run: |
-          echo "Validating skill frontmatter..."
-          errors=0
+          chmod +x scripts/validate.sh scripts/build.sh
+          ./scripts/validate.sh
 
-          for skill_dir in skills/*/; do
-            skill_name=$(basename "$skill_dir")
-            skill_file="$skill_dir/SKILL.md"
+      - name: Package skills (smoke)
+        run: ./scripts/build.sh
 
-            if [ ! -f "$skill_file" ]; then
-              echo "❌ Missing SKILL.md in $skill_name"
-              errors=$((errors + 1))
-              continue
-            fi
+      - name: Upload skill zips
+        uses: actions/upload-artifact@v4
+        with:
+          name: leadmagic-skills
+          path: dist/*.zip
+          if-no-files-found: error
+          retention-days: 14
 
-            if ! head -20 "$skill_file" | grep -q "^name:"; then
-              echo "❌ Missing 'name' in $skill_name/SKILL.md"
-              errors=$((errors + 1))
-              continue
-            fi
-
-            if ! head -20 "$skill_file" | grep -q "^description:"; then
-              echo "❌ Missing 'description' in $skill_name/SKILL.md"
-              errors=$((errors + 1))
-              continue
-            fi
-
-            yaml_name=$(head -20 "$skill_file" | grep "^name:" | sed 's/name: *//' | tr -d '"' | tr -d "'")
-            if [ "$yaml_name" != "$skill_name" ]; then
-              echo "❌ Name mismatch in $skill_name: folder='$skill_name' vs name='$yaml_name'"
-              errors=$((errors + 1))
-              continue
-            fi
-
-            if echo "$yaml_name" | grep -qE '[^a-z0-9-]'; then
-              echo "❌ Invalid name format in $skill_name: must be lowercase letters, numbers, hyphens"
-              errors=$((errors + 1))
-              continue
-            fi
-
-            if [ ${#yaml_name} -gt 64 ]; then
-              echo "❌ Name too long in $skill_name: ${#yaml_name} chars (max 64)"
-              errors=$((errors + 1))
-              continue
-            fi
-
-            if echo "$yaml_name" | grep -qiE 'anthropic|claude'; then
-              echo "❌ Reserved word in name: $skill_name"
-              errors=$((errors + 1))
-              continue
-            fi
-
-            echo "✓ $skill_name"
-          done
-
-          if [ $errors -gt 0 ]; then
-            echo ""
-            echo "❌ Validation failed with $errors error(s)"
-            exit 1
-          fi
-
-          echo ""
-          echo "✅ All skills validated successfully!"
-
-      - name: Check description length
-        run: |
-          echo "Checking description lengths (max 1024 chars)..."
-          errors=0
-
-          for skill_dir in skills/*/; do
-            skill_name=$(basename "$skill_dir")
-            skill_file="$skill_dir/SKILL.md"
-
-            desc=$(head -20 "$skill_file" | grep "^description:" | sed 's/description: *//')
-            desc_len=${#desc}
-
-            if [ $desc_len -gt 1024 ]; then
-              echo "❌ Description too long in $skill_name: $desc_len chars (max 1024)"
-              errors=$((errors + 1))
-            else
-              echo "✓ $skill_name: $desc_len chars"
-            fi
-          done
-
-          if [ $errors -gt 0 ]; then
-            exit 1
-          fi
-
-      - name: Check SKILL.md line count
-        run: |
-          echo "Checking SKILL.md line counts (max 500 lines)..."
-          errors=0
-
-          for skill_dir in skills/*/; do
-            skill_name=$(basename "$skill_dir")
-            skill_file="$skill_dir/SKILL.md"
-            line_count=$(wc -l < "$skill_file" | tr -d ' ')
-
-            if [ "$line_count" -gt 500 ]; then
-              echo "❌ $skill_name: $line_count lines (exceeds 500 limit)"
-              errors=$((errors + 1))
-            else
-              echo "✓ $skill_name: $line_count lines"
-            fi
-          done
-
-          if [ $errors -gt 0 ]; then
-            exit 1
-          fi
-
-      - name: Skills summary
-        run: |
-          echo ""
-          echo "═══════════════════════════════════════"
-          echo "     LEADMAGIC PRODUCT SKILLS"
-          echo "═══════════════════════════════════════"
-
-          total_skills=0
-          for skill_dir in skills/*/; do
-            skill_name=$(basename "$skill_dir")
-            line_count=$(wc -l < "$skill_dir/SKILL.md" | tr -d ' ')
-            printf "  %-28s %4d lines\n" "$skill_name" "$line_count"
-            total_skills=$((total_skills + 1))
-          done
-
-          echo "═══════════════════════════════════════"
-          echo "  Total: $total_skills product skills"
-          echo "  Docs: https://leadmagic.io/docs"
-          echo "═══════════════════════════════════════"
+  package:
+    name: Package Skills
+    needs: validate
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        run: chmod +x scripts/build.sh && ./scripts/build.sh
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: leadmagic-skills-main
+          path: dist/*.zip
+          retention-days: 30

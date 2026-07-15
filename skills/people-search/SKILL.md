@@ -1,15 +1,16 @@
 ---
 name: people-search
-description: "LeadMagic V3 people search (POST /v3/people/search). Use for audience building, ICP filters, job function/title/level filters, company+people filters, and debugging empty or unexpected people search results."
-argument-hint: "[people search filters or debugging]"
+description: "LeadMagic V3 people search via POST /v3/people/search. Use when building audiences or ICPs, filtering by job function, title, level, company, or geo, or debugging empty or unexpected people search results."
 license: MIT
-version: 1.0.0
-tags: [leadmagic, people-search, v3, audience, enrichment]
-github: "https://github.com/LeadMagic/leadmagic-skills"
-homepage: "https://leadmagic.io"
-docs: "https://leadmagic.io/docs/api-reference/people-search"
-publisher: "LeadMagic"
-verified: true
+compatibility: "Requires network access to api.leadmagic.io."
+metadata:
+  author: LeadMagic
+  version: "1.0.0"
+  homepage: https://leadmagic.io
+  docs: https://leadmagic.io/docs/api-reference/people-search
+  github: https://github.com/LeadMagic/leadmagic-skills
+  publisher: LeadMagic
+  tags: [leadmagic, people-search, v3, audience, enrichment, b2b]
 ---
 
 # LeadMagic — People search (V3)
@@ -41,7 +42,7 @@ curl -sS -X POST "https://api.leadmagic.io/v3/people/search" \
 |--------|----------|
 | Company | `company_domain`, company size, industry, geo, funding |
 | Role | `contact_job_title`, `contact_job_function`, `contact_job_level`, `contact_persona`, `min_seniority` |
-| Person | name, LinkedIn URL/username, headline, `has_email` / `has_phone` |
+| Person | name, B2B Profile URL/username, headline, `has_email` / `has_phone` |
 
 Exact field names and enums: see the docs page above (source of truth).
 
@@ -61,6 +62,6 @@ Exact field names and enums: see the docs page above (source of truth).
 
 ## When not to use this skill
 
-- Single-person email / mobile / profile lookup → `email-enrichment` or `people-enrichment`
+- Single-person email / mobile / B2B Profile lookup → `email-enrichment` or `people-enrichment`
 - Company firmographics only → `company-enrichment`
 - CSV enrichment of known rows → `bulk-jobs`

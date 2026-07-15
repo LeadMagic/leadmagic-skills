@@ -1,15 +1,16 @@
 ---
 name: api-auth-credits
-description: "LeadMagic API auth, keys, credits, and rate limits. Use when setting LEADMAGIC_API_KEY, calling GET /v1/credits, rotating keys, budgeting enrichment spend, or debugging 401/402/429 responses."
-argument-hint: "[auth, credits, rate limits, or key rotation]"
+description: "LeadMagic API authentication, API keys, credit balance, and rate limits. Use when setting LEADMAGIC_API_KEY, calling GET /v1/credits, rotating keys, budgeting enrichment spend, or debugging 401, 402, or 429 responses."
 license: MIT
-version: 1.0.0
-tags: [leadmagic, api, auth, credits, rate-limits]
-github: "https://github.com/LeadMagic/leadmagic-skills"
-homepage: "https://leadmagic.io"
-docs: "https://leadmagic.io/docs"
-publisher: "LeadMagic"
-verified: true
+compatibility: "Requires network access to api.leadmagic.io."
+metadata:
+  author: LeadMagic
+  version: "1.0.0"
+  homepage: https://leadmagic.io
+  docs: https://leadmagic.io/docs
+  github: https://github.com/LeadMagic/leadmagic-skills
+  publisher: LeadMagic
+  tags: [leadmagic, api, auth, credits, rate-limits, x-api-key]
 ---
 
 # LeadMagic — API auth & credits
@@ -45,9 +46,8 @@ curl -sS "https://api.leadmagic.io/v1/credits" \
 
 - **Failed / not-found lookups are free** on most people/company endpoints — do not retry aggressively on `null`.
 - Bulk jobs bill **per successful row** at the same rate as the matching single-request product.
-- Basic plan credits may not roll over; Essential+ typically do (confirm on current pricing page).
 
 ## Docs
 
 - [API docs](https://leadmagic.io/docs)
-- OpenAPI snapshot: [LeadMagic/leadmagic-openapi](https://github.com/LeadMagic/leadmagic-openapi)
+- OpenAPI: [LeadMagic/leadmagic-openapi](https://github.com/LeadMagic/leadmagic-openapi)

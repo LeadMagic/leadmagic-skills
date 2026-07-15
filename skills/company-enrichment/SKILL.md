@@ -1,15 +1,16 @@
 ---
 name: company-enrichment
-description: "LeadMagic company search, funding, technographics, and competitors. Use when enriching a domain/company, researching accounts, or pulling funding and tech stack via REST or MCP."
-argument-hint: "[company search / funding / competitors / technographics]"
+description: "LeadMagic company search, funding, technographics, and competitors. Use when enriching a domain or company name, researching an account, or pulling funding and tech-stack data via REST or MCP."
 license: MIT
-version: 1.0.0
-tags: [leadmagic, company, funding, enrichment]
-github: "https://github.com/LeadMagic/leadmagic-skills"
-homepage: "https://leadmagic.io"
-docs: "https://leadmagic.io/docs"
-publisher: "LeadMagic"
-verified: true
+compatibility: "Requires network access to api.leadmagic.io or mcp.leadmagic.io."
+metadata:
+  author: LeadMagic
+  version: "1.0.0"
+  homepage: https://leadmagic.io
+  docs: https://leadmagic.io/docs
+  github: https://github.com/LeadMagic/leadmagic-skills
+  publisher: LeadMagic
+  tags: [leadmagic, company, funding, technographics, enrichment]
 ---
 
 # LeadMagic — Company enrichment

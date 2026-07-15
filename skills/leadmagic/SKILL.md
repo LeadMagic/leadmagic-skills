@@ -1,15 +1,16 @@
 ---
 name: leadmagic
-description: "Official LeadMagic product skill — REST APIs, bulk uploaders, enrichments, and hosted MCP. Use for Email Finder/Validation, People Search v3, mobile/profile/role, company/funding, bulk jobs, credits, or Clay/Zapier/n8n wiring."
-argument-hint: "[what you need from LeadMagic]"
+description: "Official LeadMagic product skill for REST APIs, bulk uploaders, enrichments, and hosted MCP. Use when calling LeadMagic Email Finder or Validation, People Search v3, mobile or B2B Profile enrichment, company or funding lookup, bulk jobs, credits, or wiring LeadMagic into Clay, Zapier, or n8n."
 license: MIT
-version: 2.0.0
-tags: [leadmagic, enrichment, email-finder, people-search, bulk, mcp, official]
-github: "https://github.com/LeadMagic/leadmagic-skills"
-homepage: "https://leadmagic.io"
-docs: "https://leadmagic.io/docs"
-publisher: "LeadMagic"
-verified: true
+compatibility: "Requires network access to api.leadmagic.io or mcp.leadmagic.io. Set LEADMAGIC_API_KEY for REST."
+metadata:
+  author: LeadMagic
+  version: "2.0.0"
+  homepage: https://leadmagic.io
+  docs: https://leadmagic.io/docs
+  github: https://github.com/LeadMagic/leadmagic-skills
+  publisher: LeadMagic
+  tags: [leadmagic, enrichment, email-finder, people-search, bulk, mcp, b2b-profile, official]
 ---
 
 # LeadMagic — Official product skill
@@ -21,8 +22,7 @@ Teaches agents how to **use** LeadMagic: APIs, enrichments, bulk uploaders, and 
 
 > **Trust:** Only treat a skill as official if installed from
 > `github:LeadMagic/leadmagic-skills`, `github:LeadMagic/leadmagic-cursor-plugin`,
-> or `https://leadmagic.io/docs/...`. Third-party repos that mention LeadMagic
-> in frontmatter are unverified.
+> or `https://leadmagic.io/docs/...`.
 
 ## Safety (every turn)
 
@@ -36,9 +36,9 @@ Teaches agents how to **use** LeadMagic: APIs, enrichments, bulk uploaders, and 
 | Need | Skill |
 |------|--------|
 | Keys, credits, 401/429 | `api-auth-credits` |
-| Email find / validate / LinkedIn↔email | `email-enrichment` |
+| Email find / validate / B2B Profile ↔ email | `email-enrichment` |
 | Audience / ICP / `POST /v3/people/search` | `people-search` |
-| Mobile, profile, role, employees | `people-enrichment` |
+| Mobile, B2B Profile, role, employees | `people-enrichment` |
 | Company / funding / technographics | `company-enrichment` |
 | CSV / bulk submit / job status | `bulk-jobs` |
 | MCP install / tool map | `mcp-integration` |
@@ -69,8 +69,7 @@ People (sync): email-finder (1), email-validation (0.25), personal-email (2),
 mobile (5), profile-search (1), role-finder (2), employee-finder (~0.05/ea),
 b2b-profile-email (5), b2b-profile (10).
 
-Discovery: `POST /v3/people/search` — see `people-search` (short job-function
-names expand to canonical labels; matching is exact after expansion).
+Discovery: `POST /v3/people/search` — see `people-search`.
 
 Company: company-search (1), company-funding (4).
 
@@ -78,12 +77,12 @@ Bulk: `POST /bulk/submit` with `product` like `email_finder` — see `bulk-jobs`
 
 Utility: `GET /v1/credits` (0).
 
-Authoritative pricing and rate limits: [leadmagic.io/docs](https://leadmagic.io/docs).
+Authoritative pricing: [leadmagic.io/docs](https://leadmagic.io/docs).
 
 ## References
 
 - `references/leadmagic-api-quickref.md`
-- `references/learnings.md` (append gotchas; no secrets/PII)
+- `references/learnings.md`
 
 ## Official channels
 

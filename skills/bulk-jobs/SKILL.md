@@ -1,15 +1,16 @@
 ---
 name: bulk-jobs
-description: "LeadMagic bulk enrichment jobs and CSV uploaders. Use for POST /bulk/submit, JSON/CSV/fileUrl/scrape inputs, upload sessions, polling job status, callbacks, and budgeting per-row credits."
-argument-hint: "[submit bulk job / poll status / CSV upload]"
+description: "LeadMagic bulk enrichment jobs and CSV uploaders. Use when submitting POST /bulk/submit, uploading CSV or JSON rows, polling job status, configuring callbacks, or budgeting per-row credits for email, mobile, profile, or company products."
 license: MIT
-version: 1.0.0
-tags: [leadmagic, bulk, csv, uploader, enrichment]
-github: "https://github.com/LeadMagic/leadmagic-skills"
-homepage: "https://leadmagic.io"
-docs: "https://leadmagic.io/docs/api-reference/bulk-jobs-submit"
-publisher: "LeadMagic"
-verified: true
+compatibility: "Requires network access to api.leadmagic.io."
+metadata:
+  author: LeadMagic
+  version: "1.0.0"
+  homepage: https://leadmagic.io
+  docs: https://leadmagic.io/docs/api-reference/bulk-jobs-submit
+  github: https://github.com/LeadMagic/leadmagic-skills
+  publisher: LeadMagic
+  tags: [leadmagic, bulk, csv, uploader, enrichment, jobs]
 ---
 
 # LeadMagic — Bulk jobs & uploaders
@@ -61,7 +62,7 @@ Use `inputMapping` when CSV columns do not match expected field names.
 
 ## Agent rules
 
-- Never put live API keys or customer CSV contents into skill files / learnings.
-- Prefer chunking very large runs; check plan row limits (docs cite up to 500k/job).
+- Never put live API keys or customer CSV contents into skill files.
+- Prefer chunking very large runs; check plan row limits in the docs.
 - Do not busy-poll every second — use reasonable intervals or callbacks.
 - Sync single-row debugging → use the matching people/company skill instead of bulk.

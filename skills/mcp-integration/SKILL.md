@@ -1,15 +1,16 @@
 ---
 name: mcp-integration
-description: "LeadMagic hosted MCP setup for Claude, Cursor, Windsurf, VS Code. Use when installing https://mcp.leadmagic.io/mcp, configuring OAuth MCP, or mapping MCP tools to REST enrichment endpoints."
-argument-hint: "[install MCP / tool mapping / OAuth]"
+description: "LeadMagic hosted MCP setup for Claude Code, Cursor, Windsurf, and VS Code. Use when installing the LeadMagic MCP server at mcp.leadmagic.io, configuring OAuth MCP, or mapping MCP tools to REST enrichment endpoints."
 license: MIT
-version: 1.0.0
-tags: [leadmagic, mcp, cursor, claude]
-github: "https://github.com/LeadMagic/leadmagic-skills"
-homepage: "https://leadmagic.io"
-docs: "https://leadmagic.io/docs/mcp/setup"
-publisher: "LeadMagic"
-verified: true
+compatibility: "Requires network access to mcp.leadmagic.io. OAuth by default on the hosted MCP."
+metadata:
+  author: LeadMagic
+  version: "1.0.0"
+  homepage: https://leadmagic.io
+  docs: https://leadmagic.io/docs/mcp/setup
+  github: https://github.com/LeadMagic/leadmagic-skills
+  publisher: LeadMagic
+  tags: [leadmagic, mcp, cursor, oauth, enrichment]
 ---
 
 # LeadMagic — MCP integration
@@ -34,13 +35,13 @@ Prefer the **hosted MCP** over hand-rolled `curl` in agent sessions (OAuth, less
 
 ## Tool → REST map
 
-| MCP tool | REST |
-|----------|------|
+| MCP tool | REST / meaning |
+|----------|----------------|
 | `check_credit_balance` | `GET /v1/credits` |
 | `validate_work_email` | `POST /v1/people/email-validation` |
 | `find_work_email` | `POST /v1/people/email-finder` |
 | `find_mobile_number` | `POST /v1/people/mobile-finder` |
-| `linkedin_profile_to_work_email` | `POST /v1/people/b2b-profile-email` |
+| `linkedin_profile_to_work_email` | `POST /v1/people/b2b-profile-email` (B2B Profile → work email) |
 | `detect_job_change` | job change |
 | `research_account` | company search + funding |
 | `list_company_competitors` | competitors |
