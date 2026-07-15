@@ -1,47 +1,52 @@
-
-._*
-.claude/
-.cursor/
+# OS
 .DS_Store
 .DS_Store?
-.env
-.env.*.local
-.env.local
-.idea/
-.nyc_output/
-.pnpm-store/
+._*
 .Spotlight-V100
 .Trashes
-.vim/
-.vscode/
-*.local
-*.log
-*.swo
-*.swp
-*.temp
-*.tmp
-*~
-# Build artifacts
-# Claude/AI local
-# Dependencies
-# Editor
-# Environment
-# Logs
-# Note: dist/ is NOT ignored - contains packaged skills for download
-# OS
-# Packaged zips (rebuild with ./scripts/build.sh)
-# Temp files
-# Testing
-build/
-coverage/
-dist/
 ehthumbs.db
-logs/
-node_modules/
-npm-debug.log*
-pnpm-debug.log*
-temp/
 Thumbs.db
-tmp/
+
+# Editor
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.vim/
+
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build artifacts
+build/
+dist/
+
+# Environment / secrets
+.env
+.env.local
+.env.*.local
+*.local
+
+# Logs
+logs/
+*.log
+npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
+
+# Testing
+coverage/
+.nyc_output/
+
+# Temp
+tmp/
+temp/
+*.tmp
+*.temp
+
+# Local AI tooling
+.claude/
+.cursor/
