@@ -23,7 +23,7 @@ Auth: `X-API-Key: $LEADMAGIC_API_KEY` → `https://api.leadmagic.io`. Never echo
 |------|----------|-------------------|
 | Find work email from name + company | `POST /v1/people/email-finder` | 1 (free on null) |
 | Validate an email | `POST /v1/people/email-validation` | 0.25 |
-| Find personal email | `POST /v1/people/personal-email-finder` | 2 (free if not found) |
+| Find personal email (B2B fallback when work email unavailable) | `POST /v1/people/personal-email-finder` | 2 (free if not found) |
 | B2B Profile URL → work email | `POST /v1/people/b2b-profile-email` | 5 (free if not found) |
 | Email → B2B Profile | `POST /v1/people/b2b-profile` | 10 |
 
@@ -63,5 +63,6 @@ For CSV / large lists use `POST /bulk/submit` with `product: "email_finder"` or 
 
 ## Gotchas
 
+- Prefer work email (`email-finder`) before personal email. Personal email is a lawful **B2B fallback** when work email is missing or undeliverable — not for consumer marketing or bypassing opt-outs.
 - Placeholder domains like `example.com` may be rejected on some endpoints.
 - Do not retry `null` aggressively — not found is free but rate limits still apply.
