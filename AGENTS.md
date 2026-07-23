@@ -41,3 +41,7 @@ This repo does **not** document how LeadMagic’s own apps are built.
 
 - [LeadMagic/leadmagic-openapi](https://github.com/LeadMagic/leadmagic-openapi)
 - [LeadMagic/leadmagic-cursor-plugin](https://github.com/LeadMagic/leadmagic-cursor-plugin)
+
+## Workspace context
+
+When editing skills from the `all-repos` workspace, product toolchain pins live in [`../leadmagic/STACK.md`](../leadmagic/STACK.md) and [`../../docs/00-overview/stack-policy.md`](../../docs/00-overview/stack-policy.md). This skills repo does not pin pnpm/Next — keep examples API/MCP-focused.
