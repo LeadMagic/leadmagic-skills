@@ -44,6 +44,19 @@ curl -sS -X POST "https://api.leadmagic.io/v3/people/search" \
 | Role | `contact_job_title`, `contact_job_function`, `contact_job_level`, `contact_persona`, `min_seniority` |
 | Person | name, B2B Profile URL/username, headline, `has_email` / `has_phone` |
 
+Company filter aliases (normalized server-side):
+
+| Client alias | Canonical |
+|--------------|-----------|
+| `company_size` / `company_sizes` / `employee_count` | `employee_ranges` (+ `min_employees` / `max_employees`) |
+| `employee_min` / `employee_max` | `min_employees` / `max_employees` |
+| `company_industry` | `company_industry_linkedin` |
+| `company_country` / `company_countries` | `hq_country_code` (ISO) |
+
+Title matching: `"VP Sales"` is substring/FTS. Wrap in brackets for exact title equality — `"[VP of Sales]"` / `"[CEO]"` (Blitz-compatible). Mixed arrays are allowed.
+
+For list totals like Blitz `total_results`, pass `include_total: true` (capped COUNT on supported paths).
+
 Exact field names and enums: see the docs page above (source of truth).
 
 ## Job function (`contact_job_function`)
