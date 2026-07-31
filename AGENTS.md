@@ -1,5 +1,7 @@
 # AGENTS.md — LeadMagic Skills
 
+**Reviewed:** 2026-07-30
+
 Guidance for AI agents editing or using this repository.
 
 ## Purpose
