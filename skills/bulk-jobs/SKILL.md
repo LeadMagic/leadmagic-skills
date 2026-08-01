@@ -23,7 +23,7 @@ Docs: [Submit bulk job](https://leadmagic.io/docs/api-reference/bulk-jobs-submit
 
 1. Preflight: `GET /v1/credits`
 2. Optional validate: docs bulk validate endpoint for field mapping
-3. Submit: `POST /bulk/submit` (or typed `/bulk/json`, `/bulk/csv`, `/bulk/url`, `/bulk/scrape`, `/bulk/file`)
+3. Submit: `POST /bulk/submit` (or typed `/bulk/json`, `/bulk/csv`, `/bulk/url`, `/bulk/file`)
 4. Poll: `GET /bulk/jobs/{jobId}` (and list jobs as needed)
 5. Pull results / honor `callback` webhooks
 
@@ -31,11 +31,10 @@ Docs: [Submit bulk job](https://leadmagic.io/docs/api-reference/bulk-jobs-submit
 
 | Variant | Body | When |
 |---------|------|------|
-| `POST /bulk/submit` | `rows` \| `csv` \| `fileUrl` \| `scrape` | Auto-detect (recommended) |
+| `POST /bulk/submit` | `rows` \| `csv` \| `fileUrl` | Auto-detect (recommended) |
 | `POST /bulk/json` | `rows` | JSON array |
 | `POST /bulk/csv` | `csv` | Inline CSV string |
 | `POST /bulk/url` | `fileUrl` | Remote CSV/JSON/JSONL |
-| `POST /bulk/scrape` | `scrape` | Browser crawl config |
 | `POST /bulk/file` | multipart | After upload-session |
 
 ## Product keys
