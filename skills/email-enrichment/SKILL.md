@@ -27,7 +27,7 @@ Auth: `X-API-Key: $LEADMAGIC_API_KEY` → `https://api.leadmagic.io`. Never echo
 | B2B Profile URL → work email | `POST /v1/people/b2b-profile-email` | 5 (free on miss) | 1,500 |
 | Email → full B2B Profile | `POST /v1/people/b2b-profile` | 10 | 1,500 |
 
-Cheapest-first waterfall: validate (0.25) → find (1) → personal (2) → profile→email (5) → email→profile (10). If you already hold a profile URL and only need profile *fields*, use `profile-search` (1) — not `b2b-profile` (10).
+Cheapest-first ladder: find (1) → personal (2) → profile→email (5) → email→profile (10). Validation (0.25) is a separate lane for emails the user brought from elsewhere. **Every email a finder returns is already validated — always a good email; never chain a finder into validation.** If you already hold a profile URL and only need profile *fields*, use `profile-search` (1) — not `b2b-profile` (10).
 
 ## Field contract (forgiving on purpose)
 
@@ -57,7 +57,7 @@ curl -sS -X POST "https://api.leadmagic.io/v1/people/b2b-profile-email" \
 
 ## Rules
 
-- Validate before every send (recipe: `outbound-recipes` skill, "List hygiene"). Send only `valid` (+ `catch_all` at your own risk).
+- Validate emails sourced OUTSIDE LeadMagic before every send (recipe: `outbound-recipes` skill, "List hygiene"). Send only `valid` (+ `catch_all` at your own risk). Finder-returned emails are already validated — skip re-validation.
 - A miss is free but final for that input — don't resubmit the identical request hoping for a different answer.
 - Lists ≥ 50 rows → bulk (`bulk-jobs` skill) with `product: "email_finder"` / `"email_validation"`; billed per successful row.
 - MCP equivalents: `find_work_email`, `validate_work_email`, `find_personal_email`, `b2b_profile_to_work_email`, `email_to_b2b_profile`.

@@ -47,7 +47,7 @@ curl -sS -X POST "https://api.leadmagic.io/v3/people/search" \
 |--------|----------|
 | Company | `company_domain`, `company_name`, `company_industry`, `company_size`/`company_sizes`, `company_country`/`company_countries`, funding |
 | Role | `contact_job_title`, `contact_job_function`, `contact_job_level`, `contact_persona`, `min_seniority` |
-| Person | name fields, B2B Profile URL/username, headline, `contact_email_domain`, `has_email` / `has_phone` |
+| Person | name fields, B2B Profile URL/username, headline, `contact_email_domain` |
 
 Company filter aliases (normalized server-side):
 

@@ -35,7 +35,7 @@ curl -sS -X POST "https://api.leadmagic.io/v3/people/search" $LM -d '{
 4. Still nothing and personal email is acceptable for your use case? `personal-email-finder` (2).
 5. Phone channel needed? `mobile-finder` (5; free on miss) — last, it's the priciest common step.
 
-Never run steps after the one that satisfied the channel you need.
+Never run steps after the one that satisfied the channel you need. And never loop a finder result back into step 1 — every email a finder returns is already validated; validation is only for emails that arrived from outside LeadMagic.
 
 ## 4 · Bulk CSV enrichment (lists ≥ 50 rows)
 
