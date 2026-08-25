@@ -6,8 +6,8 @@ compatibility: "Requires network access to api.leadmagic.io or mcp.leadmagic.io.
 metadata:
   author: LeadMagic
   version: "3.0.0"
-  homepage: https://leadmagic.io
-  docs: https://leadmagic.io/docs
+  homepage: https://leadmagic.io?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
+  docs: https://leadmagic.io/docs?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   github: https://github.com/LeadMagic/leadmagic-skills
   publisher: LeadMagic
   tags: [leadmagic, jobs, hiring-intent, signals, triggers, outbound]

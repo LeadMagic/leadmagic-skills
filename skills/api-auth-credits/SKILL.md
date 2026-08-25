@@ -6,8 +6,8 @@ compatibility: "Requires network access to api.leadmagic.io."
 metadata:
   author: LeadMagic
   version: "3.0.0"
-  homepage: https://leadmagic.io
-  docs: https://leadmagic.io/docs
+  homepage: https://leadmagic.io?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
+  docs: https://leadmagic.io/docs?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   github: https://github.com/LeadMagic/leadmagic-skills
   publisher: LeadMagic
   tags: [leadmagic, api, auth, credits, plans, rate-limits, x-api-key]
@@ -25,7 +25,7 @@ metadata:
 ## Base URL & key
 
 - **Base:** `https://api.leadmagic.io`
-- **Key:** [app.leadmagic.io](https://app.leadmagic.io) → Settings → API
+- **Key:** [app.leadmagic.io](https://app.leadmagic.io?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills) → Settings → API
 
 ```bash
 curl -sS "https://api.leadmagic.io/v1/credits" -H "X-API-Key: $LEADMAGIC_API_KEY"
