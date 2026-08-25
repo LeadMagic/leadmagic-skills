@@ -1,6 +1,6 @@
 # LeadMagic — Plans, credits & limits
 
-Public pricing: [leadmagic.io/pricing](https://leadmagic.io/pricing). Agents should read this before sizing any run so recommendations match what the customer's plan can actually do.
+Public pricing: [leadmagic.io/pricing](https://leadmagic.io/pricing?utm_source=github&utm_medium=readme&utm_campaign=leadmagic-skills). Agents should read this before sizing any run so recommendations match what the customer's plan can actually do.
 
 ## Plan ladder
 

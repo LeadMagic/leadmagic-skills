@@ -8,10 +8,10 @@ Built for [Claude Agent Skills](https://docs.claude.com/en/docs/agents-and-tools
 |---|---|
 | **Install (skills)** | `npx skills add LeadMagic/leadmagic-skills` |
 | **Install (plugin)** | `/plugin marketplace add LeadMagic/leadmagic-skills` → `/plugin install leadmagic@leadmagic` |
-| **API docs** | [leadmagic.io/docs](https://leadmagic.io/docs) |
+| **API docs** | [leadmagic.io/docs](https://leadmagic.io/docs?utm_source=github&utm_medium=readme&utm_campaign=leadmagic-skills) |
 | **API base** | `https://api.leadmagic.io` · `X-API-Key` |
 | **MCP** | `https://mcp.leadmagic.io/mcp` (OAuth) |
-| **Dashboard** | [app.leadmagic.io](https://app.leadmagic.io) |
+| **Dashboard** | [app.leadmagic.io](https://app.leadmagic.io?utm_source=github&utm_medium=readme&utm_campaign=leadmagic-skills) |
 | **License** | MIT |
 
 ---
@@ -85,7 +85,7 @@ The plugin loads the hosted MCP server automatically — complete OAuth in the b
 
 ### REST only
 
-Create a key at [app.leadmagic.io](https://app.leadmagic.io) → Settings → API, set `LEADMAGIC_API_KEY` in your environment. Never paste keys into chat or commit them.
+Create a key at [app.leadmagic.io](https://app.leadmagic.io?utm_source=github&utm_medium=readme&utm_campaign=leadmagic-skills) → Settings → API, set `LEADMAGIC_API_KEY` in your environment. Never paste keys into chat or commit them.
 
 ```bash
 curl -sS "https://api.leadmagic.io/v1/credits" -H "X-API-Key: $LEADMAGIC_API_KEY"

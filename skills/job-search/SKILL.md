@@ -6,8 +6,8 @@ compatibility: "Requires network access to api.leadmagic.io."
 metadata:
   author: LeadMagic
   version: "1.0.0"
-  homepage: https://leadmagic.io
-  docs: https://leadmagic.io/docs/api-reference/job-search
+  homepage: https://leadmagic.io?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
+  docs: https://leadmagic.io/docs/api-reference/job-search?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   github: https://github.com/LeadMagic/leadmagic-skills
   publisher: LeadMagic
   tags: [leadmagic, job-search, jobs, v3, hiring-signals, unlimited, b2b]
@@ -18,7 +18,7 @@ metadata:
 Canonical endpoint: **`POST /v3/jobs/search`** — 46M+ open postings across corporate job boards.
 Aliases (same handler): `/v3/jobs-search`, `/v3/job-search`, `/v2/jobs/search`, `/v1/jobs/search`.
 
-Docs: [Job Search](https://leadmagic.io/docs/api-reference/job-search)
+Docs: [Job Search](https://leadmagic.io/docs/api-reference/job-search?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills)
 
 ## Unlimited with the right plan
 

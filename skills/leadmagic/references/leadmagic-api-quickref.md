@@ -1,12 +1,12 @@
 # LeadMagic API — Complete endpoint reference
 
-Source of truth: [leadmagic.io/docs](https://leadmagic.io/docs). This table is generated from the live API contract.
+Source of truth: [leadmagic.io/docs](https://leadmagic.io/docs?utm_source=github&utm_medium=readme&utm_campaign=leadmagic-skills). This table is generated from the live API contract.
 
 ## Auth
 
 - Header: `X-API-Key: <key>` (never `Authorization: Bearer`)
 - Base URL: `https://api.leadmagic.io`
-- Key: [app.leadmagic.io](https://app.leadmagic.io) → Settings → API
+- Key: [app.leadmagic.io](https://app.leadmagic.io?utm_source=github&utm_medium=readme&utm_campaign=leadmagic-skills) → Settings → API
 - MCP (OAuth, no key needed): `https://mcp.leadmagic.io/mcp`
 - Errors: RFC 9457 Problem Details — `{type, title, status, detail, code, action, docs, trace}`. Read `action` first; it says how to fix the request.
 

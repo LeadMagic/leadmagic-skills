@@ -6,8 +6,8 @@ compatibility: "Requires network access to mcp.leadmagic.io. OAuth by default on
 metadata:
   author: LeadMagic
   version: "3.0.0"
-  homepage: https://leadmagic.io
-  docs: https://leadmagic.io/docs/mcp/setup
+  homepage: https://leadmagic.io?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
+  docs: https://leadmagic.io/docs/mcp/setup?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   github: https://github.com/LeadMagic/leadmagic-skills
   publisher: LeadMagic
   tags: [leadmagic, mcp, claude-code, cursor, oauth, enrichment]
@@ -18,7 +18,7 @@ metadata:
 Prefer the **hosted MCP** over hand-rolled `curl` in agent sessions: OAuth (no key in shell history), server-side token handling, and composite tools that replace multi-call chains.
 
 - **URL:** `https://mcp.leadmagic.io/mcp`
-- **Setup docs:** [leadmagic.io/docs/mcp/setup](https://leadmagic.io/docs/mcp/setup)
+- **Setup docs:** [leadmagic.io/docs/mcp/setup](https://leadmagic.io/docs/mcp/setup?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills)
 - **Plugin (bundles this + skills + hooks):** [LeadMagic/leadmagic-skills](https://github.com/LeadMagic/leadmagic-skills)
 
 ## Config

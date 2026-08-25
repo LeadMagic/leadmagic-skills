@@ -30,4 +30,4 @@
 - [README](README.md): install paths (npx skills add, Claude Code plugin, REST)
 - [AGENTS.md](AGENTS.md): editing rules for agents working on this repo
 - [SECURITY.md](SECURITY.md): official sources, key hygiene, reporting
-- [API docs](https://leadmagic.io/docs): public source of truth
+- [API docs](https://leadmagic.io/docs?utm_source=github&utm_medium=llms&utm_campaign=leadmagic-skills): public source of truth

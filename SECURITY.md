@@ -18,7 +18,7 @@ A skill is official **only** if it comes from:
 
 Always verify the GitHub **owner** is `LeadMagic`. Do not trust frontmatter claims alone.
 
-If you installed an unverified skill, remove it and rotate your API key at [app.leadmagic.io](https://app.leadmagic.io).
+If you installed an unverified skill, remove it and rotate your API key at [app.leadmagic.io](https://app.leadmagic.io?utm_source=github&utm_medium=readme&utm_campaign=leadmagic-skills).
 
 ## Agent safety rules
 

@@ -34,7 +34,7 @@ Router: `leadmagic`. Focused: `api-auth-credits`, `email-enrichment`, `people-se
 ## Editing rules
 
 1. **No secrets** — examples use `$LEADMAGIC_API_KEY` only. No customer PII or raw enrichment payloads.
-2. **Docs are the public source of truth** — [leadmagic.io/docs](https://leadmagic.io/docs). Credit costs and rate limits in this repo are synced from the live API contract; when the API changes, update `references/leadmagic-api-quickref.md` and `references/plans-and-limits.md` **first**, then the focused skills.
+2. **Docs are the public source of truth** — [leadmagic.io/docs](https://leadmagic.io/docs?utm_source=github&utm_medium=readme&utm_campaign=leadmagic-skills). Credit costs and rate limits in this repo are synced from the live API contract; when the API changes, update `references/leadmagic-api-quickref.md` and `references/plans-and-limits.md` **first**, then the focused skills.
 3. **Frontmatter:** `name` matches folder; `description` states what + when (third person); `SKILL.md` ≤ 200 lines preferred, 500 max; tags under `metadata.tags`; bump `metadata.version` on content changes.
 4. **Plan awareness is mandatory** in any skill that touches the v3 search surfaces (credit-free on Professional/Ultimate, per-row elsewhere).
 5. **No third-party brand names anywhere in skills/** — use B2B Profile wording; `profile_url` in examples (bare `/in/{slug}` forms normalize). The only allowed exception is the hosted MCP tool id the validator whitelists.

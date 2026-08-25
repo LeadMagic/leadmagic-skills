@@ -6,8 +6,8 @@ compatibility: "Requires network access to api.leadmagic.io."
 metadata:
   author: LeadMagic
   version: "3.0.0"
-  homepage: https://leadmagic.io
-  docs: https://leadmagic.io/docs/api-reference/people-search
+  homepage: https://leadmagic.io?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
+  docs: https://leadmagic.io/docs/api-reference/people-search?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   github: https://github.com/LeadMagic/leadmagic-skills
   publisher: LeadMagic
   tags: [leadmagic, people-search, v3, audience, icp, lookalike, enrichment, b2b]
@@ -17,7 +17,7 @@ metadata:
 
 Canonical discovery endpoint: **`POST /v3/people/search`**. Same body shape on the variants: `/v3/people/company-search`, `/full-search`, `/mixed-search`, `/icp-search`, `/employees`, `/by-title`, `/contacts-by-title`, `/lookalike`.
 
-Docs: [People Search](https://leadmagic.io/docs/api-reference/people-search)
+Docs: [People Search](https://leadmagic.io/docs/api-reference/people-search?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills)
 
 ## Billing & plan awareness
 

@@ -6,8 +6,8 @@ compatibility: "Requires network access to api.leadmagic.io."
 metadata:
   author: LeadMagic
   version: "1.0.0"
-  homepage: https://leadmagic.io
-  docs: https://leadmagic.io/docs/api-reference/company-search-v3
+  homepage: https://leadmagic.io?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
+  docs: https://leadmagic.io/docs/api-reference/company-search-v3?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   github: https://github.com/LeadMagic/leadmagic-skills
   publisher: LeadMagic
   tags: [leadmagic, company-search, v3, accounts, lookalike, unlimited, b2b]
@@ -20,7 +20,7 @@ Aliases (same handler, direct-lookup inferred from the body, not the path):
 `/v3/companies/company-search`, `/lookup`, `/enrich`, `/domain-lookup`,
 `/funding`, `/company-funding`, `/v1/companies/search`.
 
-Docs: [Company Search V3](https://leadmagic.io/docs/api-reference/company-search-v3)
+Docs: [Company Search V3](https://leadmagic.io/docs/api-reference/company-search-v3?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills)
 
 ## Unlimited with the right plan
 
