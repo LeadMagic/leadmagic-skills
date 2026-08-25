@@ -1,0 +1,28 @@
+{
+  "name": "leadmagic",
+  "owner": {
+    "name": "LeadMagic",
+    "email": "plugins@leadmagic.io"
+  },
+  "metadata": {
+    "description": "LeadMagic official Claude Code plugins for B2B enrichment and outbound systems.",
+    "version": "3.0.0"
+  },
+  "plugins": [
+    {
+      "name": "leadmagic",
+      "source": "./",
+      "description": "Official LeadMagic plugin — hosted MCP, skills for every API endpoint, credit-safe hooks, and outbound recipes.",
+      "version": "3.0.0",
+      "author": {
+        "name": "LeadMagic",
+        "email": "plugins@leadmagic.io"
+      },
+      "homepage": "https://leadmagic.io/docs",
+      "repository": "https://github.com/LeadMagic/leadmagic-skills",
+      "license": "MIT",
+      "keywords": ["leadmagic", "mcp", "gtm", "enrichment", "outbound", "b2b"],
+      "category": "productivity"
+    }
+  ]
+}

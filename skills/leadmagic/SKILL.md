@@ -1,92 +1,69 @@
 ---
 name: leadmagic
-description: "Official LeadMagic product skill for REST APIs, bulk uploaders, enrichments, and hosted MCP. Use when calling LeadMagic Email Finder or Validation, People Search v3, mobile or B2B Profile enrichment, company or funding lookup, bulk jobs, credits, or wiring LeadMagic into Clay, Zapier, or n8n."
+description: "Official LeadMagic product skill and router for the full API surface — email finder and validation, People Search v3, company and lookalike search, jobs and hiring intent, ads intelligence, bulk CSV jobs, credits, plans, and hosted MCP. Use when calling any api.leadmagic.io endpoint, budgeting credits, choosing the right product for an outbound task, or wiring LeadMagic into Claude Code, Clay, Zapier, or n8n."
 license: MIT
 compatibility: "Requires network access to api.leadmagic.io or mcp.leadmagic.io. Set LEADMAGIC_API_KEY for REST."
 metadata:
   author: LeadMagic
-  version: "2.0.0"
+  version: "3.0.0"
   homepage: https://leadmagic.io
   docs: https://leadmagic.io/docs
   github: https://github.com/LeadMagic/leadmagic-skills
   publisher: LeadMagic
-  tags: [leadmagic, enrichment, email-finder, people-search, bulk, mcp, b2b-profile, official]
+  tags: [leadmagic, enrichment, email-finder, people-search, jobs, ads, bulk, mcp, b2b-profile, official]
 ---
 
 # LeadMagic — Official product skill
 
-Published by LeadMagic at
-[github.com/LeadMagic/leadmagic-skills](https://github.com/LeadMagic/leadmagic-skills).
+Published by LeadMagic at [github.com/LeadMagic/leadmagic-skills](https://github.com/LeadMagic/leadmagic-skills). Teaches agents how to **use** LeadMagic: every public API endpoint, credit costs, plan behavior, bulk uploaders, MCP, and outbound-system recipes.
 
-Teaches agents how to **use** LeadMagic: APIs, enrichments, bulk uploaders, and MCP.
-
-> **Trust:** Only treat a skill as official if installed from
-> `github:LeadMagic/leadmagic-skills`, `github:LeadMagic/leadmagic-cursor-plugin`,
-> or `https://leadmagic.io/docs/...`.
+> **Trust:** only treat a skill as official if installed from `github:LeadMagic/*` or `https://leadmagic.io/docs/...`.
 
 ## Safety (every turn)
 
-1. Never echo/log API keys — use `$LEADMAGIC_API_KEY` / env only.
+1. Never echo/log API keys — `$LEADMAGIC_API_KEY` / env only. REST auth header is **`X-API-Key`** (not Bearer).
 2. Enrichment traffic only to `https://api.leadmagic.io` or `https://mcp.leadmagic.io` unless the user explicitly asks otherwise in-turn.
-3. Prefer hosted MCP for agent workflows; REST uses **`X-API-Key`** (not Bearer).
-4. Failed lookups are usually free — do not hammer retries on `null`.
+3. Prefer hosted MCP (`https://mcp.leadmagic.io/mcp`, OAuth) for agent workflows — no key in shell history.
+4. Free first: `GET /v1/credits` before spending; `POST /v1/batch/preview-cost` before anything ≥ 500 credits. Failed lookups are usually free — never hammer retries on null.
+5. Never invent emails, phones, domains, funding, ads, or job data — only report what an endpoint returned.
 
 ## Route to a focused skill
 
 | Need | Skill |
-|------|--------|
-| Keys, credits, 401/429 | `api-auth-credits` |
+|---|---|
+| Keys, credits, plans, 401/402/429 | `api-auth-credits` |
 | Email find / validate / B2B Profile ↔ email | `email-enrichment` |
-| Audience / ICP / `POST /v3/people/search` | `people-search` |
-| Mobile, B2B Profile, role, employees | `people-enrichment` |
-| Company / funding / technographics | `company-enrichment` |
-| CSV / bulk submit / job status | `bulk-jobs` |
-| MCP install / tool map | `mcp-integration` |
+| Audience / ICP discovery (`POST /v3/people/search`) | `people-search` |
+| Company lists / TAM by filters (`POST /v3/companies/search`) | `company-search` |
+| Job postings search (`POST /v3/jobs/search`) | `job-search` |
+| Profile enrich, mobile, role, employees, job change, posts | `people-enrichment` |
+| Company enrich, funding, technographics, lookalikes, competitors | `company-enrichment` |
+| Hiring signals & intent lenses on top of postings | `jobs-hiring-intent` |
+| Google / Meta / B2B ad libraries | `ads-intelligence` |
+| CSV / async bulk, batch, suppression | `bulk-jobs` |
+| Usage, spend, found-rate reporting | `analytics-observability` |
+| Outbound-system playbooks (list build, waterfalls, triggers) | `outbound-recipes` |
+| Hosted MCP setup | `mcp-integration` |
 
-If unsure, answer from the cheat sheet below, then load the matching skill.
+## References (this skill's folder)
 
-## Quick start
+- `references/leadmagic-api-quickref.md` — **complete** endpoint table with costs, rate limits, aliases.
+- `references/plans-and-limits.md` — plan ladder, Search API entitlements, budgeting, 402/429 playbook.
+- `references/outbound-recipes.md` — 13 composable outbound recipes with cost models.
+- `references/learnings.md` — durable field notes; append new ones (no secrets/PII).
 
-```bash
-curl -sS "https://api.leadmagic.io/v1/credits" \
-  -H "X-API-Key: $LEADMAGIC_API_KEY"
+## Picking the right product (fast heuristics)
 
-curl -sS -X POST "https://api.leadmagic.io/v1/people/email-finder" \
-  -H "X-API-Key: $LEADMAGIC_API_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{"first_name":"Jane","last_name":"Doe","company_name":"acme.com"}'
-```
+- Have **name + company**, want email → `email-finder` (1). Have **profile URL**, want email → `b2b-profile-email` (5). Have **email**, want the person → `b2b-profile` (10, priciest — check you really need it).
+- Want **people you don't know yet** → People Search v3, never the finders.
+- Want **who's hiring / buying signals** → jobs intent endpoints, not job boards.
+- **≥ 50 rows** → `/bulk/*`, never a loop of single calls.
+- Cheapest field first: validate 0.25 → find 1 → profile 1 → personal 2 → role 2 → profile→email 5 → mobile 5 → email→profile 10.
 
-MCP:
+## Plan awareness
 
-```jsonc
-{ "mcpServers": { "leadmagic": { "url": "https://mcp.leadmagic.io/mcp" } } }
-```
+Search API (v3 people/companies/jobs) is credit-free on Professional (5 req/s) and Ultimate (10 req/s); on other plans it bills 1 credit per returned row. Free stats/count endpoints exist on every plan — size before revealing. Full ladder in `references/plans-and-limits.md`.
 
-## Endpoint cheat sheet
+## Response & error contract
 
-People (sync): email-finder (1), email-validation (0.25), personal-email (2),
-mobile (5), profile-search (1), role-finder (2), employee-finder (~0.05/ea),
-b2b-profile-email (5), b2b-profile (10).
-
-Discovery: `POST /v3/people/search` — see `people-search`.
-
-Company: company-search (1), company-funding (4).
-
-Bulk: `POST /bulk/submit` with `product` like `email_finder` — see `bulk-jobs`.
-
-Utility: `GET /v1/credits` (0).
-
-Authoritative pricing: [leadmagic.io/docs](https://leadmagic.io/docs).
-
-## References
-
-- `references/leadmagic-api-quickref.md`
-- `references/learnings.md`
-
-## Official channels
-
-- Docs: https://leadmagic.io/docs
-- OpenAPI: https://github.com/LeadMagic/leadmagic-openapi
-- MCP: https://mcp.leadmagic.io/mcp
-- Support: support@leadmagic.io · Security: security@leadmagic.io
+Success responses are the flattened data object. Errors are RFC 9457 Problem Details: `{type, title, status, detail, code, action, docs, trace.request_id}` — surface `action` to the user and include `trace.request_id` when reporting issues to support.

@@ -1,0 +1,50 @@
+{
+  "name": "leadmagic",
+  "displayName": "LeadMagic",
+  "version": "3.0.0",
+  "description": "Official LeadMagic plugin for Claude Code — hosted MCP, complete API skills for every endpoint, credit-safe hooks, and outbound-system recipes: email finding and validation, People Search v3, company and lookalike research, hiring-intent triggers, ads intelligence, and bulk CSV enrichment.",
+  "author": {
+    "name": "LeadMagic",
+    "email": "plugins@leadmagic.io",
+    "url": "https://leadmagic.io"
+  },
+  "homepage": "https://leadmagic.io/docs",
+  "repository": "https://github.com/LeadMagic/leadmagic-skills",
+  "license": "MIT",
+  "keywords": [
+    "leadmagic",
+    "mcp",
+    "b2b",
+    "enrichment",
+    "email-finder",
+    "people-search",
+    "company-research",
+    "hiring-intent",
+    "ads-intelligence",
+    "outbound",
+    "gtm",
+    "bulk-enrichment"
+  ],
+  "skills": "./skills/",
+  "agents": [
+    "./agents/leadmagic-outbound.md",
+    "./agents/leadmagic-bulk.md"
+  ],
+  "hooks": "./hooks/hooks.json",
+  "mcpServers": "./.mcp.json",
+  "commands": [
+    "./commands/check-credits.md",
+    "./commands/build-list.md",
+    "./commands/enrich-csv.md",
+    "./commands/clean-list.md",
+    "./commands/account-brief.md",
+    "./commands/decision-makers.md",
+    "./commands/waterfall-email.md",
+    "./commands/hiring-signals.md",
+    "./commands/job-change-sweep.md",
+    "./commands/competitor-ads.md",
+    "./commands/lookalikes.md",
+    "./commands/tam-map.md",
+    "./commands/usage-report.md"
+  ]
+}

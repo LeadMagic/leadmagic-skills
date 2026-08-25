@@ -1,0 +1,33 @@
+# LeadMagic Skills & Plugin
+
+> Official agent skills and Claude Code plugin for the LeadMagic B2B enrichment API — every public endpoint, credit costs, plan-aware guidance, bulk CSV jobs, hosted MCP, and outbound-system recipes. REST base: https://api.leadmagic.io (header `X-API-Key`). Hosted MCP: https://mcp.leadmagic.io/mcp (OAuth).
+
+## Start here
+
+- [Router skill](skills/leadmagic/SKILL.md): safety rules, product-picking heuristics, skill map
+- [Complete endpoint reference](skills/leadmagic/references/leadmagic-api-quickref.md): every endpoint with credit cost, rate limit, and aliases
+- [Plans & limits](skills/leadmagic/references/plans-and-limits.md): plan ladder, Search API entitlements, budgeting, 402/429 playbook
+- [Outbound recipes](skills/leadmagic/references/outbound-recipes.md): 13 composable recipes with cost models
+
+## Skills
+
+- [api-auth-credits](skills/api-auth-credits/SKILL.md): keys, credits, plans, error codes
+- [email-enrichment](skills/email-enrichment/SKILL.md): find/validate email, B2B Profile ↔ email
+- [people-search](skills/people-search/SKILL.md): POST /v3/people/search + variants
+- [people-enrichment](skills/people-enrichment/SKILL.md): profile, mobile, role, employees, job change
+- [company-enrichment](skills/company-enrichment/SKILL.md): company, funding, technographics, competitors
+- [company-search](skills/company-search/SKILL.md): POST /v3/companies/search (account lists / TAM)
+- [job-search](skills/job-search/SKILL.md): POST /v3/jobs/search (postings; vector/facets/deep)
+- [jobs-hiring-intent](skills/jobs-hiring-intent/SKILL.md): hiring signals, intent lenses, bulk sweeps
+- [ads-intelligence](skills/ads-intelligence/SKILL.md): Google/Meta/B2B ads research
+- [bulk-jobs](skills/bulk-jobs/SKILL.md): /bulk/* CSV and list enrichment
+- [analytics-observability](skills/analytics-observability/SKILL.md): free usage and spend reporting
+- [outbound-recipes](skills/outbound-recipes/SKILL.md): recipe index and operating rules
+- [mcp-integration](skills/mcp-integration/SKILL.md): hosted MCP setup and tool→REST map
+
+## Optional
+
+- [README](README.md): install paths (npx skills add, Claude Code plugin, REST)
+- [AGENTS.md](AGENTS.md): editing rules for agents working on this repo
+- [SECURITY.md](SECURITY.md): official sources, key hygiene, reporting
+- [API docs](https://leadmagic.io/docs): public source of truth
