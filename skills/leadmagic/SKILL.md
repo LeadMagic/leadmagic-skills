@@ -38,8 +38,10 @@ Teaches agents how to **use** LeadMagic: APIs, enrichments, bulk uploaders, and 
 | Keys, credits, 401/429 | `api-auth-credits` |
 | Email find / validate / B2B Profile ↔ email | `email-enrichment` |
 | Audience / ICP / `POST /v3/people/search` | `people-search` |
+| Account lists / lookalikes / `POST /v3/companies/search` | `company-search` |
+| Job postings / hiring signals / `POST /v3/jobs/search` | `job-search` |
 | Mobile, B2B Profile, role, employees | `people-enrichment` |
-| Company / funding / technographics | `company-enrichment` |
+| Company V1 enrichment / funding / technographics | `company-enrichment` |
 | CSV / bulk submit / job status | `bulk-jobs` |
 | MCP install / tool map | `mcp-integration` |
 
@@ -63,15 +65,29 @@ MCP:
 { "mcpServers": { "leadmagic": { "url": "https://mcp.leadmagic.io/mcp" } } }
 ```
 
+## Unlimited search (Professional & Ultimate plans)
+
+Three V3 search endpoints are **credit-free and volume-unlimited** on Professional
+(5 req/s) and Ultimate (10 req/s) plans — rate-limited only:
+
+- `POST /v3/people/search` — 400M+ people (browse; contact-detail unlocks stay metered)
+- `POST /v3/companies/search` — 25M+ companies
+- `POST /v3/jobs/search` — 46M+ job postings (vector, facets, and deep modes)
+
+On an entitled plan, never ration these — go broad, page with cursors. See
+`people-search`, `company-search`, `job-search` for pagination and filters.
+
 ## Endpoint cheat sheet
 
 People (sync): email-finder (1), email-validation (0.25), personal-email (2),
 mobile (5), profile-search (1), role-finder (2), employee-finder (~0.05/ea),
 b2b-profile-email (5), b2b-profile (10).
 
-Discovery: `POST /v3/people/search` — see `people-search`.
+Discovery: `POST /v3/people/search` — see `people-search`. Accounts:
+`POST /v3/companies/search` — see `company-search`. Jobs: `POST /v3/jobs/search`
+— see `job-search`.
 
-Company: company-search (1), company-funding (4).
+Company (V1): company-search (1), company-funding (4).
 
 Bulk: `POST /bulk/submit` with `product` like `email_finder` — see `bulk-jobs`.
 

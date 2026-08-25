@@ -15,9 +15,25 @@ metadata:
 
 # LeadMagic — People search (V3)
 
-Canonical discovery endpoint: **`POST /v3/people/search`**.
+Canonical discovery endpoint: **`POST /v3/people/search`** — 400M+ people profiles.
+Aliases (same handler and schema): `/v3/person/search`, `/v3/people/company-search`,
+`/full-search`, `/mixed-search`, `/icp-search`, `/employees`, `/by-title`,
+`/contacts-by-title`, `/lookalike`, plus legacy `/v1` and `/v2` prefixes.
 
 Docs: [People Search](https://leadmagic.io/docs/api-reference/people-search)
+
+## Unlimited with the right plan
+
+**Professional and Ultimate plans browse this endpoint free** — no credits, no volume
+cap. The only limit is rate: **5 req/s sustained (Professional), 10 req/s (Ultimate)**.
+Other plans pay ~1 credit per returned person. Never ration or narrow a query to save
+credits on an entitled plan — go broad, page the whole segment.
+
+The free lane is **browse only**: base people records with `has_email` / `has_phone`
+availability flags. Requesting raw contact details (`include_contact_details: true` /
+`full_search: true`) is always credit-metered (+1/email, +5/mobile) — and returns 403
+on RPS-only plans without credit metering. Size the audience free first; unlock
+contact details last, on the final list only.
 
 ## Auth
 
@@ -50,7 +66,7 @@ Company filter aliases (normalized server-side):
 |--------------|-----------|
 | `company_size` / `company_sizes` / `employee_count` | `employee_ranges` (+ `min_employees` / `max_employees`) |
 | `employee_min` / `employee_max` | `min_employees` / `max_employees` |
-| `company_industry` | `company_industry_linkedin` |
+| `company_industry` | canonical industry field (see docs) |
 | `company_country` / `company_countries` | `hq_country_code` (ISO) |
 
 Title matching: `"VP Sales"` is substring/FTS. Wrap in brackets for exact title equality — `"[VP of Sales]"` / `"[CEO]"` (Blitz-compatible). Mixed arrays are allowed.
@@ -58,6 +74,15 @@ Title matching: `"VP Sales"` is substring/FTS. Wrap in brackets for exact title 
 For list totals like Blitz `total_results`, pass `include_total: true` (capped COUNT on supported paths).
 
 Exact field names and enums: see the docs page above (source of truth).
+
+## Cursor pagination
+
+- First page: filters + `limit` (**≤50 on cursor pages**). No `cursor`; `offset` 0 or omitted.
+- Response carries `next_cursor` (opaque, ≤4096 chars) and `has_more`.
+- Next page: **same filters** + `"cursor": "<next_cursor>"`. Changing filters mid-cursor invalidates it.
+- Never combine `cursor` with a nonzero `offset` — the API rejects it, and `next_cursor`
+  is only minted on the offset-0 form. If you were paging by offset, restart at offset 0.
+- Stop when `next_cursor` is null / `has_more` is false.
 
 ## Job function (`contact_job_function`)
 
