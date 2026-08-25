@@ -1,4 +1,4 @@
-name: Validate Skills
+name: Validate
 
 on:
   push:
@@ -12,18 +12,24 @@ permissions:
 
 jobs:
   validate:
-    name: Claude Agent Skills checks
+    name: Skills & plugin checks
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install ripgrep
-        run: sudo apt-get update -qq && sudo apt-get install -y -qq ripgrep
+      - name: Install tooling
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ripgrep shellcheck
 
-      - name: Run scripts/validate.sh
+      - name: Shellcheck scripts
+        run: shellcheck -S warning scripts/*.sh install.sh
+
+      - name: Validate skills, manifests, commands, agents
         run: |
-          chmod +x scripts/validate.sh scripts/build.sh
+          chmod +x scripts/validate.sh scripts/build.sh scripts/credit-guard-bulk.sh
           ./scripts/validate.sh
+
+      - name: Validate Claude Code plugin manifest
+        run: npx -y @anthropic-ai/claude-code@latest plugin validate .
 
       - name: Package skills (smoke)
         run: ./scripts/build.sh

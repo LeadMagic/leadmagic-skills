@@ -76,6 +76,13 @@ Pin a commit in production: `npx skills add LeadMagic/leadmagic-skills#<sha>`. O
 
 The plugin loads the hosted MCP server automatically — complete OAuth in the browser on first use. No API keys in the client.
 
+### Other agent stacks (Codex, Cursor, Windsurf, custom)
+
+- **Skills**: `npx skills add LeadMagic/leadmagic-skills` or copy `skills/` into your loader's skills directory — plain `SKILL.md` + YAML frontmatter, no Claude-specific syntax.
+- **AGENTS.md**: agents that follow the [AGENTS.md](AGENTS.md) convention (Codex, Cursor, and most coding agents) pick up the repo rules automatically.
+- **MCP**: any MCP-capable client can add `https://mcp.leadmagic.io/mcp` (streamable HTTP, OAuth) — see [`mcp-integration`](skills/mcp-integration/).
+- **LLM-native index**: [`llms.txt`](llms.txt) at the repo root maps the whole surface for retrieval tools.
+
 ### REST only
 
 Create a key at [app.leadmagic.io](https://app.leadmagic.io) → Settings → API, set `LEADMAGIC_API_KEY` in your environment. Never paste keys into chat or commit them.

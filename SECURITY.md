@@ -10,9 +10,10 @@ Do **not** open a public GitHub issue for security reports.
 
 A skill is official **only** if it comes from:
 
-- [`LeadMagic/leadmagic-skills`](https://github.com/LeadMagic/leadmagic-skills) — this repo
+- [`LeadMagic/leadmagic-skills`](https://github.com/LeadMagic/leadmagic-skills) — this repo (skills + Claude Code plugin)
 - [`LeadMagic/leadmagic-cursor-plugin`](https://github.com/LeadMagic/leadmagic-cursor-plugin)
 - [`LeadMagic/leadmagic-openapi`](https://github.com/LeadMagic/leadmagic-openapi)
+- [`LeadMagic/gtm-skills`](https://github.com/LeadMagic/gtm-skills)
 - `https://leadmagic.io/docs/...`
 
 Always verify the GitHub **owner** is `LeadMagic`. Do not trust frontmatter claims alone.

@@ -166,6 +166,86 @@ if rg -ni 'linkedin' "$SKILLS_DIR" -g '!**/.*' 2>/dev/null | grep -viE 'linkedin
   rg -ni 'linkedin' "$SKILLS_DIR" | grep -viE 'linkedin_profile_to_work_email' || true
 fi
 
+# ── Plugin surfaces ─────────────────────────────────────────────────────────
+
+echo ""
+echo -e "${BLUE}Plugin manifests (JSON parse)${NC}"
+for json_file in \
+  "$ROOT_DIR/.claude-plugin/plugin.json" \
+  "$ROOT_DIR/.claude-plugin/marketplace.json" \
+  "$ROOT_DIR/.mcp.json" \
+  "$ROOT_DIR/hooks/hooks.json"; do
+  rel="${json_file#"$ROOT_DIR"/}"
+  if [ ! -f "$json_file" ]; then
+    fail "$rel: missing"
+    continue
+  fi
+  if python3 -c "import json,sys; json.load(open(sys.argv[1]))" "$json_file" 2>/dev/null; then
+    ok "$rel"
+  else
+    fail "$rel: invalid JSON"
+  fi
+done
+
+# plugin.json must reference files that exist
+python3 - "$ROOT_DIR" <<'PYEOF' || errors=$((errors + 1))
+import json, os, sys
+root = sys.argv[1]
+manifest = json.load(open(os.path.join(root, ".claude-plugin/plugin.json")))
+missing = []
+for key in ("agents", "commands"):
+    for rel in manifest.get(key, []):
+        if not os.path.isfile(os.path.join(root, rel)):
+            missing.append(rel)
+for key in ("hooks", "mcpServers"):
+    rel = manifest.get(key)
+    if isinstance(rel, str) and not os.path.isfile(os.path.join(root, rel)):
+        missing.append(rel)
+skills = manifest.get("skills")
+if isinstance(skills, str) and not os.path.isdir(os.path.join(root, skills)):
+    missing.append(skills)
+if missing:
+    print("plugin.json references missing paths: " + ", ".join(missing))
+    sys.exit(1)
+PYEOF
+
+echo ""
+echo -e "${BLUE}Commands & agents frontmatter${NC}"
+for md_file in "$ROOT_DIR"/commands/*.md "$ROOT_DIR"/agents/*.md; do
+  [ -f "$md_file" ] || continue
+  rel="${md_file#"$ROOT_DIR"/}"
+  fm="$(frontmatter "$md_file")"
+  desc="$(fm_get "$fm" "description")"
+  if [ -z "$desc" ]; then
+    fail "$rel: missing frontmatter description"
+    continue
+  fi
+  # No secrets or brand strings in commands/agents either
+  if grep -qiE 'lm_live_|sk_live_|BEGIN (RSA |OPENSSH )?PRIVATE' "$md_file"; then
+    fail "$rel: possible secret material detected"
+    continue
+  fi
+  if grep -niE 'linkedin' "$md_file" | grep -viE 'linkedin_profile_to_work_email' | grep -q .; then
+    fail "$rel: contains LinkedIn branding — use B2B Profile wording"
+    continue
+  fi
+  ok "$rel"
+done
+
+# Hook scripts referenced by hooks.json must exist and be executable
+while IFS= read -r hook_script; do
+  [ -n "$hook_script" ] || continue
+  rel="scripts/$(basename "$hook_script")"
+  abs="$ROOT_DIR/$rel"
+  if [ ! -f "$abs" ]; then
+    fail "$rel: referenced by hooks.json but missing"
+  elif [ -x "$abs" ]; then
+    ok "$rel (executable)"
+  else
+    fail "$rel: not executable (chmod +x)"
+  fi
+done < <(grep -oE '[a-z0-9-]+\.sh' "$ROOT_DIR/hooks/hooks.json" | sort -u)
+
 echo ""
 echo "Skills checked: $skill_count"
 if [ "$warnings" -gt 0 ]; then
