@@ -1,31 +1,29 @@
 ---
 name: bulk-jobs
-description: "LeadMagic bulk enrichment jobs and CSV uploaders. Use when submitting POST /bulk/submit, uploading CSV or JSON rows, polling job status, configuring callbacks, or budgeting per-row credits for email, mobile, profile, or company products."
+description: "LeadMagic bulk enrichment jobs, CSV uploaders, and synchronous mini-batches. Use when enriching any list of 50+ rows, submitting POST /bulk/submit, uploading a CSV, polling job status, pausing or resuming a job, pulling error rows, configuring callbacks, or budgeting per-row credits for any product."
 license: MIT
 compatibility: "Requires network access to api.leadmagic.io."
 metadata:
   author: LeadMagic
-  version: "1.0.0"
+  version: "3.0.0"
   homepage: https://leadmagic.io
   docs: https://leadmagic.io/docs/api-reference/bulk-jobs-submit
   github: https://github.com/LeadMagic/leadmagic-skills
   publisher: LeadMagic
-  tags: [leadmagic, bulk, csv, uploader, enrichment, jobs]
+  tags: [leadmagic, bulk, csv, uploader, batch, jobs]
 ---
 
 # LeadMagic — Bulk jobs & uploaders
 
-Async enrichment for lists. Bill **per successful row** at the same rate as the matching single-request product. Failed rows are free.
-
-Docs: [Submit bulk job](https://leadmagic.io/docs/api-reference/bulk-jobs-submit)
+Async enrichment for lists. Bills **per successful row** at the same rate as the matching single-request product; failed rows are free. **Any list ≥ 50 rows belongs here — never a loop of single calls.**
 
 ## Workflow
 
-1. Preflight: `GET /v1/credits`
-2. Optional validate: docs bulk validate endpoint for field mapping
-3. Submit: `POST /bulk/submit` (or typed `/bulk/json`, `/bulk/csv`, `/bulk/url`, `/bulk/file`)
-4. Poll: `GET /bulk/jobs/{jobId}` (and list jobs as needed)
-5. Pull results / honor `callback` webhooks
+1. Preflight: `GET /v1/credits` + `POST /v1/batch/preview-cost` (both free).
+2. Validate mapping (free): `POST /bulk/validate`.
+3. Submit: `POST /bulk/submit`.
+4. Poll `GET /bulk/jobs/{jobId}` **≥45s apart**, or set a `callback` webhook, or stream `GET /bulk/jobs/{jobId}/stream`.
+5. Fetch: `GET /bulk/jobs/{jobId}/download` (file) or `/results` / `/rows` (paged). Failed rows: `/errors` (free) — fix and resubmit only the misses.
 
 ## Submit shapes
 
@@ -35,33 +33,29 @@ Docs: [Submit bulk job](https://leadmagic.io/docs/api-reference/bulk-jobs-submit
 | `POST /bulk/json` | `rows` | JSON array |
 | `POST /bulk/csv` | `csv` | Inline CSV string |
 | `POST /bulk/url` | `fileUrl` | Remote CSV/JSON/JSONL |
-| `POST /bulk/file` | multipart | After upload-session |
-
-## Product keys
-
-`product` uses underscores, e.g.:
-
-- `email_finder`, `email_validation`
-- `mobile_finder`, `profile_search`
-- `company_search`
+| `POST /bulk/file` | multipart | After `POST /bulk/upload-session` |
 
 ```bash
 curl -sS -X POST "https://api.leadmagic.io/bulk/submit" \
-  -H "X-API-Key: $LEADMAGIC_API_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "product": "email_finder",
-    "rows": [
-      {"first_name":"Jane","last_name":"Doe","company_name":"acme.com"}
-    ]
-  }'
+  -H "X-API-Key: $LEADMAGIC_API_KEY" -H "Content-Type: application/json" \
+  -d '{"product":"email_finder","rows":[{"first_name":"Jane","last_name":"Doe","domain":"acme.com"}]}'
 ```
 
-Use `inputMapping` when CSV columns do not match expected field names.
+## Product keys
 
-## Agent rules
+`email_finder` · `email_validation` · `personal_email_finder` · `mobile_finder` · `b2b_profile_to_email` · `email_to_b2b_profile` · `profile_search` · `role_finder` · `company_finder` · `company_funding` · `job_change_detector` — same per-row cost and input columns as the single-request product (column aliases normalize the same way).
 
-- Never put live API keys or customer CSV contents into skill files.
-- Prefer chunking very large runs; check plan row limits in the docs.
-- Do not busy-poll every second — use reasonable intervals or callbacks.
-- Sync single-row debugging → use the matching people/company skill instead of bulk.
+## Lifecycle & ops
+
+- `GET /bulk/jobs?status=&product=&limit=&offset=` — list jobs.
+- `POST /bulk/jobs/{jobId}/pause` · `/resume` · `/cancel` · `/restart`.
+- Diagnostics: `GET /bulk/jobs/{jobId}/events`, `/logs`, `/metrics`.
+- **Out of credits mid-job:** the job pauses rather than failing — top up, then `/resume`. Report rows done vs remaining.
+
+## Rules
+
+- Always preview cost and state projected spend before submitting; get user confirmation for large jobs.
+- Poll ≥45s; prefer `callback` for jobs over a few thousand rows.
+- Match rate matters: since misses are free, a conservative budget = rows × cost × expected match rate; a hard ceiling = rows × cost.
+- Synchronous mini-batch for small arrays (no job overhead): `POST /v1/{product}/batch` or `POST /v1/batch` (mixed products). Suppression lists: `/v1/batch/suppression-lists`.
+- MCP: `submit_bulk_job`, `submit_detected_bulk_job`, `process_attached_csv` (chat CSV uploads), `get_bulk_job_status`, `get_bulk_job_rows`, `get_bulk_job_errors`, `list_bulk_jobs`.
