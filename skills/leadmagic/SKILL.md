@@ -1,11 +1,11 @@
 ---
 name: leadmagic
-description: "Official LeadMagic product skill and router for the full API surface — email finder and validation, People Search v3, company and lookalike search, jobs and hiring intent, ads intelligence, bulk CSV jobs, credits, plans, and hosted MCP. Use when calling any api.leadmagic.io endpoint, budgeting credits, choosing the right product for an outbound task, or wiring LeadMagic into Claude Code, Clay, Zapier, or n8n."
+description: "Official LeadMagic product skill and router for the full API surface — email finder and validation, People Search v3, company and lookalike search, jobs and hiring intent, ads intelligence, bulk CSV jobs, credits, plans, and hosted MCP. Use when calling any api.leadmagic.io endpoint, budgeting credits, choosing the right product for an outbound task, or wiring LeadMagic into Claude Code, integration platforms, or no-code automation tools."
 license: MIT
 compatibility: "Requires network access to api.leadmagic.io or mcp.leadmagic.io. Set LEADMAGIC_API_KEY for REST."
 metadata:
   author: LeadMagic
-  version: "3.0.0"
+  version: "3.0.1"
   homepage: https://leadmagic.io?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   docs: https://leadmagic.io/docs?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   github: https://github.com/LeadMagic/leadmagic-skills

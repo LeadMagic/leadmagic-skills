@@ -60,6 +60,11 @@ has_metadata_key() {
   printf '%s\n' "$fm" | grep -Eq "^[[:space:]]+${key}:"
 }
 
+# Third-party brand names banned anywhere under skills/ (AGENTS.md rule 5).
+# Case-insensitive, word-boundary. LinkedIn is handled separately below because
+# the hosted MCP tool id is the one whitelisted exception.
+BRAND_PATTERN='\b(clay|apollo|zoominfo|hunter\.io|lusha|rocketreach|clearbit|zapier|n8n|make\.com|instantly|smartlead|lemlist|salesforce|salesloft)\b'
+
 for skill_dir in "$SKILLS_DIR"/*/; do
   [ -d "$skill_dir" ] || continue
   skill_name=$(basename "$skill_dir")
@@ -151,6 +156,13 @@ for skill_dir in "$SKILLS_DIR"/*/; do
     continue
   fi
 
+  # No other third-party brand names (AGENTS.md rule 5)
+  if grep -niE "$BRAND_PATTERN" "$skill_file" | grep -q .; then
+    fail "$skill_name: contains third-party brand name — use generic wording (AGENTS.md rule 5)"
+    grep -niE "$BRAND_PATTERN" "$skill_file" || true
+    continue
+  fi
+
   # No secrets patterns
   if grep -qiE 'lm_live_|sk_live_|BEGIN (RSA |OPENSSH )?PRIVATE' "$skill_file"; then
     fail "$skill_name: possible secret material detected"
@@ -164,6 +176,12 @@ done
 if rg -ni 'linkedin' "$SKILLS_DIR" -g '!**/.*' 2>/dev/null | grep -viE 'linkedin_profile_to_work_email' | grep -q .; then
   fail "skills/ still contains LinkedIn branding — use B2B Profile wording"
   rg -ni 'linkedin' "$SKILLS_DIR" | grep -viE 'linkedin_profile_to_work_email' || true
+fi
+
+# Repo-wide third-party brand scan (AGENTS.md rule 5)
+if rg -ni "$BRAND_PATTERN" "$SKILLS_DIR" -g '!**/.*' 2>/dev/null | grep -q .; then
+  fail "skills/ still contains third-party brand names — use generic wording (AGENTS.md rule 5)"
+  rg -ni "$BRAND_PATTERN" "$SKILLS_DIR" -g '!**/.*' || true
 fi
 
 # ── Plugin surfaces ─────────────────────────────────────────────────────────
@@ -227,6 +245,11 @@ for md_file in "$ROOT_DIR"/commands/*.md "$ROOT_DIR"/agents/*.md; do
   fi
   if grep -niE 'linkedin' "$md_file" | grep -viE 'linkedin_profile_to_work_email' | grep -q .; then
     fail "$rel: contains LinkedIn branding — use B2B Profile wording"
+    continue
+  fi
+  if grep -qiE "$BRAND_PATTERN" "$md_file"; then
+    fail "$rel: contains third-party brand name — use generic wording (AGENTS.md rule 5)"
+    grep -niE "$BRAND_PATTERN" "$md_file" || true
     continue
   fi
   ok "$rel"
