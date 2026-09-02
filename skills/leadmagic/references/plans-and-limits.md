@@ -73,4 +73,4 @@ Limits are plan-adjustable — the response headers and 429 `Retry-After` are au
 ## 402 / 429 playbook
 
 - **402** `credits_exhausted`: stop the run, report rows completed vs remaining, show balance from `/v1/credits`, and resume after top-up (bulk jobs can `pause`/`resume`).
-- **429**: honor `Retry-After` exactly, then exponential backoff with jitter. Never tight-loop — on shared workflows (Clay, n8n, Zapier) set the tool's native rate to below the product ceiling.
+- **429**: honor `Retry-After` exactly, then exponential backoff with jitter. Never tight-loop — on shared workflows (integration platforms and no-code automation tools) set the tool's native rate to below the product ceiling.

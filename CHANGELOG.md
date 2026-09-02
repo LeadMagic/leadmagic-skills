@@ -2,6 +2,12 @@
 
 All notable changes to this repository. Format follows [Keep a Changelog](https://keepachangelog.com/); versions track the `leadmagic` router skill / plugin version.
 
+## [3.0.1] — 2026-09-02
+
+### Changed
+- Removed third-party brand names from `skills/leadmagic/SKILL.md` (frontmatter description) and `references/plans-and-limits.md` (429 playbook) in favor of generic "integration platforms / no-code automation tools" wording (AGENTS.md rule 5).
+- `validate.sh` now fails on a case-insensitive, word-boundary list of third-party brand names anywhere under `skills/` (and in `commands/`/`agents/`), alongside the existing LinkedIn check.
+
 ## [3.0.0] — 2026-08-25
 
 ### Added
