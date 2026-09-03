@@ -71,7 +71,7 @@ Fast path: `role-finder` (2) per target title. Wide path: `POST /v3/people/emplo
 
 **Goal:** catch past champions landing in new buying seats. **Cost:** 3/contact checked.
 
-Monthly over your CRM's champions list: `POST /v1/people/job-change-detector` `{profile_url, expected company}` → on change: `profile-search` (1) confirms new role → `email-finder` (1) at new domain → "congrats" sequence. Highest-converting trigger in outbound; budget = 3 × list size per sweep.
+Monthly over your CRM's champions list: `POST /v1/people/job-change-detector` `{profile_url, expected company}` → on `job_change_detected: true` (`status: JOB_CHANGE_DETECTED`): `profile-search` (1) confirms new role → `email-finder` (1) at new domain → "congrats" sequence. `AMBIGUOUS_CURRENT_EMPLOYMENT` / `CURRENT_EMPLOYMENT_UNKNOWN` are inconclusive (recheck next sweep); `PROFILE_NOT_FOUND` bills 0. Highest-converting trigger in outbound; budget = 3 × list size per sweep (not-found rows are free).
 
 ## 9 · Competitor ads monitor
 

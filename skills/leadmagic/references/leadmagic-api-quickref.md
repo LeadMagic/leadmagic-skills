@@ -38,9 +38,20 @@ Source of truth: [leadmagic.io/docs](https://leadmagic.io/docs?utm_source=github
 | `POST /v1/people/mobile-finder` | 5 | 25,000 | Free when not found. Any of `profile_url`, `work_email`, `personal_email` |
 | `POST /v1/people/role-finder` | 2 | 300 | `job_title` (required) + one of `company_domain`/`company_name`/B2B profile URL |
 | `POST /v1/people/employee-finder` | 1 | 300 | List employees at a company. Also `/v1/companies/employees` |
-| `POST /v1/people/job-change-detector` | 3 | 1,500 | Did this person change jobs? Aliases: `/job-change`, `/detect-job-change` |
+| `POST /v1/people/job-change-detector` | 3 | 1,500 | Did this person change jobs? Free (0) when `status` is `PROFILE_NOT_FOUND`. Aliases: `/job-change`, `/detect-job-change` |
 | `POST /v1/people/posts-search` | 1 | 300 | A person's recent public posts |
 | `POST /v1/people/comments-search` | 1 | 1,000 | Public comment activity |
+
+**Job-change `status` values** (`job_change_detected` is `true` only for `JOB_CHANGE_DETECTED`; the submitted `company_name` is authoritative, `company_domain` only adds matcher aliases):
+
+| `status` | Meaning | Credits |
+|---|---|---|
+| `NO_CHANGE` | Expected employer is a current role | 3 |
+| `JOB_CHANGE_DETECTED` | A different primary employer is current, or the matched role has an explicit end date with nothing current, or the expected employer is absent from history while another primary employer is current | 3 |
+| `NEVER_WORKED_THERE` | Expected employer absent from history and no primary current role listed | 3 |
+| `AMBIGUOUS_CURRENT_EMPLOYMENT` | Multiple substantive current roles; not safe to call — recheck later | 3 |
+| `CURRENT_EMPLOYMENT_UNKNOWN` | Expected employer matched but the role carries no dates — unknown, not a change | 3 |
+| `PROFILE_NOT_FOUND` | Profile URL did not resolve (`resolution_reason: PROFILE_NOT_FOUND`) | 0 |
 
 ## People Search v3 (audience discovery)
 
