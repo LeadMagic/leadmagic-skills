@@ -53,7 +53,7 @@ Out of credits mid-job? The job can `pause`; top up, then `POST /bulk/jobs/{jobI
 
 **Goal:** protect deliverability. **Cost:** 0.25/row (conclusive only).
 
-Bulk `email_validation` over the send list → segment `valid` / `catch_all` / `unknown` / `invalid`. Send only valid (+ catch-all if you accept the risk); route invalids back through recipe 3. Cheap insurance: 1,000 rows = 250 credits max.
+Bulk `email_validation` over the send list → segment `valid` / `unknown` / `invalid` (unverifiable catch-all mailboxes come back `unknown`, free). Send only valid; retry unknowns later; route invalids back through recipe 3. Cheap insurance: 1,000 rows = 250 credits max.
 
 ## 6 · Hiring-intent trigger sweep
 
