@@ -35,7 +35,7 @@ The v3 discovery surfaces — `POST /v3/people/search` (+variants), `POST /v3/co
 | Profile Search | 1 | — |
 | Personal Email Finder | 2 | Free |
 | Role Finder | 2 | — |
-| Job Change Detector | 3 | — |
+| Job Change Detector | 3 | Free when the profile URL does not resolve (`status: PROFILE_NOT_FOUND`) |
 | Company Funding | 4 | Free |
 | Mobile Finder | 5 | Free |
 | B2B Profile → Email | 5 | Free |

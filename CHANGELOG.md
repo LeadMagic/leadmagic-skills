@@ -2,6 +2,11 @@
 
 All notable changes to this repository. Format follows [Keep a Changelog](https://keepachangelog.com/); versions track the `leadmagic` router skill / plugin version.
 
+## [3.0.2] — 2026-09-03
+
+### Changed
+- Job Change Detector status contract synced with the live API: `status` now also returns `AMBIGUOUS_CURRENT_EMPLOYMENT`, `CURRENT_EMPLOYMENT_UNKNOWN` (expected employer matched but the role carries no dates — unknown, not a change) and `PROFILE_NOT_FOUND` (profile URL did not resolve — billed **0** credits); `job_change_detected` is `true` only for `JOB_CHANGE_DETECTED`, which now also covers "expected employer absent from history while another primary employer is current" (`NEVER_WORKED_THERE` only when nothing is current). Updated `references/leadmagic-api-quickref.md` (status table), `references/plans-and-limits.md` (not-found column), `references/outbound-recipes.md` recipe 8, `skills/people-enrichment` (3.0.1), and `/leadmagic:job-change-sweep`.
+
 ## [3.0.1] — 2026-09-02
 
 ### Changed
