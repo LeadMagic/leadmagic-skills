@@ -23,7 +23,7 @@ Source of truth: [leadmagic.io/docs](https://leadmagic.io/docs?utm_source=github
 | Endpoint | Cost | Rate/min | Notes |
 |---|---|---|---|
 | `POST /v1/people/email-finder` | 1 | 5,000 | Free when not found. Needs person (name **or** profile URL) + company (`domain`/`company_name`). Aliases: `/v1/email-finder`, `/v2/email-finder`, `/v1/email/find` |
-| `POST /v1/people/email-validation` | 0.25 | 5,000 | Bills only conclusive results (valid/invalid); unknown & catch-all-unverifiable are free. Aliases: `/v1/email-validation`, `/verify-email`, `/validate-email` |
+| `POST /v1/people/email-validation` | 0.25 | 5,000 | Bills only conclusive results (valid/invalid; malformed, no-MX, disposable, blocklisted addresses return invalid and bill); unknown & catch-all-unverifiable are free. Aliases: `/v1/email-validation`, `/verify-email`, `/validate-email` |
 | `POST /v1/people/personal-email-finder` | 2 | 5,000 | Free when not found. Body: `{profile_url}` (CRM synonym keys accepted) |
 | `POST /v1/people/b2b-profile-email` | 5 | 1,500 | B2B profile URL → work email. Free when not found. Aliases: `/b2b-profile-to-email`, `/profile-to-email`, `/social-to-email` |
 | `POST /v1/people/b2b-profile` | 10 | 1,500 | Email → full B2B profile. Accepts `work_email`, `personal_email`, or plain `email`. Aliases: `/email-to-b2b-profile`, `/reverse-email` |

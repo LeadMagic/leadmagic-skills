@@ -51,6 +51,6 @@ Errors are RFC 9457 Problem Details — `action` is the machine-suggested fix; `
 ## Credit accounting facts
 
 - Not-found results are **free** on the major finders (email, personal email, mobile, profile→email, company, funding).
-- Email validation bills only conclusive outcomes (valid/invalid); unknown and unverifiable catch-all are free.
+- Email validation bills only conclusive outcomes (valid/invalid). Malformed, no-MX, disposable, and blocklisted addresses come back `invalid` and bill; `unknown` (inconclusive SMTP, unverifiable catch-all, timeouts) is free.
 - Bulk jobs bill per **successful** row at single-request rates; failed rows free.
 - Track spend with free `GET /v1/analytics/usage`, `/credits`, `/day/{date}` (see `analytics-observability`).
