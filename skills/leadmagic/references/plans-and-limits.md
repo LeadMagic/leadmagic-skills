@@ -59,7 +59,7 @@ Each product carries its own per-minute ceiling (per organization); representati
 | Jobs search v3, intent lenses | 100–200 |
 | Bulk intent, AI targeting | 50 |
 
-Limits are plan-adjustable — the response headers and 429 `Retry-After` are authoritative. Sustained hammering after 429/402 triggers short escalating blocks (seconds to minutes); respect backoff and they never engage.
+Limits are identical across self-serve plans (Basic through Ultimate) — no tier carries a higher API or MCP lane; higher limits exist only on custom/enterprise agreements. The response headers and 429 `Retry-After` are authoritative. Sustained hammering after 429/402 triggers short escalating blocks (seconds to minutes); respect backoff and they never engage.
 
 ## Budgeting a run (do this before any large job)
 
