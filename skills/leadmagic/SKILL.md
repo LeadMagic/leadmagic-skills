@@ -5,7 +5,7 @@ license: MIT
 compatibility: "Requires network access to api.leadmagic.io or mcp.leadmagic.io. Set LEADMAGIC_API_KEY for REST."
 metadata:
   author: LeadMagic
-  version: "3.0.2"
+  version: "3.0.3"
   homepage: https://leadmagic.io?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   docs: https://leadmagic.io/docs?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   github: https://github.com/LeadMagic/leadmagic-skills
@@ -26,6 +26,7 @@ Published by LeadMagic at [github.com/LeadMagic/leadmagic-skills](https://github
 3. Prefer hosted MCP (`https://mcp.leadmagic.io/mcp`, OAuth) for agent workflows — no key in shell history.
 4. Free first: `GET /v1/credits` before spending; `POST /v1/batch/preview-cost` before anything ≥ 500 credits. Failed lookups are usually free — never hammer retries on null.
 5. Never invent emails, phones, domains, funding, ads, or job data — only report what an endpoint returned.
+6. Before merging bulk results, bind the exact submitted row order to its job ID and verify each result's input identity. `row_index` belongs to that job; never apply it to another job or a reordered master file. Use `bulk-jobs` for the full join contract.
 
 ## Route to a focused skill
 

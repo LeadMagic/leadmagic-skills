@@ -38,7 +38,7 @@ for skill_dir in */; do
     [ -d "$skill_name" ] || continue
 
     # Package
-    zip -rq "$DIST_DIR/$skill_name.zip" "$skill_name/"
+    zip -rq "$DIST_DIR/$skill_name.zip" "$skill_name/" -x '*/__pycache__/*' '*.pyc'
 
     # Get stats
     rule_count=$(find "$skill_name/rules" -name "*.md" 2>/dev/null | wc -l | tr -d ' ')

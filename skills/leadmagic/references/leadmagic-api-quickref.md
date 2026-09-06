@@ -123,6 +123,10 @@ Async bulk (CSV/lists) — under `/bulk/*`, billed per successful row at the sin
 | `GET /bulk/jobs/{jobId}/results` · `/rows` · `/download` · `/errors` · `/events` · `/logs` · `/stream` | Results & diagnostics |
 | `POST /bulk/jobs/{jobId}/pause` · `/resume` · `/cancel` · `/restart` | Lifecycle |
 
+For ordinary one-input/one-result enrichment, `row_index` is the **zero-based position in that job's submitted rows**, after parsing; CSV headers and blank records are not data rows. It is not a spreadsheet row number, a page position, or an index into another job. `/results` returns `{rows, limit, offset}`. Filtering changes which rows appear, not their source indices.
+
+Before submission, retain the exact ordered input and its mapping to original record IDs. Bind that manifest to the returned job ID. Before merging, verify the requested job ID, then compare every result's `lm_input` identity with the manifest at `row_index`. Never zip results to a source file or reuse indices across jobs, sorted lists, or retry subsets. Stop on any identity mismatch, missing identity, out-of-range index, or ambiguous duplicate; do not write a partial merge. Multi-product jobs can have repeated source indices; fan-out products such as Local Leads use display indices and need a product-specific join. See `bulk-jobs` for the profile join checker.
+
 `product` keys = product ids: `email_finder`, `email_validation`, `mobile_finder`, `personal_email_finder`, `b2b_profile_to_email`, `email_to_b2b_profile`, `profile_search`, `role_finder`, `company_finder`, `company_funding`, `job_change_detector`, …
 
 Synchronous mini-batch: `POST /v1/{product}/batch` and `POST /v1/batch` (mixed) for small arrays without job overhead. Suppression lists: `/v1/batch/suppression-lists`.
