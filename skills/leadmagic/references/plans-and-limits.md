@@ -1,5 +1,7 @@
 # LeadMagic — Plans, credits & limits
 
+Reviewed 2026-09-06. Verify [current credit costs](https://leadmagic.io/docs/v1/credits) before paid work. Employee Finder bills per returned employee (0.05 credits). Google/Meta ad searches bill per returned ad; B2B ad search includes a base charge.
+
 Public pricing: [leadmagic.io/pricing](https://leadmagic.io/pricing?utm_source=github&utm_medium=readme&utm_campaign=leadmagic-skills). Agents should read this before sizing any run so recommendations match what the customer's plan can actually do.
 
 ## Plan ladder

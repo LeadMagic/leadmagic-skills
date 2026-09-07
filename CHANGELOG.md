@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased — 2026-09-06
+
+Use the reviewed public API inventory; remove unconfirmed route recommendations; align hiring research, employee/ad billing, and integration authentication guidance.
+
+
 All notable changes to this repository. Format follows [Keep a Changelog](https://keepachangelog.com/); versions track the `leadmagic` router skill / plugin version.
 
 ## [3.0.2] — 2026-09-03
