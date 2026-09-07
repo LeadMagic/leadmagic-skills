@@ -129,3 +129,7 @@ No secrets, keys, or customer PII belong in this repo — see [SECURITY.md](SECU
 ## Public examples and publication
 
 Examples are fictional unless an explicit public source is cited. See [PUBLICATION.md](PUBLICATION.md) for data, claims, attribution, and disclosure requirements.
+
+## License and contributions
+
+[MIT license](LICENSE) · [Third-party materials and contribution policy](LICENSE-NOTES.md). Reuse is allowed under the license; changes to this repository require maintainer review.
