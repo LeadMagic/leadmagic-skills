@@ -1,11 +1,11 @@
 ---
 name: company-enrichment
-description: "LeadMagic company search, filter search, funding, technographics, lookalikes, competitors, and company posts. Use when enriching a domain or company name, building company lists with typed filters, finding lookalike companies from a seed, researching an account's funding or tech stack, or pulling a company's recent public posts."
+description: "LeadMagic company search, filter search, funding, technographics, lookalikes, competitors. Use when enriching a domain or company name, building company lists with typed filters, finding lookalike companies from a seed, researching an account's funding or tech stack."
 license: MIT
 compatibility: "Requires network access to api.leadmagic.io or mcp.leadmagic.io."
 metadata:
   author: LeadMagic
-  version: "3.0.0"
+  version: "3.0.1"
   homepage: https://leadmagic.io?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   docs: https://leadmagic.io/docs?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   github: https://github.com/LeadMagic/leadmagic-skills
@@ -25,10 +25,9 @@ metadata:
 | Competitors | `POST /v1/companies/competitors-search` | 5 | 300 |
 | Funding rounds | `POST /v1/companies/company-funding` | 4 (free on miss) | 300 |
 | Tech stack | `POST /v1/companies/technographics` | 1 | 1,500 |
-| Company's recent posts | `POST /v1/companies/posts-search` | 1 | 300 |
-| Employees at company | `POST /v1/companies/employees` | 1 | 300 |
+| Employees at company | `POST /v1/people/employee-finder` | 1 | 300 |
 
-Plan note: `/v3/companies/*` searches are credit-free on Professional (5 req/s) / Ultimate (10 req/s); other plans bill per row. Free count/stats surfaces exist — size a filter search before revealing.
+Plan note: canonical `/v3/companies/search` requests are credit-free on Professional (5 req/s) / Ultimate (10 req/s); other plans bill per row. Lookalikes remain metered on every plan; app-only preview is unavailable to API keys.
 
 ## Field contracts
 
@@ -49,7 +48,7 @@ curl -sS -X POST "https://api.leadmagic.io/v3/companies/lookalike" \
 
 ## Account brief composite (~8–12 credits)
 
-`company-search` (1) → `company-funding` (4) → `technographics` (1) → hiring signals (`jobs-hiring-intent` skill, 1) → `posts-search` (1) → optional `competitors-search` (5). MCP shortcut: `account_intel` runs the composite in one call. Full recipe: `outbound-recipes` recipe 2.
+`company-search` (1) → `company-funding` (4) → `technographics` (1) → public jobs research (`jobs-hiring-intent` skill; plan-dependent cost) → optional `competitors-search` (5). MCP shortcut: `account_intel` runs the composite in one call. Full recipe: `outbound-recipes` recipe 2.
 
 ## Related
 

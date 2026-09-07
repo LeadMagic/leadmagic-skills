@@ -5,7 +5,7 @@ license: MIT
 compatibility: "Requires network access to api.leadmagic.io or mcp.leadmagic.io."
 metadata:
   author: LeadMagic
-  version: "3.0.0"
+  version: "3.0.1"
   homepage: https://leadmagic.io?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   docs: https://leadmagic.io/docs?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   github: https://github.com/LeadMagic/leadmagic-skills
@@ -27,7 +27,7 @@ Auth: `X-API-Key: $LEADMAGIC_API_KEY` → `https://api.leadmagic.io`. Never echo
 | B2B Profile URL → work email | `POST /v1/people/b2b-profile-email` | 5 (free on miss) | 1,500 |
 | Email → full B2B Profile | `POST /v1/people/b2b-profile` | 10 | 1,500 |
 
-Cheapest-first ladder: find (1) → personal (2) → profile→email (5) → email→profile (10). Validation (0.25) is a separate lane for emails the user brought from elsewhere. **Every email a finder returns is already validated — always a good email; never chain a finder into validation.** If you already hold a profile URL and only need profile *fields*, use `profile-search` (1) — not `b2b-profile` (10).
+Cheapest-first ladder: find (1) → personal (2) → profile→email (5) → email→profile (10). Validation (0.25) is a separate lane for emails the user brought from elsewhere. **Email Finder returns a validation result with the address; inspect that result rather than immediately buying a duplicate validation. Delivery can still change over time.** If you already hold a profile URL and only need profile *fields*, use `profile-search` (1) — not `b2b-profile` (10).
 
 ## Field contract (forgiving on purpose)
 
@@ -47,7 +47,7 @@ curl -sS -X POST "https://api.leadmagic.io/v1/people/email-finder" \
 # Validate
 curl -sS -X POST "https://api.leadmagic.io/v1/people/email-validation" \
   -H "X-API-Key: $LEADMAGIC_API_KEY" -H "Content-Type: application/json" \
-  -d '{"email":"jane.doe@acme.com"}'
+  -d '{"email":"person@example.com"}'
 
 # Profile URL → email
 curl -sS -X POST "https://api.leadmagic.io/v1/people/b2b-profile-email" \

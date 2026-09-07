@@ -23,7 +23,7 @@ curl -sS -X POST "https://api.leadmagic.io/v3/people/search" $LM -d '{
 
 **Goal:** everything a rep needs before touching an account. **Cost:** ~8–12 credits/account.
 
-`company-search` (1) → `company-funding` (4) → `technographics` (1) → `GET /v1/jobs/companies/{domain}/hiring-signals` (1) → `company posts-search` (1) → optional `competitors-search` (5). MCP shortcut: `account_intel` does the composite in one call.
+`company-search` (1) → `company-funding` (4) → `technographics` (1) → public job search (plan-dependent) → optional `competitors-search` (5). Use `account_intel` when available through hosted MCP and preview its cost.
 
 ## 3 · Waterfall contact enrichment (cheapest-first)
 
@@ -57,9 +57,9 @@ Bulk `email_validation` over the send list → segment `valid` / `unknown` / `in
 
 ## 6 · Hiring-intent trigger sweep
 
-**Goal:** rank target accounts by buying signal this week. **Cost:** 1/domain.
+**Goal:** rank target accounts by buying signal this week. **Cost:** depends on search entitlement and returned rows.
 
-`POST /v1/jobs/bulk/hiring-signals` with `{domains:[≤100]}` → score by openings, velocity, function mix. For a specific thesis, use an intent lens per domain: `POST /v1/jobs/company-intent/{gtm|sales|marketing|revops|ai-adoption|security|expansion|...}`. Feed hot accounts to recipe 2 → recipe 7 → outreach with the job post as the opener.
+Use `POST /v3/jobs/search` and the `jobs-hiring-intent` skill to rank accounts from observed job postings. Cite evidence, separate observed facts from buying-intent hypotheses, and confirm paid work before running it.
 
 ## 7 · Decision-maker mapping
 

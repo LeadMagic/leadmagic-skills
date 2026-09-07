@@ -5,7 +5,7 @@ license: MIT
 compatibility: "Requires network access to mcp.leadmagic.io. OAuth by default on the hosted MCP."
 metadata:
   author: LeadMagic
-  version: "3.0.0"
+  version: "3.0.1"
   homepage: https://leadmagic.io?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   docs: https://leadmagic.io/docs/mcp/setup?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   github: https://github.com/LeadMagic/leadmagic-skills
@@ -25,7 +25,7 @@ Prefer the **hosted MCP** over hand-rolled `curl` in agent sessions: OAuth (no k
 
 Claude Code: `claude mcp add --transport http leadmagic https://mcp.leadmagic.io/mcp`
 
-Generic JSON (Cursor / Windsurf / VS Code):
+Cursor configuration (other clients use their own formats; consult the setup docs):
 
 ```jsonc
 {
@@ -35,7 +35,7 @@ Generic JSON (Cursor / Windsurf / VS Code):
 }
 ```
 
-Complete OAuth in the browser on first use. **401 later → reconnect OAuth in the client** (tokens are server-side; there are no API keys to fix). 402 → credits/billing.
+Complete OAuth in the browser on first use. **401 later → reconnect OAuth in the client** (do not add a REST API key to this OAuth configuration). 402 → credits/billing.
 
 ## Tool → REST map (core)
 

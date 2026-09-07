@@ -5,7 +5,7 @@ license: MIT
 compatibility: "Requires network access to api.leadmagic.io or mcp.leadmagic.io."
 metadata:
   author: LeadMagic
-  version: "3.0.0"
+  version: "3.0.1"
   homepage: https://leadmagic.io?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   docs: https://leadmagic.io/docs?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   github: https://github.com/LeadMagic/leadmagic-skills
@@ -19,9 +19,9 @@ metadata:
 
 | Goal | Endpoint | Credits | Rate/min |
 |---|---|---|---|
-| Google ads by advertiser | `POST /v1/ads/google-ads-search` | 1 | 1,500 |
-| Meta (FB/IG) ads | `POST /v1/ads/meta-ads-search` | 1 | 1,500 |
-| B2B ads library | `POST /v1/ads/b2b-ads-search` | 1 | 1,500 |
+| Google ads by advertiser | `POST /v1/ads/google-ads-search` | 1 per returned ad | 1,500 |
+| Meta (FB/IG) ads | `POST /v1/ads/meta-ads-search` | 1 per returned ad | 1,500 |
+| B2B ads library | `POST /v1/ads/b2b-ads-search` | 1 base + 1 per ad | 1,500 |
 | One B2B ad, full detail | `POST /v1/ads/b2b-ads-details` | 2 | 1,500 |
 
 Search by `company_domain` (preferred) or company name. **Pass `limit`** to cap creatives returned — it caps spend too. Legacy aliases (`/google/searchads`, `/meta/searchads`, `/b2b/searchads`, `/b2b/ad-details`) still resolve.
@@ -40,7 +40,7 @@ curl -sS -X POST "https://api.leadmagic.io/v1/ads/meta-ads-search" \
 
 ## Outbound patterns
 
-- **Weekly competitor monitor** (recipe 9): 3 searches/competitor (1 each) → diff vs last week → details on new creatives (2) → messaging brief.
+- **Weekly competitor monitor** (recipe 9): 3 searches/competitor (cost depends on returned ads) → diff vs last week → details on new creatives (2) → messaging brief.
 - **Angle mining**: competitor's ad promises become your cold-email counter-positioning ("they promise X; here's where X breaks").
 - **Warm-account signal**: a target account running B2B ads = active budget + market pressure; stack with hiring signals (`jobs-hiring-intent`) for timing.
 - MCP: `search_google_ads`, `search_meta_ads`, `search_b2b_ads`, `get_b2b_ad_details`.

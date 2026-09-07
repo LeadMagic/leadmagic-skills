@@ -6,14 +6,14 @@
   },
   "metadata": {
     "description": "LeadMagic official Claude Code plugins for B2B enrichment and outbound systems.",
-    "version": "3.0.0"
+    "version": "3.0.1"
   },
   "plugins": [
     {
       "name": "leadmagic",
       "source": "./",
       "description": "Official LeadMagic plugin — hosted MCP, skills for every API endpoint, credit-safe hooks, and outbound recipes.",
-      "version": "3.0.0",
+      "version": "3.0.1",
       "author": {
         "name": "LeadMagic",
         "email": "plugins@leadmagic.io"

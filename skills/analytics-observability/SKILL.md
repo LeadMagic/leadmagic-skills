@@ -5,7 +5,7 @@ license: MIT
 compatibility: "Requires network access to api.leadmagic.io."
 metadata:
   author: LeadMagic
-  version: "3.0.0"
+  version: "3.0.1"
   homepage: https://leadmagic.io?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   docs: https://leadmagic.io/docs?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   github: https://github.com/LeadMagic/leadmagic-skills
@@ -31,16 +31,15 @@ Every endpoint here is **free** (0 credits). Use them liberally to report on run
 | `/requests` | Recent request log |
 | `/quality` · `/quality/daily` | Data-quality metrics |
 | `/errors` | Error patterns (4xx/5xx by type) |
-| `/found-rate` | Match/found rates by product |
 
 ```bash
-curl -sS "https://api.leadmagic.io/v1/analytics/found-rate" -H "X-API-Key: $LEADMAGIC_API_KEY"
+curl -sS "https://api.leadmagic.io/v1/analytics/summary" -H "X-API-Key: $LEADMAGIC_API_KEY"
 ```
 
 ## Patterns
 
 - **After any bulk run:** `/day/{date}` + `/products` → report actual credits spent vs the preflight estimate.
-- **Weekly ops report:** `/summary` + `/found-rate` + `/errors` → spend, match quality, and integration health in three calls.
+- **Weekly ops report:** `/summary` + `/products` + `/errors` → spend, match quality, and integration health in three calls.
 - **Debugging a noisy integration:** `/errors` shows which validation failures dominate (usually field-name mismatches — the 400 body's `action` says the fix).
 - **Budget pacing:** `/credits` daily series vs plan allowance (see `api-auth-credits` for the plan ladder) → project whether the month's credits will last.
 - MCP: `get_account_analytics`, `check_credit_balance`.
