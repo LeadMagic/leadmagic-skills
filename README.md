@@ -1,6 +1,8 @@
-# LeadMagic Skills & Plugin
+# LeadMagic Agent Skills: B2B Enrichment, Search and API Workflows
 
-Official agent skills **and Claude Code plugin** for using LeadMagic — every public API endpoint, plan-aware credit guidance, bulk CSV jobs, hosted MCP, and 13 outbound-system recipes.
+Agent skills and a Claude Code plugin for LeadMagic B2B data enrichment: email finding and validation, people and company search, bulk CSV workflows, public REST API guidance, and hosted Model Context Protocol (MCP) integration.
+
+[LeadMagic B2B enrichment](https://leadmagic.io?utm_source=github&utm_medium=readme&utm_campaign=leadmagic-skills&utm_content=readme-intro) · [API documentation](https://leadmagic.io/docs?utm_source=github&utm_medium=readme&utm_campaign=leadmagic-skills&utm_content=readme-intro) · [Pricing and credits](https://leadmagic.io/pricing?utm_source=github&utm_medium=readme&utm_campaign=leadmagic-skills&utm_content=readme-intro)
 
 Built for [Claude Agent Skills](https://docs.claude.com/en/docs/agents-and-tools/agent-skills/overview) and [Claude Code plugins](https://docs.claude.com/en/docs/claude-code/plugins) (compatible with other skill loaders).
 
@@ -8,24 +10,24 @@ Built for [Claude Agent Skills](https://docs.claude.com/en/docs/agents-and-tools
 |---|---|
 | **Install (skills)** | `npx skills add LeadMagic/leadmagic-skills` |
 | **Install (plugin)** | `/plugin marketplace add LeadMagic/leadmagic-skills` → `/plugin install leadmagic@leadmagic` |
-| **API docs** | [leadmagic.io/docs](https://leadmagic.io/docs?utm_source=github&utm_medium=readme&utm_campaign=leadmagic-skills) |
+| **API docs** | [leadmagic.io/docs](https://leadmagic.io/docs?utm_source=github&utm_medium=readme&utm_campaign=leadmagic-skills&utm_content=readme-intro) |
 | **API base** | `https://api.leadmagic.io` · `X-API-Key` |
 | **MCP** | `https://mcp.leadmagic.io/mcp` (OAuth) |
-| **Dashboard** | [app.leadmagic.io](https://app.leadmagic.io?utm_source=github&utm_medium=readme&utm_campaign=leadmagic-skills) |
+| **Dashboard** | [app.leadmagic.io](https://app.leadmagic.io?utm_source=github&utm_medium=readme&utm_campaign=leadmagic-skills&utm_content=readme-intro) |
 | **License** | MIT |
 
 ---
 
 ## Current integration contract
 
-Reviewed against [LeadMagic's public documentation](https://leadmagic.io/docs) on 2026-09-06. REST uses `https://api.leadmagic.io` and `X-API-Key`; hosted MCP uses `https://mcp.leadmagic.io/mcp` with OAuth; lm-tui uses `lm login`. Keep credentials and customer data out of committed examples.
+Reviewed against [LeadMagic's public documentation](https://leadmagic.io/docs?utm_source=github&utm_medium=readme&utm_campaign=leadmagic-skills&utm_content=readme-current-integration-contract) on 2026-09-06. REST uses `https://api.leadmagic.io` and `X-API-Key`; hosted MCP uses `https://mcp.leadmagic.io/mcp` with OAuth; lm-tui uses `lm login`. Keep credentials and customer data out of committed examples.
 
-Email Finder returns validated work emails. Use Email Validation for externally sourced addresses. Check the [current pricing and credit rules](https://leadmagic.io/docs/v1/credits) before paid work; costs are endpoint- and plan-dependent. API-only integrations must not send app-only `preview` options.
+Email Finder returns validated work emails. Use Email Validation for externally sourced addresses. Check the [current pricing and credit rules](https://leadmagic.io/docs/v1/credits?utm_source=github&utm_medium=readme&utm_campaign=leadmagic-skills&utm_content=readme-current-integration-contract) before paid work; costs are endpoint- and plan-dependent. API-only integrations must not send app-only `preview` options.
 
 
 ## What's inside
 
-### Skills — full API coverage
+### Product skills
 
 | Skill | When to use | Covers |
 |-------|-------------|--------|
@@ -92,29 +94,21 @@ The plugin loads the hosted MCP server automatically — complete OAuth in the b
 
 ### REST only
 
-Create a key at [app.leadmagic.io](https://app.leadmagic.io?utm_source=github&utm_medium=readme&utm_campaign=leadmagic-skills) → Settings → API, set `LEADMAGIC_API_KEY` in your environment. Never paste keys into chat or commit them.
+Create a key at [app.leadmagic.io](https://app.leadmagic.io?utm_source=github&utm_medium=readme&utm_campaign=leadmagic-skills&utm_content=readme-install) → Settings → API, set `LEADMAGIC_API_KEY` in your environment. Never paste keys into chat or commit them.
 
 ```bash
 curl -sS "https://api.leadmagic.io/v1/credits" -H "X-API-Key: $LEADMAGIC_API_KEY"
 
 curl -sS -X POST "https://api.leadmagic.io/v1/people/email-finder" \
   -H "X-API-Key: $LEADMAGIC_API_KEY" -H "Content-Type: application/json" \
-  -d '{"first_name":"Jane","last_name":"Doe","domain":"acme.com"}'
+  -d '{"first_name":"Jane","last_name":"Doe","domain":"example.com"}'
 ```
 
 ---
 
-## Plans at a glance
+## Pricing and search access
 
-| Plan | Monthly | Credits/mo | Search API |
-|---|---|---|---|
-| Basic | $49.99 | 2,000 | metered |
-| Essential | $99 | 5,000 | metered |
-| Growth | $249 | 20,000 | metered |
-| Professional | $499 | 50,000 | **credit-free @ 5 req/s** |
-| Ultimate | $849 | 100,000 | **credit-free @ 10 req/s** |
-
-Annual = 12× credits up front at ~2 months free. Full detail: [`plans-and-limits.md`](skills/leadmagic/references/plans-and-limits.md).
+Use [current LeadMagic pricing](https://leadmagic.io/pricing?utm_source=github&utm_medium=readme&utm_campaign=leadmagic-skills&utm_content=readme-pricing-and-search-access) and [credit documentation](https://leadmagic.io/docs/v1/credits?utm_source=github&utm_medium=readme&utm_campaign=leadmagic-skills&utm_content=readme-pricing-and-search-access) to confirm costs, search access, and rate limits for your account. Check your balance before paid workflows. The [plans and limits reference](skills/leadmagic/references/plans-and-limits.md) explains how the skills handle account entitlements.
 
 ## Validate
 
@@ -126,7 +120,7 @@ claude plugin validate .       # plugin manifest
 ## Related
 
 - [LeadMagic/leadmagic-openapi](https://github.com/LeadMagic/leadmagic-openapi) — OpenAPI snapshot
-- [LeadMagic/gtm-skills](https://github.com/LeadMagic/gtm-skills) — 205 GTM strategy skills (this repo = the product; that repo = the playbooks)
+- [LeadMagic/gtm-skills](https://github.com/LeadMagic/gtm-skills) — GTM strategy playbooks (this repo = the product; that repo = the playbooks)
 
 ## Security
 
