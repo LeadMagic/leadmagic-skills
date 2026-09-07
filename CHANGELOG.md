@@ -1,5 +1,10 @@
 # Changelog
 
+## Public-content privacy review — 2026-09-06
+
+Use synthetic contact examples, remove unnecessary identity and credential-like samples, and clarify publication, attribution, and claims requirements.
+
+
 ## Unreleased — 2026-09-06
 
 Use the reviewed public API inventory; remove unconfirmed route recommendations; align hiring research, employee/ad billing, and integration authentication guidance.

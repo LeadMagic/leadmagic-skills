@@ -131,3 +131,7 @@ claude plugin validate .       # plugin manifest
 ## Security
 
 No secrets, keys, or customer PII belong in this repo — see [SECURITY.md](SECURITY.md). Only trust skills installed from `github:LeadMagic/*`.
+
+## Public examples and publication
+
+Examples are fictional unless an explicit public source is cited. See [PUBLICATION.md](PUBLICATION.md) for data, claims, attribution, and disclosure requirements.
