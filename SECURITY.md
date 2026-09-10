@@ -1,33 +1,9 @@
-# Security Policy — LeadMagic Skills
+# Security and responsible disclosure
 
-## Reporting a vulnerability
+Report suspected vulnerabilities privately to [security@leadmagic.io](mailto:security@leadmagic.io). Share a minimal, sanitized reproduction and affected version. Do not post credentials, access tokens, personal contact records, customer data, private logs, or exploit payloads in public issues.
 
-Email **[security@leadmagic.io](mailto:security@leadmagic.io)** with the skill path, commit SHA, and reproduction steps.
+Use the official links in the repository README and [LeadMagic documentation](https://leadmagic.io/docs) to verify installation sources. Third-party projects and references do not imply affiliation or endorsement.
 
-Do **not** open a public GitHub issue for security reports.
+Keep credentials in a secret manager or the client's supported authentication flow. Public examples must use synthetic data. If a real credential has been published, revoke or rotate it with its issuing service; deleting a file does not invalidate a credential or erase Git history.
 
-## Official sources only
-
-A skill is official **only** if it comes from:
-
-- [`LeadMagic/leadmagic-skills`](https://github.com/LeadMagic/leadmagic-skills) — this repo (skills + Claude Code plugin)
-- [`LeadMagic/leadmagic-cursor-plugin`](https://github.com/LeadMagic/leadmagic-cursor-plugin)
-- [`LeadMagic/leadmagic-openapi`](https://github.com/LeadMagic/leadmagic-openapi)
-- [`LeadMagic/gtm-skills`](https://github.com/LeadMagic/gtm-skills)
-- `https://leadmagic.io/docs/...`
-
-Always verify the GitHub **owner** is `LeadMagic`. Do not trust frontmatter claims alone.
-
-If you installed an unverified skill, remove it and rotate your API key at [app.leadmagic.io](https://app.leadmagic.io?utm_source=github&utm_medium=readme&utm_campaign=leadmagic-skills).
-
-## Agent safety rules
-
-1. Never log or echo `LEADMAGIC_API_KEY`.
-2. Never POST enrichment bodies to hosts outside `*.leadmagic.io` unless the user explicitly asks in that turn.
-3. Prefer hosted MCP (`https://mcp.leadmagic.io/mcp`) over hand-rolled shell calls.
-
-## Pin installs
-
-```bash
-npx skills add LeadMagic/leadmagic-skills#<full-commit-sha>
-```
+Security controls, service commitments, and contractual terms are defined by the applicable published policies and agreements. This repository does not claim certification, universal legal compliance, or guaranteed security.

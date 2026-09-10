@@ -1,11 +1,11 @@
 ---
 name: people-enrichment
-description: "LeadMagic people enrichments beyond email — B2B Profile search, mobile finder, role finder, employee finder, job change detection, and posts or comments activity. Use when enriching a known person from a B2B Profile URL, finding a mobile number, finding who holds a role at a company, listing employees, or checking whether a contact changed jobs."
+description: "LeadMagic people enrichments beyond email — B2B Profile search, mobile finder, role finder, employee finder, job change detection. Use when enriching a known person from a B2B Profile URL, finding a mobile number, finding who holds a role at a company, listing employees, or checking whether a contact changed jobs."
 license: MIT
 compatibility: "Requires network access to api.leadmagic.io or mcp.leadmagic.io."
 metadata:
   author: LeadMagic
-  version: "3.0.1"
+  version: "3.0.2"
   homepage: https://leadmagic.io?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   docs: https://leadmagic.io/docs?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   github: https://github.com/LeadMagic/leadmagic-skills
@@ -24,17 +24,15 @@ For **finding people by ICP filters**, use `people-search`. For **email** find/v
 | Enrich from B2B Profile URL | `POST /v1/people/profile-search` | 1 | 300 |
 | Find mobile number | `POST /v1/people/mobile-finder` | 5 (free on miss) | 25,000 |
 | Person holding a role at a company | `POST /v1/people/role-finder` | 2 | 300 |
-| List employees at a company | `POST /v1/people/employee-finder` | 1 | 300 |
+| List employees at a company | `POST /v1/people/employee-finder` | 0.05 per employee | 300 |
 | Did this person change jobs? | `POST /v1/people/job-change-detector` | 3 (0 on `PROFILE_NOT_FOUND`) | 1,500 |
-| Person's recent public posts | `POST /v1/people/posts-search` | 1 | 300 |
-| Public comment activity | `POST /v1/people/comments-search` | 1 | 1,000 |
 
 ## Field contracts
 
-- **profile-search / posts**: `{profile_url}` — common CRM synonym keys are accepted; full URL or bare `/in/{slug}`, normalized server-side. Company URLs are rejected (use Company Search).
+- **profile-search**: `{profile_url}` — common CRM synonym keys are accepted; full URL or bare `/in/{slug}`, normalized server-side. Company URLs are rejected (use Company Search).
 - **mobile-finder**: any of `profile_url`, `work_email`, `personal_email`. Free when not found. For lawful business use; calling/texting compliance is the customer's responsibility.
 - **role-finder**: `job_title` (required; aliases `role`, `title`, `jobTitle` map in) + one of `company_domain` / `company_name` / a B2B profile URL (a person URL resolves to their current company).
-- **employee-finder**: company identifier; also mounted at `/v1/companies/employees`. For filtered employee lists (level/function), prefer `POST /v3/people/employees` (see `people-search`).
+- **employee-finder**: company identifier; For filtered employee lists (level/function), prefer `POST /v3/people/employees` (see `people-search`).
 - **job-change-detector**: profile URL plus the expected company (`company_name` is authoritative; `company_domain` only adds matcher aliases). Act only on `job_change_detected: true` (`status: JOB_CHANGE_DETECTED` — includes "expected employer absent from history but another primary employer is current"). `NO_CHANGE` = still there; `NEVER_WORKED_THERE` = absent and nothing current; `AMBIGUOUS_CURRENT_EMPLOYMENT` / `CURRENT_EMPLOYMENT_UNKNOWN` = inconclusive → recheck next sweep, not a change; `PROFILE_NOT_FOUND` = URL did not resolve, billed **0** credits (all other statuses bill 3).
 
 ```bash

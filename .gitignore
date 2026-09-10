@@ -52,3 +52,12 @@ temp/
 # Local AI tooling
 .claude/
 .cursor/
+
+# Local credentials and diagnostic output
+.env
+.env.*
+!.env.example
+!.env.sample
+!.env.template
+reports/
+*.log

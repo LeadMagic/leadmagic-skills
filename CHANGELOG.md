@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.0.3] — 2026-09-09
+
+Require job-bound input manifests and identity validation before merging bulk profile results. Bundle the checker and regression tests, and preserve the current reviewed API reference.
+
+## Public-content privacy review — 2026-09-06
+
+Use synthetic contact examples, remove unnecessary identity and credential-like samples, and clarify publication, attribution, and claims requirements.
+
+
+## Unreleased — 2026-09-06
+
+Use the reviewed public API inventory; remove unconfirmed route recommendations; align hiring research, employee/ad billing, and integration authentication guidance.
+
+
 All notable changes to this repository. Format follows [Keep a Changelog](https://keepachangelog.com/); versions track the `leadmagic` router skill / plugin version.
 
 ## [3.0.2] — 2026-09-03

@@ -15,7 +15,7 @@ jobs:
     name: Skills & plugin checks
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
 
       - name: Install tooling
         run: sudo apt-get update -qq && sudo apt-get install -y -qq ripgrep shellcheck
@@ -38,7 +38,7 @@ jobs:
         run: ./scripts/build.sh
 
       - name: Upload skill zips
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: leadmagic-skills
           path: dist/*.zip
@@ -51,11 +51,11 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
       - name: Build
         run: chmod +x scripts/build.sh && ./scripts/build.sh
       - name: Upload artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: leadmagic-skills-main
           path: dist/*.zip
