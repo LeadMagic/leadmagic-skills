@@ -40,6 +40,8 @@ pnpm-debug.log*
 # Testing
 coverage/
 .nyc_output/
+__pycache__/
+*.py[cod]
 
 # Temp
 tmp/

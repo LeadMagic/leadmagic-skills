@@ -14,3 +14,4 @@ Rules:
 5. Out of credits mid-job → the job pauses; report rows done vs remaining and the balance; resume only after the user tops up.
 6. Never invent data; never echo API keys; results belong in files the user asked for, misses reported honestly.
 7. Close out with: job id, rows attempted / succeeded / failed, credits spent vs estimate, and where the results file is.
+8. Before submission, preserve the exact ordered input and original record IDs, then bind that manifest to the returned job ID. Before merging any result, verify its `lm_input` identity against the manifest at its zero-based `row_index`. Never zip paged or filtered results onto a CSV, reuse indices from another job, or merge into a reordered master list by position. Follow `bulk-jobs` and run its profile checker for single-product profile jobs. Any mismatch or ambiguous duplicate stops the entire merge before writes.

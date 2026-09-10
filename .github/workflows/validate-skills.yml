@@ -31,6 +31,9 @@ jobs:
       - name: Validate Claude Code plugin manifest
         run: npx -y @anthropic-ai/claude-code@latest plugin validate .
 
+      - name: Test bulk result identity guard
+        run: python3 -B -m unittest discover -s tests -v
+
       - name: Package skills (smoke)
         run: ./scripts/build.sh
 

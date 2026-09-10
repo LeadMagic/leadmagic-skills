@@ -108,3 +108,9 @@ Email Finder returns validated work emails; validate externally sourced addresse
 ## Request discipline
 
 Read the operation's schema before sending input. On cursor searches, keep filters identical between pages and never combine a cursor with a nonzero offset. Back off on 429 and honor Retry-After. A timed-out paid request can already have consumed credits; inspect its outcome before retrying. Log status and trace IDs, not keys or contact payloads.
+
+## Bulk result identity
+
+For ordinary one-input/one-result enrichment, `row_index` is the **zero-based position in that job's submitted rows**, after parsing; CSV headers and blank records are not data rows. It is not a spreadsheet row number, a page position, or an index into another job. `/results` returns `{rows, limit, offset}`. Filtering changes which rows appear, not their source indices.
+
+Before submission, retain the exact ordered input and its mapping to original record IDs. Bind that manifest to the returned job ID. Before merging, verify the requested job ID, then compare every result's `lm_input` identity with the manifest at `row_index`. Never zip results to a source file or reuse indices across jobs, sorted lists, or retry subsets. Stop on any identity mismatch, missing identity, out-of-range index, or ambiguous duplicate; do not write a partial merge. Multi-product jobs can have repeated source indices; fan-out products such as Local Leads use display indices and need a product-specific join. See `bulk-jobs` for the profile join checker.

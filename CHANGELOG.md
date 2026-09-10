@@ -1,5 +1,9 @@
 # Changelog
 
+## [3.0.3] — 2026-09-09
+
+Require job-bound input manifests and identity validation before merging bulk profile results. Bundle the checker and regression tests, and preserve the current reviewed API reference.
+
 ## Public-content privacy review — 2026-09-06
 
 Use synthetic contact examples, remove unnecessary identity and credential-like samples, and clarify publication, attribution, and claims requirements.
