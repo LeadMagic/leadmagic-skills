@@ -12,7 +12,7 @@
     {
       "name": "leadmagic",
       "source": "./",
-      "description": "Official LeadMagic plugin — hosted MCP, skills for every API endpoint, credit-safe hooks, and outbound recipes.",
+      "description": "Official LeadMagic plugin — hosted MCP (130+ tools), skills for every API endpoint, credit-safe hooks, and outbound recipes.",
       "version": "3.0.3",
       "author": {
         "name": "LeadMagic",

@@ -14,7 +14,7 @@ Built for [Claude Agent Skills](https://docs.claude.com/en/docs/agents-and-tools
 | **Install (plugin)** | `/plugin marketplace add LeadMagic/leadmagic-skills` → `/plugin install leadmagic@leadmagic` |
 | **API docs** | [leadmagic.io/docs](https://leadmagic.io/docs?utm_source=github&utm_medium=readme&utm_campaign=leadmagic-skills&utm_content=readme-intro) |
 | **API base** | `https://api.leadmagic.io` · `X-API-Key` |
-| **MCP** | `https://mcp.leadmagic.io/mcp` (OAuth) |
+| **MCP** | `https://mcp.leadmagic.io/mcp` (OAuth, 130+ tools) |
 | **Dashboard** | [app.leadmagic.io](https://app.leadmagic.io?utm_source=github&utm_medium=readme&utm_campaign=leadmagic-skills&utm_content=readme-intro) |
 | **License** | MIT |
 
