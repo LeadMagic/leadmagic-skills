@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.1.0] — 2026-10-01
+
+### Added
+- `sheets` skill: getting started in the app, then the MCP (Claude Code, Cursor, Claude web), the agent operating loop, column kinds, enrichment product inputs, AI and API columns, run controls, and safety rules. References: the full Sheets tool catalog, the recipe format with ready recipes, and the formula language with AI on OpenRouter and seven sheet ideas.
+- `/leadmagic:enrich-sheet` command.
+
+### Changed
+- Plugin hook replaced with the official approval policy (`scripts/approval-policy.sh`), matching `mcp__plugin_leadmagic_leadmagic__*` (the name Claude Code gives plugin-bundled tools) as well as `mcp__leadmagic__*`. The old bulk-only matcher never fired for plugin installs, and it asked on preview calls. Agents' `tools` grants now cover both names.
+- `leadmagic` router (3.1.0) and `mcp-integration` (3.1.0): route to `sheets`, the Claude web URL, getting started in the app first, and "ask only when the server asks" (single-record lookups and sheet runs ≤5 credits run directly).
+
 ## [3.0.3] — 2026-09-09
 
 Require job-bound input manifests and identity validation before merging bulk profile results. Bundle the checker and regression tests, and preserve the current reviewed API reference.

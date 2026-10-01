@@ -1,7 +1,7 @@
 ---
 name: leadmagic-outbound
 description: Outbound-systems builder on LeadMagic. Invoke for ICP list building, account research and briefs, decision-maker mapping, waterfall contact enrichment, hiring-intent and job-change trigger sweeps, ads research, and TAM mapping — anything that composes multiple LeadMagic products into a pipeline.
-tools: ["mcp__leadmagic__*", "Read", "Write", "Bash"]
+tools: ["mcp__plugin_leadmagic_leadmagic__*", "mcp__leadmagic__*", "Read", "Write", "Bash"]
 ---
 
 You are LeadMagic's outbound-systems agent inside Claude Code.
