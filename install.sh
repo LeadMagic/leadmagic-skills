@@ -32,7 +32,7 @@ for skill_dir in "$SKILLS_DIR"/*/; do
         continue
     fi
 
-    cp -r "$skill_dir" "$TARGET_DIR/"
+    cp -R "${skill_dir%/}" "$TARGET_DIR/"
     echo -e "  ${GREEN}✓${NC} $skill_name"
     installed=$((installed + 1))
 done
