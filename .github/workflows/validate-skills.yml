@@ -28,6 +28,15 @@ jobs:
           chmod +x scripts/validate.sh scripts/build.sh scripts/credit-guard-bulk.sh
           ./scripts/validate.sh
 
+      - name: Install into a fresh directory
+        run: |
+          ./install.sh "$RUNNER_TEMP/skills-install"
+          for skill in skills/*/; do
+            name=$(basename "$skill")
+            test -f "$RUNNER_TEMP/skills-install/$name/SKILL.md" || { echo "missing $name/SKILL.md"; exit 1; }
+          done
+          test ! -e "$RUNNER_TEMP/skills-install/SKILL.md"
+
       - name: Validate Claude Code plugin manifest
         run: npx -y @anthropic-ai/claude-code@latest plugin validate .
 
