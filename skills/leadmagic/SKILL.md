@@ -1,11 +1,11 @@
 ---
 name: leadmagic
-description: "Official LeadMagic product skill and router for the full API surface — email finder and validation, People Search v3, company and lookalike search, jobs and hiring intent, ads intelligence, bulk CSV jobs, credits, plans, and hosted MCP. Use when calling any api.leadmagic.io endpoint, budgeting credits, choosing the right product for an outbound task, or wiring LeadMagic into Claude Code, integration platforms, or no-code automation tools."
+description: "Official LeadMagic product skill and router for the full API surface — email finder and validation, People Search v3, company and lookalike search, jobs and hiring intent, ads intelligence, bulk CSV jobs, Sheets, credits, plans, and hosted MCP. Use when calling any api.leadmagic.io endpoint, budgeting credits, choosing the right product for an outbound task, or wiring LeadMagic into Claude Code, integration platforms, or no-code automation tools."
 license: MIT
 compatibility: "Requires network access to api.leadmagic.io or mcp.leadmagic.io. Set LEADMAGIC_API_KEY for REST."
 metadata:
   author: LeadMagic
-  version: "3.0.3"
+  version: "3.1.0"
   homepage: https://leadmagic.io?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   docs: https://leadmagic.io/docs?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   github: https://github.com/LeadMagic/leadmagic-skills
@@ -41,6 +41,7 @@ Published by LeadMagic at [github.com/LeadMagic/leadmagic-skills](https://github
 | Company enrich, funding, technographics, lookalikes, competitors | `company-enrichment` |
 | Hiring signals & intent lenses on top of postings | `jobs-hiring-intent` |
 | Google / Meta / B2B ad libraries | `ads-intelligence` |
+| A live sheet: enrichment / AI / API columns, recipes, getting a workspace started | `sheets` |
 | CSV / async bulk, batch, suppression | `bulk-jobs` |
 | Usage, spend, found-rate reporting | `analytics-observability` |
 | Outbound-system playbooks (list build, waterfalls, triggers) | `outbound-recipes` |
@@ -58,7 +59,7 @@ Published by LeadMagic at [github.com/LeadMagic/leadmagic-skills](https://github
 - Have **name + company**, want email → `email-finder` (1). Have **profile URL**, want email → `b2b-profile-email` (5). Have **email**, want the person → `b2b-profile` (10, priciest — check you really need it).
 - Want **people you don't know yet** → People Search v3, never the finders.
 - Want **who's hiring / buying signals** → jobs intent endpoints, not job boards.
-- **≥ 50 rows** → `/bulk/*`, never a loop of single calls.
+- **≥ 50 rows** → `/bulk/*`, never a loop of single calls. If the user wants to see and iterate on the list, or chain several columns, use a sheet (`sheets`) instead.
 - Cheapest field first: validate 0.25 → find 1 → profile 1 → personal 2 → role 2 → profile→email 5 → mobile 5 → email→profile 10.
 
 ## Plan awareness

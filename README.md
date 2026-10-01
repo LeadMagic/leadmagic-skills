@@ -44,13 +44,14 @@ Email Finder returns validated work emails. Use Email Validation for externally 
 | [`jobs-hiring-intent`](skills/jobs-hiring-intent/) | Hiring signals & triggers | Company signals, 14 intent lenses, bulk domain sweeps |
 | [`ads-intelligence`](skills/ads-intelligence/) | Competitor ad research | Google / Meta / B2B ads + details |
 | [`bulk-jobs`](skills/bulk-jobs/) | Any list ≥ 50 rows | `/bulk/*` submit, lifecycle, errors, mini-batches |
+| [`sheets`](skills/sheets/) | Live sheets in the app, driven by an agent | Getting started, enrichment / formula / AI (OpenRouter) / API columns, runs, recipes, sheet ideas |
 | [`analytics-observability`](skills/analytics-observability/) | Spend & quality reporting | 11 free `/v1/analytics/*` endpoints |
 | [`outbound-recipes`](skills/outbound-recipes/) | Multi-step GTM workflows | 13 credit-aware recipes |
 | [`mcp-integration`](skills/mcp-integration/) | Hosted MCP setup | OAuth config, tool→REST map |
 
 ### Commands (plugin) — `/leadmagic:<name>`
 
-`check-credits` · `build-list` · `enrich-csv` · `clean-list` · `account-brief` · `decision-makers` · `waterfall-email` · `hiring-signals` · `job-change-sweep` · `competitor-ads` · `lookalikes` · `tam-map` · `usage-report`
+`check-credits` · `build-list` · `enrich-csv` · `enrich-sheet` · `clean-list` · `account-brief` · `decision-makers` · `waterfall-email` · `hiring-signals` · `job-change-sweep` · `competitor-ads` · `lookalikes` · `tam-map` · `usage-report`
 
 ### Agents (plugin)
 
@@ -59,9 +60,17 @@ Email Finder returns validated work emails. Use Email Validation for externally 
 
 ### Hooks (plugin)
 
-A PreToolUse hook asks before any bulk write tool queues a paid job. Free helpers (`check_credit_balance`, `preview_cost`, analytics, catalogs) never prompt.
+One PreToolUse approval policy covers every LeadMagic tool. Reads, single-record lookups, and preview calls run without a prompt. Bulk jobs, large sheet runs, imports, pushes, and deletes ask once, on the follow-up call that carries the server's `confirmation_token`. Set `LEADMAGIC_ASK_ALL=1` to be prompted for every tool.
 
 ---
+
+## Get started (app first, then your agent)
+
+1. Sign up at [app.leadmagic.io](https://app.leadmagic.io/sign-up?utm_source=github&utm_medium=readme&utm_campaign=leadmagic-skills&utm_content=readme-get-started) and open **Sheet Enrichment**. Drop a CSV, paste rows, or start from a recipe.
+2. Add one enrichment column (e.g. work email from name + domain) and run it on a few rows.
+3. Optional: add an [OpenRouter](https://openrouter.ai/keys) key under **Vault** to turn on AI columns.
+4. Connect your agent: install the Claude Code plugin below, or add `https://mcp.leadmagic.io/mcp` to any MCP client (Claude web/desktop: `https://mcp.leadmagic.io`) and sign in with OAuth to the same workspace.
+5. Ask the agent to work in your sheet. It edits the same sheet you have open, live. See the [`sheets`](skills/sheets/) skill.
 
 ## Install
 

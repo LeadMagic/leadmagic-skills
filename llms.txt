@@ -21,6 +21,7 @@
 - [jobs-hiring-intent](skills/jobs-hiring-intent/SKILL.md): hiring signals, intent lenses, bulk sweeps
 - [ads-intelligence](skills/ads-intelligence/SKILL.md): Google/Meta/B2B ads research
 - [bulk-jobs](skills/bulk-jobs/SKILL.md): /bulk/* CSV and list enrichment
+- [sheets](skills/sheets/SKILL.md): live sheets — getting started, enrichment / formula / AI / API columns, runs, recipes ([tools](skills/sheets/references/sheets-tools.md), [recipes](skills/sheets/references/sheet-recipes.md), [formulas + OpenRouter + ideas](skills/sheets/references/formulas-and-ai.md))
 - [analytics-observability](skills/analytics-observability/SKILL.md): free usage and spend reporting
 - [outbound-recipes](skills/outbound-recipes/SKILL.md): recipe index and operating rules
 - [mcp-integration](skills/mcp-integration/SKILL.md): hosted MCP setup and tool→REST map

@@ -25,7 +25,7 @@ jobs:
 
       - name: Validate skills, manifests, commands, agents
         run: |
-          chmod +x scripts/validate.sh scripts/build.sh scripts/credit-guard-bulk.sh
+          chmod +x scripts/validate.sh scripts/build.sh scripts/approval-policy.sh
           ./scripts/validate.sh
 
       - name: Install into a fresh directory
