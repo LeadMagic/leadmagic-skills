@@ -77,6 +77,29 @@ Ops: `eq`, `contains`, `empty`, `notEmpty`, `hasResults`, `noResults`, `hasError
 
 Configure and run custom HTTP columns in the LeadMagic app. They are unavailable over hosted MCP.
 
-## Integrations
+## Integrations, workspace runs, and saved lists
 
-Connecting a CRM or outbound platform happens in the app (Integrations), not over MCP.
+Connecting a CRM or outbound platform happens in the app (Integrations), not over MCP. Once connected, these tools take only their own named fields:
+
+| Tool | Fields | Notes |
+|---|---|---|
+| `list_cloud_connections` | none | Connected CRMs and outbound platforms |
+| `list_cloud_crm_objects` | `crm_platform` | A CRM connected in the workspace |
+| `list_cloud_crm_fields` / `list_cloud_crm_filters` | `crm_platform`, `object` | `object` from `list_cloud_crm_objects`, e.g. `contacts` or `Lead` |
+| `import_cloud_crm` | `crm_platform`, `object`, `fields` (`[{field, label?}]`), `idempotency_key`; optional `list_view_id`, `lifecycle_stage`, `name`, `max_rows` | **Gated**; new sheet |
+| `list_cloud_campaigns` | `platform`; optional `search`, `limit` | An outbound platform connected in the workspace |
+| `import_cloud_sequencer` | `platform`, `campaigns`, `fields`, `idempotency_key`; optional `name`, `max_rows` | **Gated**; new sheet |
+| `list_cloud_imports` / `cancel_cloud_import` | `sheet_id`; cancel also takes `import_id` | |
+| `list_cloud_runs` | `sheet_id`; optional `status`, `column_key`, `active_only`, `limit`, `offset` | |
+| `pause_cloud_run` / `cancel_cloud_run` | `sheet_id`, `run_id` | `run_id` from `list_cloud_runs` |
+| `list_cloud_pushes` | `sheet_id`; optional `status`, `destination`, `limit`, `offset` | Delivery status only |
+| `list_prospect_lists` | `list_type` (`people` default, or `company`) | |
+| `get_prospect_list` / `export_prospect_list` | `list_type`, `list_id` | |
+| `create_prospect_list` | `list_type`, `name`; optional `description`, `rows` | `rows` exactly as `search_people` / `search_companies` returned them |
+| `add_prospect_list_members` | `list_type`, `list_id`, `rows` | |
+| `update_prospect_list` | `list_type`, `list_id`, `name` and/or `description` | |
+| `remove_prospect_list_members` | `list_type`, `list_id`, `member_ids` | **Gated** |
+| `list_saved_searches` | `search_type` (`people` default, or `company`) | |
+| `get_saved_search` / `rerun_saved_search` | `search_type`, `search_id` | |
+
+Generate one `idempotency_key` (a UUID) per import and resend it unchanged on a retry.
