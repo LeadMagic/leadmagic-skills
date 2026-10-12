@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Document the named parameters hosted MCP takes for CRM and outbound imports, workspace runs, saved prospect lists, and saved searches.
+
 ## [3.1.1] — 2026-10-12
 
 - Match the hosted MCP surface: use public bulk submission, route custom HTTP columns to the app, and remove paused ads and competitor MCP tools from recommendations.
