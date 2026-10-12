@@ -22,10 +22,11 @@ Aliases (same handler, direct-lookup inferred from the body, not the path):
 
 Docs: [Company Search V3](https://leadmagic.io/docs/api-reference/company-search-v3?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills)
 
-## Unlimited with the right plan
+## Credit-free browse search on qualifying plans
 
-**Professional and Ultimate plans search this endpoint free** — no credits, no volume
-cap. The only limit is rate: **5 req/s sustained (Professional), 10 req/s (Ultimate)**.
+**On Professional and Ultimate, browse search on this endpoint costs no credits**, at
+**5 req/s (Professional) or 10 req/s (Ultimate)**, within a fair-use cap shared across
+People, Company and Jobs search — see [leadmagic.io/unlimited](https://leadmagic.io/unlimited?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills).
 Other plans pay ~1 credit per returned company. Never ration or narrow a query to
 save credits on an entitled plan. Lookalikes (`/v3/companies/lookalike`) are
 **metered on every plan** (flat 5 credits per successful response).
@@ -73,7 +74,7 @@ narrows hard; pick the one the brief means and say which.
 - Next page: **same filters** + `"cursor": "<next_cursor>"`.
 - `cursor` + nonzero `offset` is rejected. `next_cursor` is only minted on the
   offset-0 form — if you were paging by offset, restart at offset 0 to switch to cursors.
-- Stop when `has_more` is false. On an unlimited plan, paging a whole segment is free.
+- Stop when `has_more` is false. On Professional or Ultimate, paging a segment is credit-free within the fair-use cap.
 
 ## Lookalikes (metered)
 

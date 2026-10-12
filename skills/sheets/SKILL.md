@@ -99,7 +99,7 @@ Always in this order. Use column **keys** (`col_…`) from `get_sheet`, never di
 
 ### API (HTTP) columns
 
-1. Find a verified endpoint: `search_sheet_http_catalog` → `get_sheet_http_catalog_endpoint` (with `sheet_id` it binds row inputs). Or build one: `parse_sheet_http_request` (from a cURL) or `draft_sheet_http_request` (from a goal).
+1. Build the request: `parse_sheet_http_request` (from a cURL) or `draft_sheet_http_request` (from a goal).
 2. Keys: `list_sheet_http_credentials` lists keys the user connected in the app (never the secret). Pass `credential_id`. If none fits, send the user to Sheets → Vault — keys never go through chat.
 3. `test_sheet_http_request` sends **one** sample call. Show the response.
 4. `save_sheet_http_request` with `column_name` (new column) or `column_key` (existing). It asks for confirmation because running it sends each row's values to that host.
@@ -109,7 +109,7 @@ Always in this order. Use column **keys** (`col_…`) from `get_sheet`, never di
 - `scope`: `column` (default, the whole column), `selection` (+ `row_ids`), `sheet`. Narrow further with `filter`, `q`, `row_state`, `start_row` / `end_row`.
 - `confirm_max_credits` — the user's ceiling; the run is refused if the quote is higher.
 - `idempotency_key` — reuse it when retrying the same submission.
-- `pause_sheet_run` keeps finished cells and stops charging; resume with `resume_cloud_run`. `cancel_sheet_run` stops for good; unstarted rows are not charged.
+- `pause_sheet_run` keeps finished cells and stops charging. `cancel_sheet_run` stops for good; unstarted rows are not charged.
 - Waiting: pass `wait_seconds: 45` once (`run_sheet_column`, `get_sheet_run`, `list_sheet_runs`) instead of polling.
 
 ## Safety rules

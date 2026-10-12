@@ -51,11 +51,11 @@ Complete OAuth in the browser on first use. **401 later → reconnect OAuth in t
 | `b2b_profile_to_work_email` / `email_to_b2b_profile` | b2b-profile-email / b2b-profile |
 | `search_profile` / `enrich_contact` | profile-search (+composite) |
 | `search_people` / `find_people_by_role` / `find_company_employees` | v3 people search / role-finder / employee-finder |
-| `enrich_company` / `account_intel` / `research_account` | company-search (+composite brief) |
+| `enrich_company` / `account_intel` | company-search (+composite brief) |
 | `find_company_funding` / `get_company_technographics` | company-funding / technographics |
 | `find_lookalike_companies` / `list_company_competitors` | v3 lookalike / competitors-search |
 | `find_decision_makers` | role/employee composite |
-| `find_jobs` / `search_jobs` / `get_job_search_catalogs` | jobs search + free catalogs |
+| `find_jobs` / `search_jobs` | jobs search |
 | `get_company_hiring_signals` | `/v1/jobs/companies/{domain}/hiring-signals` |
 | `detect_job_change` | job-change-detector |
 | `search_google_ads` / `search_meta_ads` / `search_b2b_ads` / `get_b2b_ad_details` | ads endpoints |

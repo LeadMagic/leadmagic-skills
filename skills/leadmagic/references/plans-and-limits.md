@@ -6,15 +6,15 @@ Public pricing: [leadmagic.io/pricing](https://leadmagic.io/pricing?utm_source=g
 
 ## Plan ladder
 
-| Plan | Monthly | Credits / mo | Rollover | Seats | Search API |
-|---|---|---|---|---|---|
-| **Basic** | $49.99 | 2,000 | No | 1 | Metered (credits per search) |
-| **Essential** | $99 | 5,000 | Yes | Team | Metered; in-app Search included |
-| **Growth** | $249 | 20,000 | Yes | Team | Metered; in-app Search included |
-| **Professional** | $499 | 50,000 | Yes | Team | **Credit-free at 5 req/s** |
-| **Ultimate** | $849 | 100,000 | Yes | Team | **Credit-free at 10 req/s** |
+Current monthly and annual prices, included credits, and rollover terms are published on [leadmagic.io/pricing](https://leadmagic.io/pricing?utm_source=github&utm_medium=readme&utm_campaign=leadmagic-skills) — read them there rather than from a copy.
 
-Annual plans grant 12× the monthly credits **up front** at roughly two months free: Basic $490 / 24,000 · Essential $990 / 60,000 · Growth $2,490 / 240,000 · Professional $4,990 / 600,000 · Ultimate $8,490 / 1,200,000.
+| Plan | Search API |
+|---|---|
+| **Basic** | Metered (credits per search) |
+| **Essential** | Metered; in-app Search included |
+| **Growth** | Metered; in-app Search included |
+| **Professional** | **Credit-free browse search at 5 req/s, fair-use cap** |
+| **Ultimate** | **Credit-free browse search at 10 req/s, fair-use cap** |
 
 Enterprise / custom plans exist — credits, rate, and Search API throughput are set per agreement; check `GET /v1/credits` and ask your account contact rather than assuming a tier.
 
@@ -22,11 +22,11 @@ Enterprise / custom plans exist — credits, rate, and Search API throughput are
 
 The v3 discovery surfaces — `POST /v3/people/search` (+variants), `POST /v3/companies/search` / `lookalike`, `POST /v3/jobs/search` — behave differently by plan:
 
-- **Professional & Ultimate:** search requests do not consume credits, up to 5 / 10 requests per second sustained. Ideal for TAM mapping, list building at scale, and continuous monitoring.
+- **Professional & Ultimate:** browse search requests do not consume credits, up to 5 / 10 requests per second, within a fair-use cap shared across People, Company and Jobs search ([leadmagic.io/unlimited](https://leadmagic.io/unlimited?utm_source=github&utm_medium=readme&utm_campaign=leadmagic-skills)). Lookalikes and exports stay metered. Ideal for TAM mapping, list building at scale, and continuous monitoring.
 - **All other plans:** every search bills the catalog cost (1 credit per returned row). Nobody is hard-blocked — searches just cost credits.
 - Free on every plan: count/preview/stats helpers (`/v3/search/stats`, `/v3/jobs/search/stats`, catalogs, facets).
 
-**Agent guidance:** on Basic–Growth, prefer narrow filters + small `per_page` and use free stats endpoints to size a query before revealing rows. On Professional/Ultimate, fan out freely within the RPS cap.
+**Agent guidance:** on Basic–Growth, prefer narrow filters + small `per_page` and use free stats endpoints to size a query before revealing rows. On Professional/Ultimate, fan out within the RPS and fair-use caps.
 
 ## Enrichment credit costs (identical on every plan)
 

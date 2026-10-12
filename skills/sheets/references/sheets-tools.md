@@ -68,7 +68,7 @@ Ops: `eq`, `contains`, `empty`, `notEmpty`, `hasResults`, `noResults`, `hasError
 | `list_sheet_runs` | Runs on a sheet (progress, credits, status) | `active: true`; `wait_seconds` 45 once instead of polling |
 | `get_sheet_run` | One run by id | `wait_seconds` ≤45 |
 | `list_sheet_run_rows` | How each row ended (no values) | Use to explain failures |
-| `pause_sheet_run` | Pause; finished cells stay, no more charges | Resume with `resume_cloud_run` |
+| `pause_sheet_run` | Pause; finished cells stay, no more charges | — |
 | `cancel_sheet_run` | Stop for good | Unstarted rows not charged |
 
 `run_sheet_column` row selection: `scope` (`column` | `selection` + `row_ids` | `sheet`), `filter`, `q`, `row_state` (`failed`, `insufficientCredits`, `noResult`, `notRun`), `start_row` / `end_row` (1-based), `sample_size` (≤1000), `force` (re-run filled cells), `confirm_max_credits`, `idempotency_key`.
@@ -77,8 +77,6 @@ Ops: `eq`, `contains`, `empty`, `notEmpty`, `hasResults`, `noResults`, `hasError
 
 | Tool | Does | Notes |
 |---|---|---|
-| `search_sheet_http_catalog` | Search verified third-party endpoints | `q`, `provider`, `list_providers` |
-| `get_sheet_http_catalog_endpoint` | One catalog endpoint: inputs, where the key goes, how to get one | With `sheet_id`, returns a template bound to matching columns |
 | `parse_sheet_http_request` | cURL → template | Sends nothing; strip keys from the cURL first |
 | `draft_sheet_http_request` | Goal (+ optional `docs_url`) → validated request | Reads the vendor docs |
 | `test_sheet_http_request` | Send ONE sample request | Private / internal addresses are refused |
@@ -88,19 +86,6 @@ Ops: `eq`, `contains`, `empty`, `notEmpty`, `hasResults`, `noResults`, `hasError
 | `update_sheet_http_request` | Edit in place | Cells made by the old request are marked outdated |
 | `list_sheet_http_credentials` | Keys connected in Sheets → Vault (id, provider, label) | Never returns a key; pass `credential_id` |
 
-## Imports, pushes and workflows (low-level)
-
-The `*_cloud_*` tools are the lower-level surface the Sheets tools are built on. Prefer the Sheets tool when one exists (`read_sheet_rows` over `get_cloud_rows`, `run_sheet_column` over `run_cloud_workflow`, etc.).
-
-| Tool | Does |
-|---|---|
-| `list_cloud_connections` | Workspace CRM connections |
-| `list_cloud_crm_objects` / `list_cloud_crm_fields` / `list_cloud_crm_filters` | Discover what a connected CRM can import |
-| `import_cloud_crm` / `import_cloud_sequencer` | Import rows from a connected CRM / outbound platform (gated; stable `idempotencyKey` UUID) |
-| `list_cloud_imports` / `cancel_cloud_import` | Inspect / cancel imports |
-| `list_cloud_campaigns` | Campaigns in a connected outbound platform |
-| `push_cloud_rows` / `list_cloud_pushes` | Deliver rows to a connected CRM / outbound platform (gated; deduplicated) and inspect outcomes |
-| `list_cloud_workflows` / `create_cloud_workflow` / `update_cloud_workflow` / `quote_cloud_workflow` / `publish_cloud_workflow` | Multi-step per-row pipelines one column runs; quote is free; scheduling needs admin + hard limits |
-| `list_cloud_runs` / `get_cloud_run_trace` / `resume_cloud_run` | Inspect workflow runs, per-row node attempts, resume a paused run |
+## Integrations
 
 Connecting a CRM or outbound platform happens in the app (Integrations), not over MCP.

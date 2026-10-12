@@ -20,11 +20,11 @@ Aliases (same handler): `/v3/jobs-search`, `/v3/job-search`, `/v2/jobs/search`, 
 
 Docs: [Job Search](https://leadmagic.io/docs/api-reference/job-search?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills)
 
-## Unlimited with the right plan
+## Credit-free browse search on qualifying plans
 
-**Professional and Ultimate plans search this endpoint free** — no credits, no volume
-cap. The only limit is rate: **5 req/s sustained (Professional), 10 req/s (Ultimate)**.
-That covers all three modes below. Other plans pay ~1 credit per returned job.
+**On Professional and Ultimate, browse search on this endpoint costs no credits**, at
+**5 req/s (Professional) or 10 req/s (Ultimate)**, within a fair-use cap shared across
+People, Company and Jobs search — see [leadmagic.io/unlimited](https://leadmagic.io/unlimited?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills). Other plans pay ~1 credit per returned job.
 Never ration or narrow a query to save credits on an entitled plan — go broad.
 Export is credit-metered on every plan.
 
@@ -72,7 +72,7 @@ curl -sS -X POST "https://api.leadmagic.io/v3/jobs/search" \
 - Next page: **same filters** + `"cursor": "<next_cursor>"`. Changing filters mid-cursor invalidates it.
 - Never combine `cursor` with a nonzero `offset` — the API rejects it.
 - Stop when `next_cursor` is null / `has_more` is false.
-- On an unlimited plan, paging an entire market is free — just respect the RPS.
+- On Professional or Ultimate, paging is credit-free within the fair-use cap — respect the RPS.
 
 ## Free helpers (0 credits, shape filters first)
 

@@ -33,7 +33,7 @@ curl -sS "https://api.leadmagic.io/v1/credits" -H "X-API-Key: $LEADMAGIC_API_KEY
 
 ## Plans (what a run can afford)
 
-Basic $49.99/mo · 2,000 credits (no rollover, 1 seat) → Essential $99 · 5,000 → Growth $249 · 20,000 → Professional $499 · 50,000 → Ultimate $849 · 100,000 (rollover on Essential+). Annual = 12× credits up front at ~2 months free. **Professional/Ultimate include credit-free Search API throughput (5/10 req/s)** — v3 searches cost 0 credits there and 1 credit/row elsewhere. Full ladder + budgeting: `leadmagic` skill → `references/plans-and-limits.md`.
+Plans are Basic, Essential, Growth, Professional and Ultimate; current prices, monthly credits and rollover are on [leadmagic.io/pricing](https://leadmagic.io/pricing?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills). **Professional and Ultimate include credit-free browse search (5 / 10 req/s) within a fair-use cap** — see [leadmagic.io/unlimited](https://leadmagic.io/unlimited?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills). Other plans pay 1 credit per returned row. Always read the live balance from `GET /v1/credits`. Full ladder + budgeting: `leadmagic` skill → `references/plans-and-limits.md`.
 
 ## Status codes
 

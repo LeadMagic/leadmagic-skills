@@ -8,11 +8,11 @@
 # flow) when stdin cannot be parsed, the tool is not a LeadMagic tool, or
 # LEADMAGIC_ASK_ALL=1 is set.
 #
-# Contract: the ASK_BEFORE_TOOLS array is parsed by
-# lm-tui/tests/unit/plugin-approval-policy.test.ts and mirrored by the Claude Code
-# permissions snippet on app.leadmagic.io (Settings -> API -> AI tooling). One
-# "tool:group" entry per line, double-quoted, sorted. Groups: bulk | run | import |
-# push | delete.
+# The ASK_BEFORE_TOOLS array mirrors the Claude Code permissions snippet on
+# app.leadmagic.io (Settings -> API -> AI tooling). One "tool:group" entry per
+# line, double-quoted, sorted. Groups: bulk | run | import | push | delete.
+# Tools not listed by name still ask when their name starts with an acting verb
+# (import_, push_, publish_, run_, resume_, submit_, restart_, delete_, remove_).
 #
 # Bash 3.2 compatible (macOS /bin/bash): no associative arrays, no lowercasing.
 set -euo pipefail
@@ -22,17 +22,10 @@ ASK_BEFORE_TOOLS=(
   "delete_sheet_column:delete"
   "delete_sheet_rows:delete"
   "find_local_leads:bulk"
-  "import_cloud_crm:import"
-  "import_cloud_sequencer:import"
   "import_sheet_recipe:import"
   "process_attached_csv:bulk"
-  "publish_cloud_workflow:run"
-  "push_cloud_rows:push"
-  "remove_prospect_list_members:delete"
   "restart_bulk_job:bulk"
   "resume_bulk_job:run"
-  "resume_cloud_run:run"
-  "run_cloud_workflow:run"
   "run_sheet_column:run"
   "save_sheet_http_request:push"
   "set_sheet_column_auto_run:run"
@@ -75,6 +68,17 @@ for entry in "${ASK_BEFORE_TOOLS[@]}"; do
   fi
 done
 
+# Name-agnostic fallback: anything that imports, pushes, runs, queues or deletes.
+if [[ -z "$group" ]]; then
+  case "$name" in
+    import_*) group="import" ;;
+    push_*) group="push" ;;
+    publish_*|run_*|resume_*) group="run" ;;
+    submit_*|restart_*) group="bulk" ;;
+    delete_*|remove_*) group="delete" ;;
+  esac
+fi
+
 emit() {
   printf '{"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"%s","permissionDecisionReason":"%s"}}\n' "$1" "$2"
 }
@@ -102,7 +106,7 @@ case "$group" in
   bulk)
     reason="LeadMagic ${name} queues a paid bulk job that bills every row. Check preview_cost and check_credit_balance, confirm the row count, then approve." ;;
   run)
-    reason="LeadMagic ${name} starts a paid run. Confirm the previewed max credits (run_sheet_column preview or quote_cloud_workflow) before approving." ;;
+    reason="LeadMagic ${name} starts a paid run. Confirm the max credits shown by the preview call before approving." ;;
   import)
     reason="LeadMagic ${name} imports records from a connected CRM or sequencer into a LeadMagic sheet. Check platform, object and maxRows before approving." ;;
   push)
