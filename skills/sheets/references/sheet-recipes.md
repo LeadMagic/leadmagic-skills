@@ -19,11 +19,11 @@ A recipe is a sheet minus its data: the columns, in order, and what fills each. 
 Rules:
 
 - `ref` is a lowercase-hyphen id (`^[a-z0-9][a-z0-9-]{0,63}$`). Columns reference each other by `ref`, never by `col_` key.
-- `name` is kept verbatim on import, because prompts, formulas and HTTP templates resolve `{Column Name}` by **name**. Keep names unique.
+- `name` is kept verbatim on import, because prompts and formulas resolve `{Column Name}` by **name**. Keep names unique.
 - Document order is the grid order; run order follows the references.
 - Up to 200 columns, 50 connections, 10 webhook sources, 256 KB per document.
 - Never put keys, tokens, personal data, or workspace ids in a recipe. Account-bound things are **declared** as `connections` and supplied by the importer (`ai_keys`, `leadmagic_keys` on `import_sheet_recipe`).
-- Recipes whose API requests need a secret header must be imported in the app, not over MCP.
+- Recipes containing HTTP requests must be imported and run in the app, not over hosted MCP.
 
 ## Column actions
 
@@ -31,7 +31,6 @@ Rules:
 |---|---|---|
 | `gateway` | `{ "kind": "gateway", "product": "email_finder", "inputs": { "<product field>": "<column ref>" } }` | Any Sheets enrichment product (see the SKILL.md table) |
 | `ai` | `{ "kind": "ai", "style": "text" \| "short" \| "label", "prompt": "… {Column Name} …", "output": { … } }` | `output.type`: `text`, `category` (with `options`, optional `allowEmpty`), `number` (`decimals`), `boolean`, `json`, `email`. Optional `provider` + `model` + `connection` (an `ai` connection) |
-| `http` | `{ "kind": "http", "connection": "<http connection ref>", "field": "…", "inputs": { … } }` | The request lives in `connections` as `{ref, kind: "http", label, template, vars, fields}`; secret headers carry no value |
 | `formula` | `{ "kind": "formula", "src": "{First Name} & \" \" & {Last Name}" }` | ≤8000 chars |
 | `json` | `{ "kind": "json", "source": "<column ref>", "path": ["field", 0, "sub"] }` | One field of another column's response |
 
@@ -95,7 +94,7 @@ Input: emails from another source. Validate before sending.
 
 ### 3. Account qualification
 
-Input: company domains. Enrich the company, then label fit and segment with AI. The AI columns run on the importer's own AI key — map it with `ai_keys`, or the run reports `ai_key_required` and the user adds a key in Sheets → Vault.
+Input: company domains. Enrich the company, then label fit and segment with AI. The AI columns use LeadMagic AI by default and charge credits by usage. A user can instead select a saved provider key in Sheets → Vault.
 
 ```json
 {
@@ -148,6 +147,6 @@ Input: domain + the title to look for. Role Finder returns the person; then find
 
 When a user describes a workflow from another tool ("find the email, then check it, then write an opener"):
 
-1. Map each step to a column kind: lookup → `gateway`, judgement/writing → `ai`, third-party API → `http`, string assembly → `formula`, pick-a-field → `json`.
+1. Map each step to a column kind: lookup → `gateway`, judgement/writing → `ai`, string assembly → `formula`, pick-a-field → `json`.
 2. Write the recipe, show it to the user, then `import_sheet_recipe`.
-3. Steps with no Sheets product (job postings, ads, people search) stay outside the sheet — run them with their own skills and add the results as rows.
+3. Third-party HTTP requests must be configured and run in the app. Steps with no Sheets product (job postings, ads, people search) stay outside the sheet — run them with their own skills and add the results as rows.

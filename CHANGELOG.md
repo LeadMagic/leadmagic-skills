@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.1] — 2026-10-12
+
+- Match the hosted MCP surface: use public bulk submission, route custom HTTP columns to the app, and remove paused ads and competitor MCP tools from recommendations.
+- Ask before editing existing sheet cells or cancelling a sheet run; honor the user's selected automatic permission mode.
+- Document LeadMagic AI as the default for Sheets, with saved provider keys as an option.
+- Add approval-hook regressions for both MCP tool name prefixes.
+
 ## [3.1.0] — 2026-10-01
 
 ### Added

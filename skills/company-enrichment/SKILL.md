@@ -5,7 +5,7 @@ license: MIT
 compatibility: "Requires network access to api.leadmagic.io or mcp.leadmagic.io."
 metadata:
   author: LeadMagic
-  version: "3.0.1"
+  version: "3.0.2"
   homepage: https://leadmagic.io?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   docs: https://leadmagic.io/docs?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   github: https://github.com/LeadMagic/leadmagic-skills
@@ -55,4 +55,4 @@ curl -sS -X POST "https://api.leadmagic.io/v3/companies/lookalike" \
 - People at a company by filters → `people-search`; buyers → `outbound-recipes` recipe 7
 - Hiring/intent signals for the account → `jobs-hiring-intent`
 - What they're advertising → `ads-intelligence`
-- MCP: `enrich_company`, `research_account`, `find_company_funding`, `get_company_technographics`, `find_lookalike_companies`, `list_company_competitors`
+- MCP: `enrich_company`, `account_intel`, `find_company_funding`, `get_company_technographics`, `find_lookalike_companies`

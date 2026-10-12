@@ -1,8 +1,8 @@
 {
   "name": "leadmagic",
   "displayName": "LeadMagic",
-  "version": "3.1.0",
-  "description": "Official LeadMagic plugin for Claude Code — hosted MCP (130+ tools), complete API skills for every endpoint, credit-safe hooks, and outbound-system recipes: email finding and validation, People Search v3, company and lookalike research, hiring-intent triggers, ads intelligence, bulk CSV enrichment, and live Sheets with formula, AI, and enrichment columns.",
+  "version": "3.1.1",
+  "description": "Official LeadMagic plugin for Claude Code — hosted MCP, complete API skills for every endpoint, credit-safe hooks, and outbound-system recipes: email finding and validation, People Search v3, company and lookalike research, hiring-intent triggers, ads intelligence, bulk CSV enrichment, and live Sheets with formula, AI, and enrichment columns.",
   "author": {
     "name": "LeadMagic",
     "email": "plugins@leadmagic.io",
@@ -30,7 +30,6 @@
     "./agents/leadmagic-outbound.md",
     "./agents/leadmagic-bulk.md"
   ],
-  "hooks": "./hooks/hooks.json",
   "mcpServers": "./.mcp.json",
   "commands": [
     "./commands/check-credits.md",

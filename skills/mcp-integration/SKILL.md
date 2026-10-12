@@ -5,7 +5,7 @@ license: MIT
 compatibility: "Requires network access to mcp.leadmagic.io. OAuth by default on the hosted MCP."
 metadata:
   author: LeadMagic
-  version: "3.1.0"
+  version: "3.1.1"
   homepage: https://leadmagic.io?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   docs: https://leadmagic.io/docs/mcp/setup?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   github: https://github.com/LeadMagic/leadmagic-skills
@@ -35,7 +35,7 @@ Cursor configuration (other clients use their own formats; consult the setup doc
 }
 ```
 
-Claude web / desktop custom connector: URL `https://mcp.leadmagic.io` (no `/mcp`). Per-client steps: [mcp.leadmagic.io/clients](https://mcp.leadmagic.io/clients).
+Claude web / desktop custom connector: URL `https://mcp.leadmagic.io/mcp`. Per-client steps: [mcp.leadmagic.io/clients](https://mcp.leadmagic.io/clients).
 
 New users: sign up at [app.leadmagic.io](https://app.leadmagic.io/sign-up?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills), run one thing in the app (e.g. a first sheet in Sheet Enrichment — see the `sheets` skill), then connect the MCP. OAuth signs the client into a **workspace**; pick the one that owns the user's sheets and credits.
 
@@ -51,17 +51,18 @@ Complete OAuth in the browser on first use. **401 later → reconnect OAuth in t
 | `b2b_profile_to_work_email` / `email_to_b2b_profile` | b2b-profile-email / b2b-profile |
 | `search_profile` / `enrich_contact` | profile-search (+composite) |
 | `search_people` / `find_people_by_role` / `find_company_employees` | v3 people search / role-finder / employee-finder |
-| `enrich_company` / `account_intel` / `research_account` | company-search (+composite brief) |
+| `enrich_company` / `account_intel` | company-search (+composite brief) |
 | `find_company_funding` / `get_company_technographics` | company-funding / technographics |
-| `find_lookalike_companies` / `list_company_competitors` | v3 lookalike / competitors-search |
+| `find_lookalike_companies` | v3 lookalike |
 | `find_decision_makers` | role/employee composite |
-| `find_jobs` / `search_jobs` / `get_job_search_catalogs` | jobs search + free catalogs |
+| `find_jobs` / `search_jobs` | jobs search |
 | `get_company_hiring_signals` | `/v1/jobs/companies/{domain}/hiring-signals` |
 | `detect_job_change` | job-change-detector |
-| `search_google_ads` / `search_meta_ads` / `search_b2b_ads` / `get_b2b_ad_details` | ads endpoints |
-| `submit_bulk_job` / `process_attached_csv` / `get_bulk_job_status` | `/bulk/*` |
+| `submit_detected_bulk_job` / `process_attached_csv` / `get_bulk_job_status` | `/bulk/*` |
 | `get_account_analytics` | `/v1/analytics/*` (free) |
 | `list_sheets` / `get_sheet` / `add_sheet_columns` / `run_sheet_column` / `read_sheet_rows` (+ ~40 more) | Sheets (MCP + app only, no public REST) — see the `sheets` skill |
+
+Ads and competitor tools are currently paused on hosted MCP. Custom HTTP request columns are configured and run in the LeadMagic app; hosted MCP exposes no arbitrary outbound HTTP tools.
 
 Sheets tools only appear when the signed-in workspace has Sheets (paid plan). If they're missing, check the plan and the workspace chosen during OAuth, then reconnect.
 

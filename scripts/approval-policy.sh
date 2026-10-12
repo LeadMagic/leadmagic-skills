@@ -12,12 +12,13 @@
 # lm-tui/tests/unit/plugin-approval-policy.test.ts and mirrored by the Claude Code
 # permissions snippet on app.leadmagic.io (Settings -> API -> AI tooling). One
 # "tool:group" entry per line, double-quoted, sorted. Groups: bulk | run | import |
-# push | delete.
+# push | delete | edit.
 #
 # Bash 3.2 compatible (macOS /bin/bash): no associative arrays, no lowercasing.
 set -euo pipefail
 
 ASK_BEFORE_TOOLS=(
+  "cancel_sheet_run:edit"
   "create_bulk_upload_session:bulk"
   "delete_sheet_column:delete"
   "delete_sheet_rows:delete"
@@ -35,6 +36,7 @@ ASK_BEFORE_TOOLS=(
   "run_cloud_workflow:run"
   "run_sheet_column:run"
   "save_sheet_http_request:push"
+  "set_sheet_cells:edit"
   "set_sheet_column_auto_run:run"
   "submit_bulk_job:bulk"
   "submit_detected_bulk_job:bulk"
@@ -67,6 +69,22 @@ if [[ ! "$tool" =~ ^mcp__(plugin_leadmagic_)?leadmagic__([a-z0-9_]+)$ ]]; then
 fi
 name="${BASH_REMATCH[2]}"
 
+# PreToolUse input includes permission_mode (default | acceptEdits | plan |
+# auto | dontAsk | bypassPermissions). "ask" from this hook forces a prompt
+# even in auto mode, so honor the modes that already skip approval prompts.
+permission_mode=""
+permission_mode_pattern='"permission_mode"[[:space:]]*:[[:space:]]*"([^"]*)"'
+if [[ "$input" =~ $permission_mode_pattern ]]; then
+  permission_mode="${BASH_REMATCH[1]}"
+fi
+
+session_skips_ask() {
+  case "$permission_mode" in
+    bypassPermissions|auto|dontAsk) return 0 ;;
+    *) return 1 ;;
+  esac
+}
+
 group=""
 for entry in "${ASK_BEFORE_TOOLS[@]}"; do
   if [[ "${entry%%:*}" == "$name" ]]; then
@@ -74,6 +92,17 @@ for entry in "${ASK_BEFORE_TOOLS[@]}"; do
     break
   fi
 done
+
+# Keep new acting tools protected without relying on a copied catalog entry.
+if [[ -z "$group" ]]; then
+  case "$name" in
+    import_*) group="import" ;;
+    push_*) group="push" ;;
+    publish_*|run_*|resume_*) group="run" ;;
+    submit_*|restart_*) group="bulk" ;;
+    delete_*|remove_*) group="delete" ;;
+  esac
+fi
 
 emit() {
   printf '{"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"%s","permissionDecisionReason":"%s"}}\n' "$1" "$2"
@@ -87,9 +116,10 @@ fi
 # The hosted server runs these tools only when the call carries the
 # confirmation_token its first, preview-only call returned. So the preview runs
 # unprompted and the person is asked once, on the call that would act. The two
-# widget openers carry no token and always ask.
+# widget openers, cell edits, and sheet cancellations carry no token and ask in
+# the default permission modes.
 case "$name" in
-  create_bulk_upload_session|process_attached_csv) ;;
+  create_bulk_upload_session|process_attached_csv|set_sheet_cells|cancel_sheet_run) ;;
   *)
     token_pattern='"confirmation_token"[[:space:]]*:[[:space:]]*"'
     if [[ ! "$input" =~ $token_pattern ]]; then
@@ -102,14 +132,20 @@ case "$group" in
   bulk)
     reason="LeadMagic ${name} queues a paid bulk job that bills every row. Check preview_cost and check_credit_balance, confirm the row count, then approve." ;;
   run)
-    reason="LeadMagic ${name} starts a paid run. Confirm the previewed max credits (run_sheet_column preview or quote_cloud_workflow) before approving." ;;
+    reason="LeadMagic ${name} starts a paid run. Confirm the max credits shown by the preview call before approving." ;;
   import)
     reason="LeadMagic ${name} imports records from a connected CRM or sequencer into a LeadMagic sheet. Check platform, object and maxRows before approving." ;;
   push)
     reason="LeadMagic ${name} writes sheet rows out to a connected CRM or sequencer. Review the selected rows and destination before approving." ;;
   delete)
     reason="LeadMagic ${name} deletes rows or list members in your LeadMagic workspace. Confirm the ids before approving." ;;
+  edit)
+    reason="LeadMagic ${name} changes existing sheet data or stops an active sheet run. Review the target before approving." ;;
   *)
     reason="LeadMagic ${name} needs explicit approval under the LeadMagic plugin policy." ;;
 esac
+if session_skips_ask; then
+  emit allow "LeadMagic ${name}: session permission_mode is ${permission_mode}, so the LeadMagic plugin does not add an approval prompt."
+  exit 0
+fi
 emit ask "$reason"
