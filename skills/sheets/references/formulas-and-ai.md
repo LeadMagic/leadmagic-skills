@@ -1,6 +1,6 @@
 # Formulas, AI on OpenRouter, and sheet ideas
 
-Formula and JSON columns are free and recompute by themselves when their inputs change. AI columns run on the user's own model key. Put cheap, deterministic work in formulas, judgement and writing in AI, and spend LeadMagic credits only on the lookups.
+Formula and JSON columns are free and recompute by themselves when their inputs change. AI columns use LeadMagic AI by default and charge credits by usage; they can also run on the user's saved provider key. Put cheap, deterministic work in formulas, judgement and writing in AI, and sample paid AI or enrichment columns before a large run.
 
 ## Formulas
 
@@ -35,7 +35,7 @@ Set one with `configure_sheet_column` (`kind: "formula"`, `formula: "…"`) or i
 
 ## AI columns on OpenRouter (one-time setup)
 
-OpenRouter gives one key for hundreds of models, so it is the simplest way to light up AI columns.
+LeadMagic AI needs no provider key. To bill model usage to an OpenRouter account instead, configure a saved OpenRouter key:
 
 1. Create a key at [openrouter.ai/keys](https://openrouter.ai/keys) (it starts with `sk-or-`) and add credit there. Model usage bills to that account, not to LeadMagic credits.
 2. In the app: Sheet Enrichment → **Vault** → add the key under **OpenRouter** and make it the default. Never paste the key into chat or a recipe.
@@ -50,7 +50,7 @@ Each idea lists its columns left to right: **manual** inputs, then *(formula)*, 
 
 1. **Lead list cleanup → work emails.** Full Name, Website → First Name *(formula `NAME_FIRST(CLEAN_PERSON_NAME({Full Name}))`)*, Last Name *(formula `NAME_LAST(…)`)*, Domain *(formula `DOMAIN({Website})`)* → Work Email *(credits: `email_finder` on first/last/domain)*. Formulas do the cleanup for free, so the finder hits more rows.
 2. **Inbound triage.** Email, Message (from a webhook or paste) → Domain *(formula)*, Role Inbox *(formula regex)* → Company *(credits: `company_search` on Domain)* → Intent *(AI on OpenRouter, category `Buying / Support / Job seeker / Spam`)* → Route *(formula `IFS(...)` on Intent)*.
-3. **Account tiering.** Domain → Company *(credits: `company_search`)* → Tier *(AI category `A / B / C` with your ICP in the prompt)* → Next Step *(formula routing from Tier)*. Re-run only Tier when the ICP changes — no credits.
+3. **Account tiering.** Domain → Company *(credits: `company_search`)* → Tier *(AI category `A / B / C` with your ICP in the prompt)* → Next Step *(formula routing from Tier)*. Re-run only Tier when the ICP changes; AI usage is billed to LeadMagic credits or the saved provider account.
 4. **First-line personalisation.** First Name, Company Name, Title, Domain → Greeting *(formula safe greeting)* → Opener *(AI text, ≤25 words, prompt names `{Title}` and `{Company Name}`)* → Line *(formula `{Greeting} & ", " & {Opener}`)*. Pair with `email_finder` when the email is missing.
 5. **Email hygiene before a send.** Email → Email Domain *(formula `DOMAIN({Email})`)*, Role Inbox *(formula)* → Validation *(credits: `email_validation`, the cheapest product)* → Send? *(formula `AND(NOT({Role Inbox}), {Validation} <> "")` — tighten once you see the Validation fields with `list_sheet_column_fields`)*.
 6. **Job-change sweep for a customer list.** Profile URL, Domain, Company Name → Job Change *(credits: `job_change_detector`)* → JSON-extracted status fields → Talk Track *(AI text on OpenRouter for the changed rows only — run with a `filter`)*.

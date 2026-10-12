@@ -5,7 +5,7 @@ license: MIT
 compatibility: "Requires network access to api.leadmagic.io or mcp.leadmagic.io."
 metadata:
   author: LeadMagic
-  version: "3.0.1"
+  version: "3.0.2"
   homepage: https://leadmagic.io?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   docs: https://leadmagic.io/docs?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   github: https://github.com/LeadMagic/leadmagic-skills
@@ -43,4 +43,4 @@ curl -sS -X POST "https://api.leadmagic.io/v1/ads/meta-ads-search" \
 - **Weekly competitor monitor** (recipe 9): 3 searches/competitor (cost depends on returned ads) → diff vs last week → details on new creatives (2) → messaging brief.
 - **Angle mining**: competitor's ad promises become your cold-email counter-positioning ("they promise X; here's where X breaks").
 - **Warm-account signal**: a target account running B2B ads = active budget + market pressure; stack with hiring signals (`jobs-hiring-intent`) for timing.
-- MCP: `search_google_ads`, `search_meta_ads`, `search_b2b_ads`, `get_b2b_ad_details`.
+- Ads tools are currently paused on the hosted MCP. Use the REST endpoints above when available; do not invent an MCP tool.

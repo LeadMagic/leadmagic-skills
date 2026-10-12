@@ -33,7 +33,7 @@ Ops: `eq`, `contains`, `empty`, `notEmpty`, `hasResults`, `noResults`, `hasError
 |---|---|---|
 | `create_sheet` | Empty sheet, optional manual columns in order | Free; needs a paid plan; returns keys |
 | `update_sheet` | Rename, file in a folder (`null` = unfiled), archive / unarchive | Archived sheets keep their data |
-| `import_sheet_recipe` | New sheet from a recipe document | Gated when the recipe carries API requests or webhook sources |
+| `import_sheet_recipe` | New sheet from a recipe document | API requests are refused; webhook sources are gated |
 | `export_sheet_recipe` | Current sheet → recipe JSON (keys replaced by named connections) | Stores nothing; `author_name` is a display name, never an email |
 
 ## Rows and cells
@@ -41,7 +41,7 @@ Ops: `eq`, `contains`, `empty`, `notEmpty`, `hasResults`, `noResults`, `hasError
 | Tool | Does | Notes |
 |---|---|---|
 | `add_sheet_rows` | Append rows `{column_key: value}` | ≤100 per call; ≤4000 chars per cell; returns row ids + `columns_to_fill`; never runs anything |
-| `set_sheet_cells` | Edits `{row_id, column_key, value}` | ≤500 per call; live in the user's grid |
+| `set_sheet_cells` | Edits `{row_id, column_key, value}` | ≤500 per call; asks before editing live cells |
 | `delete_sheet_rows` | Soft delete by id | Gated; undo with `restore_sheet_rows` |
 | `restore_sheet_rows` | Bring back deleted rows | |
 
@@ -49,9 +49,9 @@ Ops: `eq`, `contains`, `empty`, `notEmpty`, `hasResults`, `noResults`, `hasError
 
 | Tool | Does | Notes |
 |---|---|---|
-| `add_sheet_columns` | Add + configure up to 50 columns left to right | Any kind; `after_column_key` to place |
+| `add_sheet_columns` | Add + configure up to 50 columns left to right | Manual, enrichment, AI, formula or JSON; `after_column_key` to place |
 | `add_sheet_column` | Add one `manual` or `enrichment` column | For ai / formula / json: add manual, then configure |
-| `configure_sheet_column` | Set what fills an existing column | Kinds: enrichment, http, ai, formula, json, manual (manual = stop filling, values stay) |
+| `configure_sheet_column` | Set what fills an existing column | Kinds: enrichment, ai, formula, json, manual (manual = stop filling, values stay) |
 | `update_sheet_column` | Rename, hide, or turn an empty manual column into enrichment | |
 | `extract_sheet_json_field` | New column reading one field of another column's response | Free; placed after the source by default |
 | `reorder_sheet_columns` | Set full left-to-right order | Pass every key from `get_sheet` |
@@ -64,27 +64,18 @@ Ops: `eq`, `contains`, `empty`, `notEmpty`, `hasResults`, `noResults`, `hasError
 
 | Tool | Does | Notes |
 |---|---|---|
-| `run_sheet_column` | Quote and run enrichment / AI / API columns | `also_column_keys` ≤9 more; dependents start after their inputs; paid stages gated; returns `next_step` + `next_arguments` for the next paid stage |
+| `run_sheet_column` | Quote and run enrichment / AI columns | `also_column_keys` ≤9 more; dependents start after their inputs; paid stages gated; returns `next_step` + `next_arguments` for the next paid stage |
 | `list_sheet_runs` | Runs on a sheet (progress, credits, status) | `active: true`; `wait_seconds` 45 once instead of polling |
 | `get_sheet_run` | One run by id | `wait_seconds` ≤45 |
 | `list_sheet_run_rows` | How each row ended (no values) | Use to explain failures |
 | `pause_sheet_run` | Pause; finished cells stay, no more charges | — |
-| `cancel_sheet_run` | Stop for good | Unstarted rows not charged |
+| `cancel_sheet_run` | Stop for good | Asks before changing the run; unstarted rows not charged |
 
 `run_sheet_column` row selection: `scope` (`column` | `selection` + `row_ids` | `sheet`), `filter`, `q`, `row_state` (`failed`, `insufficientCredits`, `noResult`, `notRun`), `start_row` / `end_row` (1-based), `sample_size` (≤1000), `force` (re-run filled cells), `confirm_max_credits`, `idempotency_key`.
 
 ## API (HTTP) columns
 
-| Tool | Does | Notes |
-|---|---|---|
-| `parse_sheet_http_request` | cURL → template | Sends nothing; strip keys from the cURL first |
-| `draft_sheet_http_request` | Goal (+ optional `docs_url`) → validated request | Reads the vendor docs |
-| `test_sheet_http_request` | Send ONE sample request | Private / internal addresses are refused |
-| `save_sheet_http_request` | Save template; attach via `column_name` or `column_key` | Gated; `fields` = response fields offered as columns |
-| `list_sheet_http_requests` | Saved requests in the workspace | Never includes credentials |
-| `get_sheet_http_request` | One saved request | Secret headers come back as `[stored securely]` — send unchanged to keep |
-| `update_sheet_http_request` | Edit in place | Cells made by the old request are marked outdated |
-| `list_sheet_http_credentials` | Keys connected in Sheets → Vault (id, provider, label) | Never returns a key; pass `credential_id` |
+Configure and run custom HTTP columns in the LeadMagic app. They are unavailable over hosted MCP.
 
 ## Integrations
 

@@ -5,7 +5,7 @@ license: MIT
 compatibility: "Requires network access to api.leadmagic.io."
 metadata:
   author: LeadMagic
-  version: "3.0.1"
+  version: "3.0.2"
   homepage: https://leadmagic.io?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   docs: https://leadmagic.io/docs/api-reference/bulk-jobs-submit?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   github: https://github.com/LeadMagic/leadmagic-skills
@@ -78,4 +78,4 @@ curl -sS -X POST "https://api.leadmagic.io/bulk/submit" \
 - Poll ≥45s; prefer `callback` for jobs over a few thousand rows.
 - Match rate matters: since misses are free, a conservative budget = rows × cost × expected match rate; a hard ceiling = rows × cost.
 - Synchronous mini-batch for small arrays (no job overhead): `POST /v1/{product}/batch` or `POST /v1/batch` (mixed products). Suppression lists: `/v1/batch/suppression-lists`.
-- MCP: `submit_bulk_job`, `submit_detected_bulk_job`, `process_attached_csv` (chat CSV uploads), `get_bulk_job_status`, `get_bulk_job_rows`, `get_bulk_job_errors`, `list_bulk_jobs`.
+- MCP: `submit_detected_bulk_job`, `process_attached_csv` (chat CSV uploads), `get_bulk_job_status`, `get_bulk_job_rows`, `get_bulk_job_errors`, `list_bulk_jobs`.
