@@ -5,7 +5,7 @@ license: MIT
 compatibility: "Requires network access to mcp.leadmagic.io. OAuth by default on the hosted MCP."
 metadata:
   author: LeadMagic
-  version: "3.1.1"
+  version: "3.1.2"
   homepage: https://leadmagic.io?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   docs: https://leadmagic.io/docs/mcp/setup?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   github: https://github.com/LeadMagic/leadmagic-skills
@@ -48,17 +48,19 @@ Complete OAuth in the browser on first use. **401 later → reconnect OAuth in t
 | `check_credit_balance` / `preview_cost` | `GET /v1/credits` / `POST /v1/batch/preview-cost` (free) |
 | `find_work_email` / `validate_work_email` | email-finder / email-validation |
 | `find_personal_email` / `find_mobile_number` | personal-email-finder / mobile-finder |
-| `b2b_profile_to_work_email` / `email_to_b2b_profile` | b2b-profile-email / b2b-profile |
+| `b2b_profile_to_work_email` / `linkedin_profile_to_work_email` / `email_to_b2b_profile` | b2b-profile-email / b2b-profile |
 | `search_profile` / `enrich_contact` | profile-search (+composite) |
 | `search_people` / `find_people_by_role` / `find_company_employees` | v3 people search / role-finder / employee-finder |
-| `enrich_company` / `account_intel` | company-search (+composite brief) |
+| `enrich_company` | company-search |
+| `research_account` / `account_intel` | MCP account snapshot / research composites (no single REST equivalent) |
 | `find_company_funding` / `get_company_technographics` | company-funding / technographics |
 | `find_lookalike_companies` | v3 lookalike |
 | `find_decision_makers` | role/employee composite |
 | `find_jobs` / `search_jobs` | jobs search |
 | `get_company_hiring_signals` | `/v1/jobs/companies/{domain}/hiring-signals` |
 | `detect_job_change` | job-change-detector |
-| `submit_detected_bulk_job` / `process_attached_csv` / `get_bulk_job_status` | `/bulk/*` |
+| `find_local_leads` | `POST /bulk/local-leads` |
+| `submit_detected_bulk_job` / `process_attached_csv` / `get_bulk_job_status` / `watch_bulk_job_progress` / `pause_bulk_job` / `resume_bulk_job` / `restart_bulk_job` / `export_bulk_job` | `/bulk/*` |
 | `get_account_analytics` | `/v1/analytics/*` (free) |
 | `list_sheets` / `get_sheet` / `add_sheet_columns` / `run_sheet_column` / `read_sheet_rows` (+ ~40 more) | Sheets (MCP + app only, no public REST) — see the `sheets` skill |
 

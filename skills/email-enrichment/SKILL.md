@@ -5,7 +5,7 @@ license: MIT
 compatibility: "Requires network access to api.leadmagic.io or mcp.leadmagic.io."
 metadata:
   author: LeadMagic
-  version: "3.0.1"
+  version: "3.0.2"
   homepage: https://leadmagic.io?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   docs: https://leadmagic.io/docs?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   github: https://github.com/LeadMagic/leadmagic-skills
@@ -57,7 +57,7 @@ curl -sS -X POST "https://api.leadmagic.io/v1/people/b2b-profile-email" \
 
 ## Rules
 
-- Validate emails sourced OUTSIDE LeadMagic before every send (recipe: `outbound-recipes` skill, "List hygiene"). Send only `valid` (+ `catch_all` at your own risk). Finder-returned emails are already validated — skip re-validation.
+- Public email-validation statuses are exactly `valid`, `invalid`, and `unknown`. Validate emails sourced OUTSIDE LeadMagic before every send (recipe: `outbound-recipes` skill, "List hygiene"). Send only `valid`; catch-all and other unverifiable outcomes are `unknown`, never a fourth status or send-ready. Finder-returned emails are already validated — skip re-validation.
 - A miss is free but final for that input — don't resubmit the identical request hoping for a different answer.
 - Lists ≥ 50 rows → bulk (`bulk-jobs` skill) with `product: "email_finder"` / `"email_validation"`; billed per successful row.
 - MCP equivalents: `find_work_email`, `validate_work_email`, `find_personal_email`, `b2b_profile_to_work_email`, `email_to_b2b_profile`.
