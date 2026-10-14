@@ -4,6 +4,7 @@
 
 ## Start here
 
+- [Simple connection skill](skills/connect-leadmagic/SKILL.md): choose the user's app, install its connection, and verify table access without running enrichment
 - [Router skill](skills/leadmagic/SKILL.md): safety rules, product-picking heuristics, skill map
 - [Complete endpoint reference](skills/leadmagic/references/leadmagic-api-quickref.md): every endpoint with credit cost, rate limit, and aliases
 - [Plans & limits](skills/leadmagic/references/plans-and-limits.md): plan ladder, Search API entitlements, budgeting, 402/429 playbook

@@ -21,7 +21,7 @@ This repo does **not** document how LeadMagic's own apps are built.
 
 | Path | What |
 |------|------|
-| `skills/*/SKILL.md` | 15 product skills (also consumed standalone via `npx skills add`) |
+| `skills/*/SKILL.md` | 16 product and setup skills (also consumed standalone via `npx skills add`) |
 | `skills/leadmagic/references/` | Endpoint quickref, plans & limits, recipes, learnings |
 | `skills/sheets/references/` | Sheets tool catalog, recipe format, formulas + AI on OpenRouter, sheet ideas |
 | `.claude-plugin/plugin.json` | Plugin manifest (skills + commands + agents + hooks + MCP) |
@@ -33,7 +33,7 @@ Claude Code names this plugin's MCP tools `mcp__plugin_leadmagic_leadmagic__<too
 
 ## Skill map
 
-Router: `leadmagic`. Focused: `api-auth-credits`, `email-enrichment`, `people-search`, `people-enrichment`, `company-enrichment`, `company-search`, `job-search`, `jobs-hiring-intent`, `ads-intelligence`, `bulk-jobs`, `sheets`, `analytics-observability`, `outbound-recipes`, `mcp-integration`.
+Router: `leadmagic`. Setup: `connect-leadmagic`. Focused: `api-auth-credits`, `email-enrichment`, `people-search`, `people-enrichment`, `company-enrichment`, `company-search`, `job-search`, `jobs-hiring-intent`, `ads-intelligence`, `bulk-jobs`, `sheets`, `analytics-observability`, `outbound-recipes`, `mcp-integration`.
 
 ## Editing rules
 
