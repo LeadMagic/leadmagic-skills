@@ -4,12 +4,12 @@ description: "LeadMagic competitor ads research — Google Ads, Meta (Facebook/I
 license: MIT
 compatibility: "Requires network access to api.leadmagic.io or mcp.leadmagic.io."
 metadata:
-  author: LeadMagic
-  version: "3.0.2"
+  author: LeadMagic Corporation
+  version: "3.0.3"
   homepage: https://leadmagic.io?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   docs: https://leadmagic.io/docs?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   github: https://github.com/LeadMagic/leadmagic-skills
-  publisher: LeadMagic
+  publisher: LeadMagic Corporation
   tags: [leadmagic, ads, google-ads, meta-ads, b2b-ads, competitive-intel]
 ---
 

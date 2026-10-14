@@ -4,12 +4,12 @@ description: "LeadMagic V3 jobs search via POST /v3/jobs/search — 46M+ open jo
 license: MIT
 compatibility: "Requires network access to api.leadmagic.io."
 metadata:
-  author: LeadMagic
-  version: "1.0.0"
+  author: LeadMagic Corporation
+  version: "1.0.1"
   homepage: https://leadmagic.io?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   docs: https://leadmagic.io/docs/api-reference/job-search?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   github: https://github.com/LeadMagic/leadmagic-skills
-  publisher: LeadMagic
+  publisher: LeadMagic Corporation
   tags: [leadmagic, job-search, jobs, v3, hiring-signals, unlimited, b2b]
 ---
 

@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.1.3 — 2026-10-13
+
+- Use LeadMagic Corporation for plugin author, marketplace owner, and skill author/publisher metadata. Keep LeadMagic as the product name.
+- Validate corporate publisher metadata and bump each changed skill metadata version.
+
 ## 3.1.2 — 2026-10-13
 
 - Validate approval-hook JSON fields and preserve normal permissions for invalid input or a missing `jq` installation.

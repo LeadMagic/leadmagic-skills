@@ -131,11 +131,17 @@ for skill_dir in "$SKILLS_DIR"/*/; do
     warn "$skill_name: missing optional 'license' (recommend MIT)"
   fi
   if ! printf '%s\n' "$fm" | grep -q '^metadata:'; then
-    warn "$skill_name: missing 'metadata' block (author, version, tags, docs)"
+    fail "$skill_name: missing 'metadata' block with corporate author and publisher"
   else
     for mk in author version tags; do
       if ! has_metadata_key "$fm" "$mk"; then
         warn "$skill_name: metadata missing '$mk'"
+      fi
+    done
+    for mk in author publisher; do
+      publisher_value="$(printf '%s\n' "$fm" | sed -nE "s/^[[:space:]]+${mk}:[[:space:]]*(.*)/\1/p" | head -1 | sed -E 's/^["'\'']//; s/["'\'']$//')"
+      if [ "$publisher_value" != "LeadMagic Corporation" ]; then
+        fail "$skill_name: metadata.$mk must be LeadMagic Corporation"
       fi
     done
   fi
