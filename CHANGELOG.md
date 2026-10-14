@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.1.2 — 2026-10-13
+
+- Validate approval-hook JSON fields and preserve normal permissions for invalid input or a missing `jq` installation.
+- Cover both bundled and hand-added MCP tool names, and require approval for new acting tools until their preview contract is known.
+- Keep default-mode approval for cell edits, sheet cancellation, and upload widgets; preserve the session's selected automatic permission mode.
+- Check public files in CI and document the standalone public policy ownership.
+
 ## Unreleased
 
 - Document the named parameters hosted MCP takes for CRM and outbound imports, workspace runs, saved prospect lists, and saved searches.
@@ -28,7 +35,6 @@ Require job-bound input manifests and identity validation before merging bulk pr
 ## Public-content privacy review — 2026-09-06
 
 Use synthetic contact examples, remove unnecessary identity and credential-like samples, and clarify publication, attribution, and claims requirements.
-
 
 ## Unreleased — 2026-09-06
 
