@@ -31,10 +31,13 @@ Email Finder returns validated work emails. Use Email Validation for externally 
 
 ## What's inside
 
+New to agent setup? [Download the simple connection skill](https://raw.githubusercontent.com/LeadMagic/leadmagic-skills/main/skills/connect-leadmagic/SKILL.md) and open it in your agent. It explains what to install for the app you use, helps you sign in, and checks that your tables are visible.
+
 ### Product skills
 
 | Skill | When to use | Covers |
 |-------|-------------|--------|
+| [`connect-leadmagic`](skills/connect-leadmagic/) | First-time agent setup | Choose your app, connect, and check table access |
 | [`leadmagic`](skills/leadmagic/) | Router + complete references | Endpoint quickref, plans & limits, recipes |
 | [`api-auth-credits`](skills/api-auth-credits/) | Keys, credits, plans, 401/402/403/429 | `/v1/credits`, plan ladder, error contract |
 | [`email-enrichment`](skills/email-enrichment/) | Find/validate email, B2B Profile ↔ email | 5 email endpoints + waterfall order |
