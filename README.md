@@ -2,6 +2,8 @@
 
 <img src="https://raw.githubusercontent.com/LeadMagic/.github/main/profile/assets/leadmagic.svg" width="64" height="64" alt="LeadMagic logo">
 
+Published by LeadMagic Corporation.
+
 Agent skills and a Claude Code plugin for LeadMagic B2B data enrichment: email finding and validation, people and company search, bulk CSV workflows, public REST API guidance, and hosted Model Context Protocol (MCP) integration.
 
 [LeadMagic B2B enrichment](https://leadmagic.io?utm_source=github&utm_medium=readme&utm_campaign=leadmagic-skills&utm_content=readme-intro) · [API documentation](https://leadmagic.io/docs?utm_source=github&utm_medium=readme&utm_campaign=leadmagic-skills&utm_content=readme-intro) · [Pricing and credits](https://leadmagic.io/pricing?utm_source=github&utm_medium=readme&utm_campaign=leadmagic-skills&utm_content=readme-intro)

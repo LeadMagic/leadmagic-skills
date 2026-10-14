@@ -4,12 +4,12 @@ description: "Composable LeadMagic recipes for building outbound systems — ICP
 license: MIT
 compatibility: "Requires network access to api.leadmagic.io or mcp.leadmagic.io."
 metadata:
-  author: LeadMagic
-  version: "3.0.1"
+  author: LeadMagic Corporation
+  version: "3.0.2"
   homepage: https://leadmagic.io?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   docs: https://leadmagic.io/docs?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   github: https://github.com/LeadMagic/leadmagic-skills
-  publisher: LeadMagic
+  publisher: LeadMagic Corporation
   tags: [leadmagic, outbound, recipes, gtm, prospecting, workflows, official]
 ---
 

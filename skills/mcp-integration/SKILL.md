@@ -4,12 +4,12 @@ description: "LeadMagic hosted MCP setup for Claude Code, Claude Desktop, Cursor
 license: MIT
 compatibility: "Requires network access to mcp.leadmagic.io. OAuth by default on the hosted MCP."
 metadata:
-  author: LeadMagic
-  version: "3.1.2"
+  author: LeadMagic Corporation
+  version: "3.1.3"
   homepage: https://leadmagic.io?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   docs: https://leadmagic.io/docs/mcp/setup?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   github: https://github.com/LeadMagic/leadmagic-skills
-  publisher: LeadMagic
+  publisher: LeadMagic Corporation
   tags: [leadmagic, mcp, claude-code, cursor, oauth, enrichment]
 ---
 

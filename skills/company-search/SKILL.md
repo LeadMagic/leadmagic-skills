@@ -4,12 +4,12 @@ description: "LeadMagic V3 company search via POST /v3/companies/search — 25M+
 license: MIT
 compatibility: "Requires network access to api.leadmagic.io."
 metadata:
-  author: LeadMagic
-  version: "1.0.0"
+  author: LeadMagic Corporation
+  version: "1.0.1"
   homepage: https://leadmagic.io?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   docs: https://leadmagic.io/docs/api-reference/company-search-v3?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   github: https://github.com/LeadMagic/leadmagic-skills
-  publisher: LeadMagic
+  publisher: LeadMagic Corporation
   tags: [leadmagic, company-search, v3, accounts, lookalike, unlimited, b2b]
 ---
 

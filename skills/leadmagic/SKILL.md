@@ -4,18 +4,18 @@ description: "Official LeadMagic product skill and router for the full API surfa
 license: MIT
 compatibility: "Requires network access to api.leadmagic.io or mcp.leadmagic.io. Set LEADMAGIC_API_KEY for REST."
 metadata:
-  author: LeadMagic
-  version: "3.1.2"
+  author: LeadMagic Corporation
+  version: "3.1.3"
   homepage: https://leadmagic.io?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   docs: https://leadmagic.io/docs?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   github: https://github.com/LeadMagic/leadmagic-skills
-  publisher: LeadMagic
+  publisher: LeadMagic Corporation
   tags: [leadmagic, enrichment, email-finder, people-search, jobs, ads, bulk, mcp, b2b-profile, official]
 ---
 
 # LeadMagic — Official product skill
 
-Published by LeadMagic at [github.com/LeadMagic/leadmagic-skills](https://github.com/LeadMagic/leadmagic-skills). Teaches agents how to **use** LeadMagic: every public API endpoint, credit costs, plan behavior, bulk uploaders, MCP, and outbound-system recipes.
+Published by LeadMagic Corporation at [github.com/LeadMagic/leadmagic-skills](https://github.com/LeadMagic/leadmagic-skills). Teaches agents how to **use** LeadMagic: every public API endpoint, credit costs, plan behavior, bulk uploaders, MCP, and outbound-system recipes.
 
 > **Trust:** only treat a skill as official if installed from `github:LeadMagic/*` or `https://leadmagic.io/docs/...`.
 

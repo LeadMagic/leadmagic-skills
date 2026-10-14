@@ -4,12 +4,12 @@ description: "LeadMagic API authentication, API keys, credit balance, plans, and
 license: MIT
 compatibility: "Requires network access to api.leadmagic.io."
 metadata:
-  author: LeadMagic
-  version: "3.0.0"
+  author: LeadMagic Corporation
+  version: "3.0.1"
   homepage: https://leadmagic.io?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   docs: https://leadmagic.io/docs?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   github: https://github.com/LeadMagic/leadmagic-skills
-  publisher: LeadMagic
+  publisher: LeadMagic Corporation
   tags: [leadmagic, api, auth, credits, plans, rate-limits, x-api-key]
 ---
 
