@@ -8,9 +8,10 @@
 # flow) when stdin cannot be parsed, the tool is not a LeadMagic tool, or
 # LEADMAGIC_ASK_ALL=1 is set.
 #
-# Contract: the ASK_BEFORE_TOOLS array is parsed by
-# lm-tui/tests/unit/plugin-approval-policy.test.ts and mirrored by the Claude Code
-# permissions snippet on app.leadmagic.io (Settings -> API -> AI tooling). One
+# Contract: tests/test_approval_policy.py verifies this hook. Coordinate policy
+# updates between LeadMagic/leadmagic-claude-plugin and LeadMagic/leadmagic-skills.
+# The policy is also mirrored by the Claude Code permissions
+# snippet on app.leadmagic.io (Settings -> API -> AI tooling). One
 # "tool:group" entry per line, double-quoted, sorted. Groups: bulk | run | import |
 # push | delete | edit.
 #
@@ -52,32 +53,35 @@ if [[ "${LEADMAGIC_ASK_ALL:-}" == "1" ]]; then
   exit 0
 fi
 
-# Leftmost match wins. Claude Code emits tool_name before tool_input, so a
-# "tool_name" string inside tool_input cannot shadow the real key.
-tool_name_pattern='"tool_name"[[:space:]]*:[[:space:]]*"([^"]*)"'
-tool=""
-if [[ "$input" =~ $tool_name_pattern ]]; then
-  tool="${BASH_REMATCH[1]}"
+# Parse only top-level hook fields. Raw-text matching could treat values inside
+# tool_input as permission metadata or decide on malformed JSON. Without jq,
+# retain Claude Code's normal permission flow instead of guessing.
+if ! command -v jq >/dev/null 2>&1; then
+  exit 0
 fi
+parsed="$(printf '%s' "$input" | jq -ers '
+  if length != 1 then error("expected one hook input") else .[0] end |
+  if type != "object" or (.tool_name | type) != "string"
+     or (has("permission_mode") and (.permission_mode | type) != "string")
+     or (has("tool_input") and (.tool_input | type) != "object")
+  then error("invalid hook input")
+  else [.tool_name, (.permission_mode // "default" | if . == "" then "default" else . end),
+        ((.tool_input.confirmation_token? | type) == "string")] | @tsv
+  end
+' 2>/dev/null)" || exit 0
+IFS=$'\t' read -r tool permission_mode has_token <<< "$parsed"
 
 # Only decide for well-formed LeadMagic tool names; anything else gets no output.
-# The strict charset is also what makes $name safe to interpolate into JSON below.
-# Claude Code scopes a plugin-bundled server's tools as
-# mcp__plugin_<plugin>_<server>__<tool>; a server added by hand is mcp__<server>__<tool>.
+# The strict charset also makes $name safe to interpolate into JSON below.
+# Plugin tools use mcp__plugin_<plugin>_<server>__<tool>; hand-added tools use
+# mcp__<server>__<tool>.
 if [[ ! "$tool" =~ ^mcp__(plugin_leadmagic_)?leadmagic__([a-z0-9_]+)$ ]]; then
   exit 0
 fi
 name="${BASH_REMATCH[2]}"
 
-# PreToolUse input includes permission_mode (default | acceptEdits | plan |
-# auto | dontAsk | bypassPermissions). "ask" from this hook forces a prompt
-# even in auto mode, so honor the modes that already skip approval prompts.
-permission_mode=""
-permission_mode_pattern='"permission_mode"[[:space:]]*:[[:space:]]*"([^"]*)"'
-if [[ "$input" =~ $permission_mode_pattern ]]; then
-  permission_mode="${BASH_REMATCH[1]}"
-fi
-
+# A hook ask forces a prompt even in automatic permission modes. Honor the
+# session's selected mode, read from the parsed top-level field above.
 session_skips_ask() {
   case "$permission_mode" in
     bypassPermissions|auto|dontAsk) return 0 ;;
@@ -86,14 +90,16 @@ session_skips_ask() {
 }
 
 group=""
+known_preview="false"
 for entry in "${ASK_BEFORE_TOOLS[@]}"; do
   if [[ "${entry%%:*}" == "$name" ]]; then
     group="${entry##*:}"
+    known_preview="true"
     break
   fi
 done
 
-# Keep new acting tools protected without relying on a copied catalog entry.
+# Keep new acting tools protected before their preview contract is known.
 if [[ -z "$group" ]]; then
   case "$name" in
     import_*) group="import" ;;
@@ -116,14 +122,13 @@ fi
 # The hosted server runs these tools only when the call carries the
 # confirmation_token its first, preview-only call returned. So the preview runs
 # unprompted and the person is asked once, on the call that would act. The two
-# widget openers, cell edits, and sheet cancellations carry no token and ask in
-# the default permission modes.
+# widget openers, cell edits, and sheet cancellations ask before the first call
+# in the default permission modes.
 case "$name" in
   create_bulk_upload_session|process_attached_csv|set_sheet_cells|cancel_sheet_run) ;;
   *)
-    token_pattern='"confirmation_token"[[:space:]]*:[[:space:]]*"'
-    if [[ ! "$input" =~ $token_pattern ]]; then
-      emit allow "LeadMagic ${name}: preview only. Nothing runs until you approve the follow-up call that carries its confirmation_token."
+    if [[ "$known_preview" == "true" && "$has_token" != "true" ]]; then
+      emit allow "LeadMagic ${name}: initial call allowed by the plugin. If the server returns a confirmation_token, approve the follow-up before sending it."
       exit 0
     fi ;;
 esac

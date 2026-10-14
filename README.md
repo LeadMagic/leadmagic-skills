@@ -60,7 +60,7 @@ Email Finder returns validated work emails. Use Email Validation for externally 
 
 ### Hooks (plugin)
 
-One PreToolUse approval policy covers every LeadMagic tool. Reads, single-record lookups, and preview calls run without a prompt. Bulk jobs, large sheet runs, imports, and deletes ask once, on the follow-up call that carries the server's `confirmation_token`. Upload-widget openers, `set_sheet_cells`, and `cancel_sheet_run` act without a token and ask immediately in the default permission modes. Sessions already using `auto`, `dontAsk`, or `bypassPermissions` keep their selected approval behavior. Set `LEADMAGIC_ASK_ALL=1` to be prompted for every tool.
+One PreToolUse approval policy covers every LeadMagic tool. Reads, single-record lookups, and preview calls run without a prompt. Bulk jobs, large sheet runs, imports, and deletes ask once, on the follow-up call that carries the server's `confirmation_token`. Upload-widget openers, `set_sheet_cells`, and `cancel_sheet_run` ask before the first call in the default permission modes. Sessions already using `auto`, `dontAsk`, or `bypassPermissions` keep their selected approval behavior. Tools added by a newer server that match an acting prefix ask immediately until the plugin knows their preview contract. The optional hook requires Bash and `jq`; if `jq` is missing or the input is invalid, Claude Code keeps its normal permission flow. Set `LEADMAGIC_ASK_ALL=1` to use that flow for every tool.
 
 ---
 
