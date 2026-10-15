@@ -6,7 +6,7 @@ Reviewed on 2026-09-06 against the [published public schema](https://leadmagic.i
 
 REST: `https://api.leadmagic.io`, `X-API-Key` from `$LEADMAGIC_API_KEY`. Hosted MCP: `https://mcp.leadmagic.io/mcp` with OAuth. Terminal: lm-tui with `lm login`.
 
-`GET /v1/credits` is free. Consult [current credits documentation](https://leadmagic.io/docs/v1/credits) for costs and [the agent guide](https://leadmagic.io/docs/mcp/agent-guide) for search entitlements and pagination. Professional and Ultimate include credit-free canonical people/company/jobs search; contact unlocks, enrichment, lookalikes, and exports remain metered. Never send app-only preview options.
+`GET /v1/credits` is free. Consult [current credits documentation](https://leadmagic.io/docs/v1/credits) for costs and [the MCP agent guide](https://leadmagic.io/docs/mcp/introduction) for search entitlements and pagination. Professional and Ultimate include credit-free canonical people/company/jobs search; contact unlocks, enrichment, lookalikes, and exports remain metered. Never send app-only preview options.
 
 Email Finder returns validated work emails; validate externally sourced addresses separately. Employee Finder costs 0.05 credits per employee returned. Google and Meta ad searches charge per returned ad; B2B ad search includes a base charge. Confirm cost before paid work.
 

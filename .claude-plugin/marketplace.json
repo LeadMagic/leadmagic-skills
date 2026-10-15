@@ -2,7 +2,7 @@
   "name": "leadmagic",
   "owner": {
     "name": "LeadMagic Corporation",
-    "email": "plugins@leadmagic.io"
+    "email": "support@leadmagic.io"
   },
   "metadata": {
     "description": "LeadMagic official Claude Code plugins for B2B enrichment and outbound systems.",
@@ -16,7 +16,7 @@
       "version": "3.1.4",
       "author": {
         "name": "LeadMagic Corporation",
-        "email": "plugins@leadmagic.io"
+        "email": "support@leadmagic.io"
       },
       "homepage": "https://leadmagic.io/docs",
       "repository": "https://github.com/LeadMagic/leadmagic-skills",

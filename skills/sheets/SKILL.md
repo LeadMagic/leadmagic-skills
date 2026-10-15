@@ -7,7 +7,7 @@ metadata:
   author: LeadMagic Corporation
   version: "1.0.2"
   homepage: https://leadmagic.io?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
-  docs: https://leadmagic.io/docs/mcp/setup?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
+  docs: https://leadmagic.io/docs/mcp/introduction?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   github: https://github.com/LeadMagic/leadmagic-skills
   publisher: LeadMagic Corporation
   tags: [leadmagic, sheets, sheet-enrichment, spreadsheet, enrichment, ai-columns, recipes, mcp, onboarding]

@@ -33,4 +33,4 @@ Company, observed roles, posting dates, evidence URLs, relevance to the user's o
 
 ## Public references
 
-[Job search and pagination](https://leadmagic.io/docs/mcp/agent-guide) · [Public API schema](https://leadmagic.io/docs/api-reference/openapi.yml)
+[Job search and pagination](https://leadmagic.io/docs/mcp/introduction) · [Public API schema](https://leadmagic.io/docs/api-reference/openapi.yml)

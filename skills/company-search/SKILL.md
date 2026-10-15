@@ -2,7 +2,7 @@
 name: company-search
 description: "LeadMagic V3 company search via POST /v3/companies/search — 25M+ companies with firmographic, geographic, funding, and technographic filters, plus lookalikes. Use when building account lists, filtering companies by criteria, finding lookalike companies, or handling company cursor pagination."
 license: MIT
-compatibility: "Requires network access to api.leadmagic.io."
+compatibility: "Requires network access to api.leadmagic.io or mcp.leadmagic.io."
 metadata:
   author: LeadMagic Corporation
   version: "1.0.1"

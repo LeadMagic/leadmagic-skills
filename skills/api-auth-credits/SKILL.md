@@ -2,7 +2,7 @@
 name: api-auth-credits
 description: "LeadMagic API authentication, API keys, credit balance, plans, and rate limits. Use when setting LEADMAGIC_API_KEY, calling GET /v1/credits, budgeting a run against a plan's credits, previewing bulk cost, or debugging 401, 402, 403, or 429 responses."
 license: MIT
-compatibility: "Requires network access to api.leadmagic.io."
+compatibility: "Requires network access to api.leadmagic.io or mcp.leadmagic.io."
 metadata:
   author: LeadMagic Corporation
   version: "3.0.1"
