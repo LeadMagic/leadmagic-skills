@@ -2,7 +2,7 @@
 name: people-search
 description: "LeadMagic People Search v3 via POST /v3/people/search and its variants (employees, by-title, lookalike, ICP). Use when building audiences or ICP lists, filtering by job function, title, level, company, or geo, sizing a segment for free before revealing rows, or debugging empty or unexpected people search results."
 license: MIT
-compatibility: "Requires network access to api.leadmagic.io."
+compatibility: "Requires network access to api.leadmagic.io or mcp.leadmagic.io."
 metadata:
   author: LeadMagic Corporation
   version: "3.0.1"

@@ -2,7 +2,7 @@
 name: analytics-observability
 description: "LeadMagic account analytics — usage, credit spend, per-product breakdowns, daily history, found rates, data quality, and error reporting via the free GET /v1/analytics endpoints. Use when reporting credit spend, auditing what a workflow cost, checking match or found rates, tracking usage by product, or debugging error patterns in an integration."
 license: MIT
-compatibility: "Requires network access to api.leadmagic.io."
+compatibility: "Requires network access to api.leadmagic.io or mcp.leadmagic.io."
 metadata:
   author: LeadMagic Corporation
   version: "3.0.2"

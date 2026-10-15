@@ -1,13 +1,16 @@
 ---
 name: connect-leadmagic
-description: "Helps first-time users connect their chosen AI agent to LeadMagic. Use when installing LeadMagic skills, setting up the hosted connection, or checking that an agent can see the user's tables."
+description: "Helps first-time users connect their chosen AI agent to LeadMagic. Use when installing LeadMagic skills, setting up the hosted connection, or checking that an agent can see the user's sheets."
 license: MIT
+compatibility: "Requires network access to mcp.leadmagic.io (OAuth)."
 metadata:
   author: LeadMagic Corporation
-  version: "1.0.0"
-  tags: [leadmagic, setup, mcp, oauth, sheets]
-  docs: https://leadmagic.io/docs/mcp/setup
+  version: "1.0.1"
+  homepage: https://leadmagic.io?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
+  docs: https://leadmagic.io/docs/mcp/introduction?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
+  github: https://github.com/LeadMagic/leadmagic-skills
   publisher: LeadMagic Corporation
+  tags: [leadmagic, setup, mcp, oauth, sheets]
 ---
 
 # Connect to LeadMagic
@@ -40,10 +43,10 @@ Choose the same app in the installer. If it is already installed, keep the exist
 
 ## 2. Sign in
 
-Let the user finish the browser sign-in. Choose the workspace that owns their tables. Hosted sign-in uses OAuth; no REST API key needs to be pasted into chat or a downloaded file.
+Let the user finish the browser sign-in. Choose the workspace that owns their sheets. Hosted sign-in uses OAuth; no REST API key needs to be pasted into chat or a downloaded file.
 
 ## 3. Check it works
 
-Ask the connected LeadMagic tools to list the user's tables. This is a read-only check. Confirm the workspace and the table they want. If table tools are missing, check the selected workspace, connection, and plan before suggesting another install.
+Ask the connected LeadMagic tools to list the user's sheets. This is a read-only check. Confirm the workspace and the sheet they want. If sheet tools are missing, check the selected workspace, connection, and plan before suggesting another install.
 
-Then ask what the user wants to do in that table. The setup check should not start enrichment or change rows. Use LeadMagic's Sheets instructions for the actual workflow and show the server's cost/confirmation preview when a run requires it.
+Then ask what the user wants to do in that sheet. The setup check should not start enrichment or change rows. Use LeadMagic's Sheets instructions for the actual workflow and show the server's cost/confirmation preview when a run requires it.

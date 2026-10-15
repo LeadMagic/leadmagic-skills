@@ -4,6 +4,7 @@
 
 - Add a simple client-aware LeadMagic connection skill for first-run setup across Claude Code, Cursor, and Claude web.
 - Keep plugin, marketplace, and skill metadata aligned at 3.1.4 with LeadMagic Corporation publisher identity.
+- Metadata consistency pass: canonical support email (`support@leadmagic.io`), point MCP docs links at `/docs/mcp/introduction`, Sheets terminology in the connect skill, and state the fair-use search caps (10M records/month, 13,333 searches/day effective) in plans-and-limits.
 
 ## 3.1.3 — 2026-10-13
 

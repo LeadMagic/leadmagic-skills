@@ -2,7 +2,7 @@
 name: job-search
 description: "LeadMagic V3 jobs search via POST /v3/jobs/search — 46M+ open job postings with vector, facets, and deep modes. Use when searching job postings, mining hiring signals, building lists from who's hiring, handling jobs cursor pagination, or bulk-exporting postings."
 license: MIT
-compatibility: "Requires network access to api.leadmagic.io."
+compatibility: "Requires network access to api.leadmagic.io or mcp.leadmagic.io."
 metadata:
   author: LeadMagic Corporation
   version: "1.0.1"

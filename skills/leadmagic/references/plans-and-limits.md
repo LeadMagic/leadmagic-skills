@@ -22,7 +22,7 @@ Enterprise / custom plans exist — credits, rate, and Search API throughput are
 
 The v3 discovery surfaces — `POST /v3/people/search` (+variants), `POST /v3/companies/search` / `lookalike`, `POST /v3/jobs/search` — behave differently by plan:
 
-- **Professional & Ultimate:** browse search requests do not consume credits, up to 5 / 10 requests per second, within a fair-use cap shared across People, Company and Jobs search ([leadmagic.io/unlimited](https://leadmagic.io/unlimited?utm_source=github&utm_medium=readme&utm_campaign=leadmagic-skills)). Lookalikes and exports stay metered. Ideal for TAM mapping, list building at scale, and continuous monitoring.
+- **Professional & Ultimate:** browse search requests do not consume credits, up to 5 / 10 requests per second, within a fair-use cap shared across People, Company and Jobs search ([leadmagic.io/unlimited](https://leadmagic.io/unlimited?utm_source=github&utm_medium=readme&utm_campaign=leadmagic-skills)): 10M records per month (400k searches at the 25-row browse page size), floored to 13,333 searches per day — the effective daily limit is the lower of the contractual and fair-use daily caps. Lookalikes and exports stay metered. Ideal for TAM mapping, list building at scale, and continuous monitoring.
 - **All other plans:** every search bills the catalog cost (1 credit per returned row). Nobody is hard-blocked — searches just cost credits.
 - Free on every plan: count/preview/stats helpers (`/v3/search/stats`, `/v3/jobs/search/stats`, catalogs, facets).
 

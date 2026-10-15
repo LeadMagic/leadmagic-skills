@@ -2,7 +2,7 @@
 name: bulk-jobs
 description: "LeadMagic bulk enrichment jobs, CSV uploaders, and synchronous mini-batches. Use when enriching any list of 50+ rows, submitting POST /bulk/submit, uploading a CSV, polling job status, pausing or resuming a job, pulling error rows, configuring callbacks, or budgeting per-row credits for any product."
 license: MIT
-compatibility: "Requires network access to api.leadmagic.io."
+compatibility: "Requires network access to api.leadmagic.io or mcp.leadmagic.io."
 metadata:
   author: LeadMagic Corporation
   version: "3.0.3"
