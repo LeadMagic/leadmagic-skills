@@ -26,6 +26,7 @@
     "bulk-enrichment"
   ],
   "skills": "./skills/",
+  "hooks": "./hooks/hooks.json",
   "agents": [
     "./agents/leadmagic-outbound.md",
     "./agents/leadmagic-bulk.md"
