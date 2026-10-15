@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.1.4 — 2026-10-14
+
+- Add a simple client-aware LeadMagic connection skill for first-run setup across Claude Code, Cursor, and Claude web.
+- Keep plugin, marketplace, and skill metadata aligned at 3.1.4 with LeadMagic Corporation publisher identity.
+
 ## 3.1.3 — 2026-10-13
 
 - Use LeadMagic Corporation for plugin author, marketplace owner, and skill author/publisher metadata. Keep LeadMagic as the product name.
