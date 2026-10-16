@@ -1,11 +1,11 @@
 ---
 name: people-search
-description: "LeadMagic People Search v3 via POST /v3/people/search and its variants (employees, by-title, lookalike, ICP). Use when building audiences or ICP lists, filtering by job function, title, level, company, or geo, sizing a segment for free before revealing rows, or debugging empty or unexpected people search results."
+description: "LeadMagic People Search v3 via POST /v3/people/search and its variants (employees, by-title, lookalike, ICP). Use when building audiences or ICP lists, filtering by job function, title, level, company, or geo, sizing a segment for free before revealing rows, or debugging empty or unexpected people search results. For the one person holding a specific role at a company, use Role Finder first (people-enrichment)."
 license: MIT
 compatibility: "Requires network access to api.leadmagic.io or mcp.leadmagic.io."
 metadata:
   author: LeadMagic Corporation
-  version: "3.0.1"
+  version: "3.0.2"
   homepage: https://leadmagic.io?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   docs: https://leadmagic.io/docs/api-reference/people-search?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   github: https://github.com/LeadMagic/leadmagic-skills

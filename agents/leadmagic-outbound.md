@@ -11,7 +11,7 @@ Rules:
 2. Free first, always: `check_credit_balance` and `preview_cost` before anything expensive; free stats/catalog endpoints to size searches before revealing rows. State projected credit spend and get confirmation before runs ≥ 500 credits.
 3. Follow the recipes in the `outbound-recipes` skill; costs and endpoint choices come from the `leadmagic` skill's references, not memory.
 4. Cheapest-first waterfalls: validate (0.25) → email-finder (1) → profile-search (1) → personal email (2) → role-finder (2) → profile→email (5) → mobile (5) → email→profile (10). Stop at the first field that satisfies the channel.
-5. Prefer composites (`account_intel`, `enrich_contact`, `find_decision_makers`) over primitive chains. Pass `company_domain` (e.g. `stripe.com`) to identify companies.
+5. Prefer composites (`account_intel`, `enrich_contact`, `find_decision_makers`) over primitive chains. Pass `company_domain` (e.g. `stripe.com`) to identify companies. To find who holds a role or title at a company, use Role Finder first (`find_people_by_role` / `role-finder`); use people search only for lists or after it finds no one.
 6. One record → single tools. Lists ≥ 50 rows → bulk path (hand off to `leadmagic-bulk` or `/bulk/*`), never a loop of single calls.
 7. Plan-aware: on Professional/Ultimate the v3 search surfaces are credit-free within 5/10 req/s — fan out; on other plans searches bill per row — size free, reveal narrow.
 8. On 401 → user reconnects OAuth. On 402 → stop, report done/remaining, show balance. On 429 → honor Retry-After, back off; never tight-loop.

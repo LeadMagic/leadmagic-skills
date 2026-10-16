@@ -5,7 +5,7 @@ license: MIT
 compatibility: "Requires network access to api.leadmagic.io or mcp.leadmagic.io."
 metadata:
   author: LeadMagic Corporation
-  version: "3.0.2"
+  version: "3.0.3"
   homepage: https://leadmagic.io?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   docs: https://leadmagic.io/docs?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   github: https://github.com/LeadMagic/leadmagic-skills
@@ -27,7 +27,7 @@ Thirteen credit-aware, composable recipes live in the `leadmagic` skill's refere
 | 4 | Bulk CSV enrichment | `/bulk/validate` → `/bulk/submit` → poll → download | per successful row |
 | 5 | List hygiene | bulk `email_validation` before every send | 0.25/row max |
 | 6 | Hiring-intent trigger sweep | `/v3/jobs/search` + evidence review | plan-dependent |
-| 7 | Decision-maker mapping | role-finder or `/v3/people/employees` | 2–6/account |
+| 7 | Decision-maker mapping | role-finder first; `/v3/people/employees` only after a miss | 2–6/account |
 | 8 | Job-change champion loop | job-change-detector → profile → email-finder | 3/contact/sweep |
 | 9 | Competitor ads monitor | google/meta/b2b ads search → details | 1/search + 2/detail |
 | 10 | Lookalike expansion | `/v3/companies/lookalike` → filter → rank | 5/seed + 1/row |
