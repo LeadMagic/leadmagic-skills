@@ -71,7 +71,7 @@ Sheets tools only appear when the signed-in workspace has Sheets (paid plan). If
 ## Usage rules
 
 - Prefer composites (`account_intel`, `enrich_contact`, `find_decision_makers`) over long primitive chains.
-- Who holds one role or title at a company → `find_people_by_role` first (2 credits if found, free on a miss). Use `search_people` or `find_company_employees` for lists, or only after Role Finder finds no one.
+- Who holds one role or title at a company → `find_people_by_role` first (2 credits if found, free on a miss). Use `search_people` or `find_company_employees` only for lists; if Role Finder finds no one, report the miss instead of searching for the role.
 - Free first: `check_credit_balance` + `preview_cost` before expensive or bulk work.
 - One record → single tools; CSV/list → bulk path or a sheet; poll `get_bulk_job_status` ≥45s apart.
 - Single-record lookups and small sheet runs (≤5 credits) run directly; don't ask first. Bulk jobs, larger sheet runs, imports, pushes, and deletes return `needs_confirmation` + `confirmation_token` first. Show the summary, resend with the token only after the user agrees, and never invent a token.
