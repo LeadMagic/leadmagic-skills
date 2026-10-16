@@ -18,7 +18,7 @@
         "name": "LeadMagic Corporation",
         "email": "support@leadmagic.io"
       },
-      "homepage": "https://leadmagic.io/docs",
+      "homepage": "https://leadmagic.io/docs/mcp/introduction",
       "repository": "https://github.com/LeadMagic/leadmagic-skills",
       "license": "MIT",
       "keywords": ["leadmagic", "mcp", "gtm", "enrichment", "outbound", "b2b"],

@@ -16,7 +16,7 @@ Current monthly and annual prices, included credits, and rollover terms are publ
 | **Professional** | **Credit-free browse search at 5 req/s, fair-use cap** |
 | **Ultimate** | **Credit-free browse search at 10 req/s, fair-use cap** |
 
-Enterprise / custom plans exist — credits, rate, and Search API throughput are set per agreement; check `GET /v1/credits` and ask your account contact rather than assuming a tier.
+Custom agreements exist — credits, rate, and Search API throughput are set per agreement; check `GET /v1/credits` and ask your account contact rather than assuming a tier.
 
 ## What "Search API" means
 

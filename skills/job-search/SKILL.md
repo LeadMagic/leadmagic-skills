@@ -23,7 +23,7 @@ Docs: [Job Search](https://leadmagic.io/docs/api-reference/job-search?utm_source
 ## Credit-free browse search on qualifying plans
 
 **On Professional and Ultimate, browse search on this endpoint costs no credits**, at
-**5 req/s (Professional) or 10 req/s (Ultimate)**, within a fair-use cap shared across
+**5 req/s (Professional) or 10 req/s (Ultimate)**, within a fair-use cap (10M records/month, 13,333 searches/day) shared across
 People, Company and Jobs search — see [leadmagic.io/unlimited](https://leadmagic.io/unlimited?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills). Other plans pay ~1 credit per returned job.
 Never ration or narrow a query to save credits on an entitled plan — go broad.
 Export is credit-metered on every plan.
