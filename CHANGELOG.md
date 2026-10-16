@@ -20,6 +20,7 @@
 
 ## Unreleased
 
+- Approval hook asks before every state-changing tool, including cancel, pause, update, add, restore, rerun, export, create, configure, reorder, and JSON-field extraction. Reads, free previews, and paid single-record lookups stay auto-approved.
 - Document the named parameters hosted MCP takes for CRM and outbound imports, workspace runs, saved prospect lists, and saved searches.
 
 ## [3.1.1] — 2026-10-12
