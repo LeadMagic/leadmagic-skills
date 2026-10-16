@@ -65,7 +65,7 @@ Use `POST /v3/jobs/search` and the `jobs-hiring-intent` skill to rank accounts f
 
 **Goal:** the 2–4 real buyers at an account. **Cost:** 2–6/account.
 
-Fast path: `role-finder` (2) per target title. Wide path: `POST /v3/people/employees` or `employee-finder` (1) filtered by `contact_job_level: ["Director","VP","C-Team"]`, then pick. MCP shortcut: `find_decision_makers`. Then recipe 3 for channels.
+Start with Role Finder: `role-finder` (2 if found, free on a miss) per target title; on MCP, `find_people_by_role` per title, or `find_decision_makers` when you also want emails (it runs Role Finder per title first). Report a Role Finder miss as a miss. Only for exploratory mapping (a list, not one role holder): `POST /v3/people/employees` or `employee-finder` (1) filtered by `contact_job_level: ["Director","VP","C-Team"]`, then pick. Then recipe 3 for channels.
 
 ## 8 · Job-change (champion tracking) loop
 

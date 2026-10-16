@@ -5,7 +5,7 @@ license: MIT
 compatibility: "Requires network access to api.leadmagic.io or mcp.leadmagic.io."
 metadata:
   author: LeadMagic Corporation
-  version: "3.0.3"
+  version: "3.0.4"
   homepage: https://leadmagic.io?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   docs: https://leadmagic.io/docs?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   github: https://github.com/LeadMagic/leadmagic-skills
@@ -23,7 +23,7 @@ For **finding people by ICP filters**, use `people-search`. For **email** find/v
 |---|---|---|---|
 | Enrich from B2B Profile URL | `POST /v1/people/profile-search` | 1 | 300 |
 | Find mobile number | `POST /v1/people/mobile-finder` | 5 (free on miss) | 25,000 |
-| Person holding a role at a company | `POST /v1/people/role-finder` | 2 | 300 |
+| Person holding a role at a company (use first for any role or title ask) | `POST /v1/people/role-finder` | 2 | 300 |
 | List employees at a company | `POST /v1/people/employee-finder` | 0.05 per employee | 300 |
 | Did this person change jobs? | `POST /v1/people/job-change-detector` | 3 (0 on `PROFILE_NOT_FOUND`) | 1,500 |
 
