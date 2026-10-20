@@ -43,6 +43,7 @@ Plans are Basic, Essential, Growth, Professional and Ultimate; current prices, m
 | 401 | Missing/invalid key | Check header name (`X-API-Key`) and env var; key may be revoked |
 | 402 | Out of credits | Stop the run; report done/remaining; `GET /v1/credits`; resume after top-up. Never retry-loop |
 | 403 | Plan/entitlement gate | Feature not on this plan — say which plan unlocks it |
+| 404 | Unknown route | Retry once with `errors[0].context.suggested_endpoint` (the canonical path); if absent, don't guess other routes |
 | 429 | Rate limited | Honor `Retry-After`, exponential backoff + jitter. Sustained hammering escalates temporary blocks |
 | 5xx | Transient | One retry with backoff, then surface with `trace.request_id` |
 

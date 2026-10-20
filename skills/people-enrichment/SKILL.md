@@ -31,6 +31,7 @@ For **finding people by ICP filters**, use `people-search`. For **email** find/v
 
 - **profile-search**: `{profile_url}` — common CRM synonym keys are accepted; full URL or bare `/in/{slug}`, normalized server-side. Company URLs are rejected (use Company Search).
 - **mobile-finder**: any of `profile_url`, `work_email`, `personal_email`. Free when not found. For lawful business use; calling/texting compliance is the customer's responsibility.
+- On a 404 unknown route, retry once with `errors[0].context.suggested_endpoint` (the canonical path) instead of guessing.
 - **role-finder**: `job_title` (required; aliases `role`, `title`, `jobTitle` map in) + one of `company_domain` / `company_name` / a B2B profile URL (a person URL resolves to their current company).
 - **employee-finder**: company identifier; For filtered employee lists (level/function), prefer `POST /v3/people/employees` (see `people-search`).
 - **job-change-detector**: profile URL plus the expected company (`company_name` is authoritative; `company_domain` only adds matcher aliases). Act only on `job_change_detected: true` (`status: JOB_CHANGE_DETECTED` — includes "expected employer absent from history but another primary employer is current"). `NO_CHANGE` = still there; `NEVER_WORKED_THERE` = absent and nothing current; `AMBIGUOUS_CURRENT_EMPLOYMENT` / `CURRENT_EMPLOYMENT_UNKNOWN` = inconclusive → recheck next sweep, not a change; `PROFILE_NOT_FOUND` = URL did not resolve, billed **0** credits (all other statuses bill 3).
