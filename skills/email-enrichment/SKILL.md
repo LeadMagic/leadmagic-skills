@@ -31,7 +31,7 @@ Cheapest-first ladder: find (1) → personal (2) → profile→email (5) → ema
 
 ## Field contract (forgiving on purpose)
 
-- **email-finder** needs the *person* (`first_name`+`last_name`, `full_name`, **or** a person `profile_url`) AND the *company* (`domain`/`company_domain`/`website`/`url` or `company_name`). CamelCase and common CRM aliases are accepted; `null` values are treated as omitted.
+- **email-finder** needs the *person* (`first_name`+`last_name`, `full_name`, **or** a person `profile_url`) AND the *company* (`domain`/`company_domain`/`website`/`url` or `company_name`). CamelCase and common CRM aliases are accepted; `null` values are treated as omitted. A B2B person profile URL pasted into a name field is remapped to `profile_url` instead of rejected.
 - **Profile-URL endpoints** take `profile_url` (common CRM synonym keys are accepted); full URL or bare slug — `/in/{username}` forms are normalized. Company pages (`/company/…`) are rejected here; use Company Search for those.
 - **b2b-profile** accepts `work_email`, `personal_email`, or plain `email` (maps to work_email).
 - Names are sanitized (credentials, emojis, trailing digits stripped) but multi-person strings, bios, and company names in name fields are rejected with a 400 explaining the fix.
