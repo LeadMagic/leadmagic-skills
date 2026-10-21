@@ -1,6 +1,6 @@
 # AGENTS.md — LeadMagic Skills & Plugin
 
-**Reviewed:** 2026-10-12
+**Reviewed:** 2026-10-20
 
 Guidance for AI agents editing or using this repository.
 
