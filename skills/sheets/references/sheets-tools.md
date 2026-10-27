@@ -4,7 +4,7 @@ Every tool takes `sheet_id` (uuid, from `list_sheets` or the sheet URL) where it
 
 Tool names below are the hosted MCP ids. In Claude Code they appear as `mcp__plugin_leadmagic_leadmagic__<name>` (plugin install) or `mcp__leadmagic__<name>` (server added by hand).
 
-`run_sheet_column` runs quoted at 5 credits or less start without a token; larger runs are gated.
+Every paid `run_sheet_column` run is gated, including samples, runs of 5 credits or less, and AI billed to the user's own provider key. The first call returns the credit cost and provider billing summary; resend the identical arguments with its `confirmation_token` only after explicit user approval. Only verified free runs (zero LeadMagic credits and no external provider billing) start without a token. Unknown quotes cannot start.
 
 ## Find and inspect
 

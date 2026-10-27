@@ -5,7 +5,7 @@ license: MIT
 compatibility: "Requires network access to mcp.leadmagic.io. OAuth by default on the hosted MCP."
 metadata:
   author: LeadMagic Corporation
-  version: "3.1.5"
+  version: "3.1.6"
   homepage: https://leadmagic.io?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   docs: https://leadmagic.io/docs/mcp/introduction?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   github: https://github.com/LeadMagic/leadmagic-skills
@@ -74,6 +74,6 @@ Sheets tools only appear when the signed-in workspace has Sheets (paid plan). If
 - Who holds one role or title at a company → `find_people_by_role` first (2 credits if found, free on a miss). Use `search_people` or `find_company_employees` only for lists; if Role Finder finds no one, report the miss instead of searching for the role.
 - Free first: `check_credit_balance` + `preview_cost` before expensive or bulk work.
 - One record → single tools; CSV/list → bulk path or a sheet; poll `get_bulk_job_status` ≥45s apart.
-- Single-record lookups and small sheet runs (≤5 credits) run directly; don't ask first. Bulk jobs, larger sheet runs, imports, pushes, and deletes return `needs_confirmation` + `confirmation_token` first. Show the summary, resend with the token only after the user agrees, and never invent a token.
+- Single-record lookups run directly. Every paid sheet run, including small samples, runs of 5 credits or less, and AI using the user's own provider key, requires an exact quote and explicit user approval. Only verified free sheet runs (zero LeadMagic credits and no external provider billing) start immediately; unknown quotes cannot start. Bulk jobs, paid sheet runs, imports, pushes, and deletes return `needs_confirmation` + `confirmation_token` first. Show the credit cost and provider billing summary, resend the identical arguments with the token only after the user agrees, and never invent a token.
 - Claude Code names plugin-bundled tools `mcp__plugin_leadmagic_leadmagic__<tool>` and hand-added ones `mcp__leadmagic__<tool>`. Permission rules and hooks must match both (the plugin's approval hook does).
 - Pass `company_domain` (e.g. `stripe.com`) when identifying companies.

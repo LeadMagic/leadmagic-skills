@@ -9,6 +9,8 @@
     "url": "https://leadmagic.io"
   },
   "homepage": "https://leadmagic.io/docs/mcp/introduction",
+  "privacyPolicyUrl": "https://leadmagic.io/legal/privacy",
+  "icon": "./assets/icon.png",
   "repository": "https://github.com/LeadMagic/leadmagic-skills",
   "license": "MIT",
   "keywords": [
