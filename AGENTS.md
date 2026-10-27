@@ -27,7 +27,7 @@ This repo does **not** document how LeadMagic's own apps are built.
 | `.claude-plugin/plugin.json` | Plugin manifest (skills + commands + agents + hooks + MCP) |
 | `commands/*.md` | 14 recipe slash commands (`/leadmagic:<name>`) |
 | `agents/*.md` | `leadmagic-outbound`, `leadmagic-bulk` |
-| `hooks/` + `scripts/approval-policy.sh` | PreToolUse policy: auto-allows reads, single-record lookups, and preview calls; asks once on the token-carrying call of bulk / large-run / import / push / delete tools, and on every call of other state-changing tools (cancel, pause, update, add, restore, rerun, export, create, configure, reorder, extract). The public `LeadMagic/leadmagic-claude-plugin` repository owns the Claude plugin hook; coordinate policy changes between these standalone public repositories |
+| `hooks/` + `scripts/approval-policy.sh` | PreToolUse policy: auto-allows reads, single-record lookups, and preview calls; asks once on the token-carrying call of bulk, paid sheet run, import, push, and delete tools, and on every call of other state-changing tools (cancel, pause, update, add, restore, rerun, export, create, configure, reorder, extract). Every paid sheet run, including small samples and AI billed to the user's own provider, requires a quote and explicit approval. The public `LeadMagic/leadmagic-claude-plugin` repository owns the Claude plugin hook; coordinate policy changes between these standalone public repositories |
 
 Claude Code names this plugin's MCP tools `mcp__plugin_leadmagic_leadmagic__<tool>` (hand-added server: `mcp__leadmagic__<tool>`). Hook matchers and agent `tools` grants must cover both.
 

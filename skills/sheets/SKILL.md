@@ -5,7 +5,7 @@ license: MIT
 compatibility: "Requires the hosted MCP at mcp.leadmagic.io (OAuth) and a paid LeadMagic plan with Sheets enabled for the workspace."
 metadata:
   author: LeadMagic Corporation
-  version: "1.0.2"
+  version: "1.0.3"
   homepage: https://leadmagic.io?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   docs: https://leadmagic.io/docs/mcp/introduction?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills
   github: https://github.com/LeadMagic/leadmagic-skills
@@ -51,8 +51,8 @@ Always in this order. Use column **keys** (`col_…`) from `get_sheet`, never di
 3. **Size** — `get_sheet_stats` answers "how many rows are missing an email" without paging. Use `read_sheet_rows` with `columns` + `filter` only when you need values.
 4. **Add rows if needed** — `add_sheet_rows` (≤100 per call, values keyed by column key). Correct cells with `set_sheet_cells` after approval (batch ≤500 edits — never one call per cell). For thousands of rows, ask the user to drop the file into Sheet Enrichment instead of streaming rows through chat.
 5. **Build columns** — `add_sheet_columns` adds and configures several at once, left to right. Configuring is free and fills nothing.
-6. **Try a sample** (for large fills) — `run_sheet_column` with `sample_size: 5`, `also_column_keys` for the dependent columns, `wait_seconds: 45`. Show the user the values (`read_sheet_rows` on those row ids).
-7. **Run the rest** — same tool, no `sample_size`. Small runs (a few rows, ≤5 credits) start right away — don't ask the user before filling a handful of new rows. Bigger runs come back `needs_confirmation` + `confirmation_token`: show the summary, and send the identical arguments plus the token **only after the user agrees**.
+6. **Try a sample** (for large fills) — `run_sheet_column` with `sample_size: 5`, `also_column_keys` for the dependent columns, `wait_seconds: 45`. For a paid sample, show the returned cost and billing summary, get explicit approval, then resend the identical arguments with its `confirmation_token`. Show the user the values (`read_sheet_rows` on those row ids).
+7. **Run the rest** — same tool, no `sample_size`. Every paid run returns `needs_confirmation` + `confirmation_token` first, including runs of 5 credits or less and AI billed to the user's own provider. Show the credit cost and provider billing summary, and send the identical arguments plus the token **only after the user agrees**. Only verified free runs (zero LeadMagic credits and no external provider billing) start immediately.
 8. **Follow through** — when a run returns `next_step`, it is the next paid stage of the pipeline: show it, and on approval send `next_arguments` + its token. Don't call separate status/quote tools in between.
 9. **Explain gaps** — `list_sheet_run_rows` shows how each row ended (`completed`, `failed`, `insufficient_credits`, no result). Re-run only the failures with `row_state: "failed"`; re-run filled cells only with `force: true` and explicit consent.
 10. **Save it** — `export_sheet_recipe` turns a working sheet into a template; `import_sheet_recipe` builds new sheets from it.
@@ -111,7 +111,7 @@ Custom HTTP columns are configured and run in the LeadMagic app. Hosted MCP cann
 ## Safety rules
 
 1. **Free first**: `check_credit_balance` before paid runs; sample before full runs.
-2. **Ask only when the server asks.** Single-record lookups and small runs need no question. When a call returns `needs_confirmation`, never invent a `confirmation_token` and never resend one without the user's explicit yes to *that* summary. Deletes (`delete_sheet_rows`, `delete_sheet_column`), recipe imports with webhook sources, and auto-run use the same gate. Deletes are soft: `restore_sheet_rows` / `restore_sheet_column`.
+2. **Approve every paid run.** Free preflights need no question. Every paid sheet run, including small samples and AI using the user's own provider key, needs an exact quote and explicit approval before it starts. Unknown quotes cannot start. When a call returns `needs_confirmation`, never invent a `confirmation_token` and never resend one without the user's explicit yes to *that* summary. Deletes (`delete_sheet_rows`, `delete_sheet_column`), recipe imports with webhook sources, and auto-run use the same gate. Deletes are soft: `restore_sheet_rows` / `restore_sheet_column`.
 3. Report only values the sheet returned. Empty / no-result cells stay empty — don't fill them from memory.
 4. Secrets live in the app's Vault. Never put API keys, AI keys, or personal data into prompts, recipes, or chat.
 5. 402 / `insufficient_credits` → [billing](https://app.leadmagic.io/settings/billing?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills) or [auto top-up](https://app.leadmagic.io/settings/auto-top-up?utm_source=github&utm_medium=skill&utm_campaign=leadmagic-skills), then re-run with `row_state: "insufficientCredits"`. 401 → reconnect OAuth in the client.

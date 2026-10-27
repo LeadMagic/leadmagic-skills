@@ -20,6 +20,8 @@
 
 ## Unreleased
 
+- Add the existing LeadMagic 512px icon and privacy policy URL to the plugin manifest for directory review.
+- Correct Sheets guidance to require a quote and explicit approval for every paid run, including small samples and AI using the user's own provider key. Only verified free runs start immediately. Update the Sheets and MCP integration skill metadata without changing the plugin release version.
 - Approval hook asks before every state-changing tool, including cancel, pause, update, add, restore, rerun, export, create, configure, reorder, and JSON-field extraction. Reads, free previews, and paid single-record lookups stay auto-approved.
 - Document the named parameters hosted MCP takes for CRM and outbound imports, workspace runs, saved prospect lists, and saved searches.
 
